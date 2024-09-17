@@ -1,27 +1,27 @@
 ---
-title: npm package scope, access level, and visibility
+title: npm 패키지 스코프, 접근 수준 및 공개 여부
 ---
 
-Visibility of npm packages depends on the scope (namespace) in which the package is contained, and the access level (private or public) set for the package.
+npm 패키지의 공개 여부은 패키지가 포함된 스코프(네임스페이스)와 패키지에 설정된 접근 수준(비공개 또는 공개)에 따라 달라집니다.
 
 <Note>
 
-**Note:** To create organization-scoped packages, you must first create an organization. For more information, see "[Creating an organization](https://docs.npmjs.com/creating-an-organization)".
+**참고:** 조직 스코프 패키지를 만들려면 먼저 조직을 생성해야 합니다. 자세한 내용은 "[조직 만들기](https://docs.npmjs.com/creating-an-organization)"를 참조하세요.
 
 </Note>
 
-## npm Package Access Matrix
+## npm 패키지 접근 표
 
-| Scope | Access level | Can view and download | Can write (publish) |
+| 스코프 | 접근 수준 | 보기 및 다운로드 가능 | 쓰기(게시) 가능 |
 | --- | --- | --- | --- |
-| Org | Private | Members of a team in the organization with read access to the package | Members of a team in the organization with read and write access to the package |
-| Org | Public | Everyone | Members of a team in the organization with read and write access to the package |
-| User | Private | The package owner and users who have been granted read access to the package | The package owner and users who have been granted read and write access to the package |
-| User | Public | Everyone | The package owner and users who have been granted read and write access to the package |
-| Unscoped | Public | Everyone | The package owner and users who have been granted read and write access to the package |
+| 조직 | 비공개 | 패키지에 대한 읽기 권한이 있는 조직의 팀 구성원 | 패키지에 대한 읽기 및 쓰기 권한이 있는 조직의 팀 구성원 |
+| 조직 | 공개 | 모든 사람 | 패키지에 대한 읽기 및 쓰기 권한이 있는 조직의 팀 구성원 |
+| 사용자 | 비공개 | 패키지 소유자 및 패키지에 대한 읽기 권한이 부여된 사용자 | 패키지 소유자 및 패키지에 대한 읽기 및 쓰기 권한이 부여된 사용자 |
+| 사용자 | 공개 | 모든 사람 | 패키지 소유자 및 패키지에 대한 읽기 및 쓰기 권한이 부여된 사용자 |
+| 스코프 없음 | 공개 | 모든 사람 | 패키지 소유자 및 패키지에 대한 읽기 및 쓰기 권한이 부여된 사용자 |
 
 <Note>
 
-**Note:** Only user accounts can create and manage unscoped packages. Organizations can only manage scoped packages.
+**참고:** 사용자 계정만 스코프가 없는 패키지를 생성하고 관리할 수 있습니다. 조직은 스코프가 있는 패키지만 관리할 수 있습니다.
 
 </Note>

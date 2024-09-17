@@ -1,60 +1,60 @@
 ---
-title: Adding dist-tags to packages
+title: 패키지에 dist-tags 추가하기
 redirect_from:
   - /getting-started/using-tags/
 ---
 
-Distribution tags (dist-tags) are human-readable labels that you can use to organize and label different versions of packages you publish. dist-tags supplement [semantic versioning][semver]. In addition to being more human-readable than semantic version numbering, tags allow publishers to distribute their packages more effectively.
+배포 태그(dist-tags)는 게시하는 패키지의 다양한 버전을 정리하고 라벨링하는 데 사용할 수 있는 사람이 읽을 수 있는 레이블입니다. dist-tags는 [시맨틱 버저닝][semver]을 보완합니다. 시맨틱 버전 번호보다 더 읽기 쉬울 뿐만 아니라, 태그를 사용하면 게시자가 패키지를 더 효과적으로 배포할 수 있습니다.
 
-For more information, see the [`dist-tag` CLI documentation][dist-tag].
+자세한 내용은 [`dist-tag` CLI 문서][dist-tag]를 참조하세요.
 
 <Note>
 
-**Note:** Since dist-tags share a namespace with semantic versions, avoid dist-tags that conflict with existing version numbers. We recommend avoiding dist-tags that start with a number or the letter "v".
+**참고:** dist-tags는 시맨틱 버전과 네임스페이스를 공유하므로, 기존 버전 번호와 충돌하는 dist-tags는 피하세요. 숫자나 "v"로 시작하는 dist-tags를 사용하지 않는 것이 좋습니다.
 
 </Note>
 
-## Publishing a package with a dist-tag
+## dist-tag로 패키지 게시하기
 
-By default, running `npm publish` will tag your package with the `latest` dist-tag. To use another dist-tag, use the `--tag` flag when publishing.
+기본적으로 `npm publish`를 실행하면 패키지에 `latest` dist-tag가 태그됩니다. 다른 dist-tag를 사용하려면 게시할 때 `--tag` 플래그를 사용하세요.
 
-1. On the command line, navigate to the root directory of your package.
+1. 명령줄에서 패키지의 루트 디렉토리로 이동합니다.
 
    ```
    cd /path/to/package
    ```
 
-2. Run the following command, replacing `<tag>` with the tag you want to use:
+2. 다음 명령을 실행하되, `<tag>`를 사용하고자 하는 태그로 교체하세요:
 
    ```
    npm publish --tag <tag>
    ```
 
-### Example
+### 예시
 
-To publish a package with the "beta" dist-tag, on the command line, run the following command in the root directory of your package:
+"beta" dist-tag로 패키지를 게시하려면 패키지의 루트 디렉토리에서 명령줄에 다음 명령을 실행하세요:
 
 ```
 npm publish --tag beta
 ```
 
-## Adding a dist-tag to a specific version of your package
+## 패키지의 특정 버전에 dist-tag 추가하기
 
-1. On the command line, navigate to the root directory of your package.
+1. 명령줄에서 패키지의 루트 디렉토리로 이동합니다.
 
    ```
    cd /path/to/package
    ```
 
-2. Run the following command, replacing `<package_name>` with the name of your package, `<version>` with your package version number, and `<tag>` with the distribution tag:
+2. 다음 명령을 실행하되, `<package_name>`을 패키지 이름으로, `<version>`을 패키지 버전 번호로, `<tag>`를 배포 태그로 교체하세요:
 
    ```
    npm dist-tag add <package-name>@<version> [<tag>]
    ```
 
-### Example
+### 예시
 
-To add the "stable" tag to the 1.4.0 version of the "example-package" package, you would run the following command:
+"example-package" 패키지의 1.4.0 버전에 "stable" 태그를 추가하려면 다음 명령을 실행합니다:
 
 ```
 npm dist-tag add example-package@1.4.0 stable

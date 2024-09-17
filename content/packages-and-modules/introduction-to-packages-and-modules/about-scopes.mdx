@@ -1,44 +1,44 @@
 ---
-title: About scopes
+title: 스코프에 대하여
 redirect_from:
   - /getting-started/scoped-packages
 ---
 
 <Note>
 
-**Note:** You must be using npm version 2 or greater to use scopes. To upgrade to the latest version of npm, on the command line, run `npm install npm@latest -g`
+**참고:** 스코프를 사용하려면 npm 버전 2 이상을 사용해야 합니다. npm을 최신 버전으로 업그레이드하려면 명령줄에서 `npm install npm@latest -g`를 실행하세요.
 
 </Note>
 
-When you sign up for an npm user account or create an organization, you are granted a scope that matches your user or organization name. You can use this scope as a namespace for related packages.
+npm 사용자 계정에 가입하거나 조직을 만들 때, 사용자 또는 조직 이름과 일치하는 스코프가 부여됩니다. 이 스코프를 관련 패키지의 네임스페이스로 사용할 수 있습니다.
 
-A scope allows you to create a package with the same name as a package created by another user or organization without conflict.
+스코프를 사용하면 다른 사용자나 조직이 만든 패키지와 동일한 이름의 패키지를 충돌 없이 만들 수 있습니다.
 
-When listed as a dependent in a `package.json` file, scoped packages are preceded by their scope name. The scope name is everything between the `@` and the slash:
+`package.json` 파일에 종속성으로 나열될 때, 스코프가 있는 패키지는 스코프 이름이 앞에 붙습니다. 스코프 이름은 `@`와 슬래시 사이의 모든 내용입니다:
 
-- **"npm" scope:**
+- **"npm" 스코프:**
 
 ```
 @npm/package-name
 ```
 
-- **"npmcorp" scope:**
+- **"npmcorp" 스코프:**
 
 ```
 @npmcorp/package-name
 ```
 
-To create and publish public scoped packages, see "[Creating and publishing scoped public packages][create-public-pkg]".
+공개 스코프 패키지를 만들고 게시하려면 "[스코프가 있는 공개 패키지 만들기 및 게시하기][create-public-pkg]"를 참조하세요.
 
-To create and publish private scoped packages, see "[Creating and publishing private packages][create-private-pkg]".
+비공개 스코프 패키지를 만들고 게시하려면 "[비공개 패키지 만들기 및 게시하기][create-private-pkg]"를 참조하세요.
 
-## Scopes and package visibility
+## 스코프와 패키지 공개 여부
 
-- Unscoped packages are always public.
-- [Private packages][about-priv-pkg] are always scoped.
-- Scoped packages are private by default; you must pass a command-line flag when publishing to make them public.
+- 스코프가 없는 패키지는 항상 공개입니다.
+- [비공개 패키지][about-priv-pkg]는 항상 스코프가 있습니다.
+- 스코프가 있는 패키지는 기본적으로 비공개입니다. 공개로 만들려면 게시할 때 명령줄 플래그를 전달해야 합니다.
 
-For more information on package scope and visibility, see "[Package scope, access level, and visibility][pkg-viz]".
+패키지 스코프와 공개 여부에 대한 자세한 정보는 "[패키지 스코프, 접근 수준 및 공개 여부][pkg-viz]"을 참조하세요.
 
 [create-public-pkg]: creating-and-publishing-scoped-public-packages
 [create-private-pkg]: creating-and-publishing-private-packages

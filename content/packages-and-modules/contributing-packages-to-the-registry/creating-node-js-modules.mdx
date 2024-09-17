@@ -1,31 +1,31 @@
 ---
-title: Creating Node.js modules
+title: Node.js 모듈 만들기
 redirect_from:
   - /getting-started/creating-node-modules
 ---
 
-Node.js modules are a type of [package][about-pkgs] that can be published to npm.
+Node.js 모듈은 npm에 게시할 수 있는 [패키지][about-pkgs]의 한 유형입니다.
 
-## Overview
+## 개요
 
-1. [Create a `package.json` file](#create-a-package-json-file)
-2. [Create the file that will be loaded when your module is required by another application](#create-the-file-that-will-be-loaded-when-your-module-is-required-by-another-application)
-3. [Test your module](#test-your-module)
+1. [`package.json` 파일 만들기](#package-json-파일-만들기)
+2. [모듈이 다른 애플리케이션에 의해 요구될 때 로드될 파일 만들기](#모듈이-다른-애플리케이션에-의해-요구될-때-로드될-파일-만들기)
+3. [모듈 테스트하기](#모듈-테스트하기)
 
-## Create a `package.json` file
+## `package.json` 파일 만들기
 
-1. To create a `package.json` file, on the command line, in the root directory of your Node.js module, run `npm init`:
-   - For [scoped modules][scoped-pkg], run `npm init --scope=@scope-name`
-   - For [unscoped modules][unscoped-pkg], run `npm init`
-2. Provide responses for the required fields (`name` and `version`), as well as the `main` field:
-   - `name`: The name of your module.
-   - `version`: The initial module version. We recommend following [semantic versioning guidelines][semver] and starting with `1.0.0`.
+1. `package.json` 파일을 만들려면 명령줄에서 Node.js 모듈의 루트 디렉토리에서 `npm init`을 실행하세요:
+   - [스코프가 있는 모듈][scoped-pkg]의 경우, `npm init --scope=@scope-name`을 실행하세요
+   - [스코프가 없는 모듈][unscoped-pkg]의 경우, `npm init`을 실행하세요
+2. 필수 필드(`name`과 `version`)와 `main` 필드에 대한 응답을 제공하세요:
+   - `name`: 모듈의 이름.
+   - `version`: 초기 모듈 버전. [시맨틱 버저닝 가이드라인][semver]을 따르고 `1.0.0`으로 시작하는 것을 권장합니다.
 
-For more information on `package.json` files, see "[Creating a package.json file][creating-pkg-json]".
+`package.json` 파일에 대한 자세한 정보는 "[package.json 파일 만들기][creating-pkg-json]"를 참조하세요.
 
-## Create the file that will be loaded when your module is required by another application
+## 모듈이 다른 애플리케이션에 의해 요구될 때 로드될 파일 만들기
 
-Create a file with the same name you provided in the `main` field. In that file, add a function as a property of the `exports` object. This will make the function available to other code:
+`main` 필드에서 제공한 이름과 동일한 이름의 파일을 만드세요. 해당 파일에서 `exports` 객체의 속성으로 함수를 추가하세요. 이렇게 하면 다른 코드에서 함수를 사용할 수 있게 됩니다:
 
 ```
 exports.printMsg = function() {
@@ -33,36 +33,36 @@ exports.printMsg = function() {
 }
 ```
 
-## Test your module
+## 모듈 테스트하기
 
-1. Publish your package to npm:
+1. 패키지를 npm에 게시하세요:
 
-   - For [private packages][priv-pkg-pub] and [unscoped packages][unscoped-pkg-pub], use `npm publish`.
-   - For [scoped public packages][scoped-pkg-pub], use `npm publish --access public`
+   - [비공개 패키지][priv-pkg-pub]와 [스코프가 없는 패키지][unscoped-pkg-pub]의 경우, `npm publish`를 사용하세요.
+   - [스코프가 있는 공개 패키지][scoped-pkg-pub]의 경우, `npm publish --access public`을 사용하세요
 
-2. On the command line, create a new test directory outside of your project directory.
+2. 명령줄에서 프로젝트 디렉토리 외부에 새 테스트 디렉토리를 만드세요.
 
    ```
    mkdir test-directory
    ```
 
-3. Switch to the new directory:
+3. 새 디렉토리로 이동하세요:
 
    ```
    cd /path/to/test-directory
    ```
 
-4. In the test directory, install your module:
+4. 테스트 디렉토리에서 모듈을 설치하세요:
 
    ```
    npm install <your-module-name>
    ```
 
-5. In the test directory, create a `test.js` file which requires your module and calls your module as a method.
+5. 테스트 디렉토리에서 모듈을 요구하고 모듈을 메서드로 호출하는 `test.js` 파일을 만드세요.
 
-6. On the command line, run `node test.js`. The message sent to the console.log should appear.
+6. 명령줄에서 `node test.js`를 실행하세요. console.log로 전송된 메시지가 나타나야 합니다.
 
-## Resources
+## 리소스
 
 <YouTube id="3I78ELjTzlQ" />
 

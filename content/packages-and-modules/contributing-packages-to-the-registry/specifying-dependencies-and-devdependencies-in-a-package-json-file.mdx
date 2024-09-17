@@ -1,35 +1,35 @@
 ---
-title: Specifying dependencies and devDependencies in a package.json file
+title: package.json 파일에서 dependencies와 devDependencies 지정하기
 ---
 
-To specify the packages your project depends on, you must list them as `"dependencies"` or `"devDependencies"` in your package's [`package.json`][pkg-json] file. When you (or another user) run `npm install`, npm will download dependencies and devDependencies that are listed in `package.json` that meet the [semantic version][semver] requirements listed for each. To see which versions of a package will be installed, use the [semver calculator][semver-calc].
+프로젝트가 의존하는 패키지를 지정하려면 패키지의 [`package.json`][pkg-json] 파일에 `"dependencies"` 또는 `"devDependencies"`로 나열해야 합니다. 여러분(또는 다른 사용자)이 `npm install`을 실행하면, npm은 `package.json`에 나열된 dependencies와 devDependencies 중 나열된 [시맨틱 버전][semver] 요구사항을 충족하는 것을 다운로드합니다. 어떤 버전의 패키지가 설치될지 확인하려면 [semver 계산기][semver-calc]를 사용하세요.
 
-- `"dependencies"`: Packages required by your application in production.
-- `"devDependencies"`: Packages that are only needed for local development and testing.
+- `"dependencies"`: 프로덕션 환경에서 애플리케이션에 필요한 패키지.
+- `"devDependencies"`: 로컬 개발 및 테스트에만 필요한 패키지.
 
-## Adding dependencies to a `package.json` file
+## `package.json` 파일에 dependencies 추가하기
 
-You can add dependencies to a `package.json` file from the command line or by manually editing the `package.json` file.
+명령줄에서 또는 `package.json` 파일을 직접 편집하여 dependencies를 추가할 수 있습니다.
 
-### Adding dependencies to a `package.json` file from the command line
+### 명령줄에서 `package.json` 파일에 dependencies 추가하기
 
-To add dependencies and devDependencies to a `package.json` file from the command line, you can install them in the root directory of your package using the `--save-prod` flag (also `-S`) for dependencies (the default behavior of `npm install`) or the `--save-dev` flag (also `-D`) for devDependencies.
+명령줄에서 `package.json` 파일에 dependencies와 devDependencies를 추가하려면 패키지의 루트 디렉토리에서 dependencies의 경우 `--save-prod` 플래그(또는 `-S`, `npm install`의 기본 동작)를 사용하여, devDependencies의 경우 `--save-dev` 플래그(또는 `-D`)를 사용하여 설치할 수 있습니다.
 
-To add an entry to the `"dependencies"` attribute of a `package.json` file, on the command line, run the following command:
+`package.json` 파일의 `"dependencies"` 속성에 항목을 추가하려면 명령줄에서 다음 명령을 실행하세요:
 
 ```
 npm install <package-name> [--save-prod]
 ```
 
-To add an entry to the `"devDependencies"` attribute of a `package.json` file, on the command line, run the following command:
+`package.json` 파일의 `"devDependencies"` 속성에 항목을 추가하려면 명령줄에서 다음 명령을 실행하세요:
 
 ```
 npm install <package-name> --save-dev
 ```
 
-### Manually editing the `package.json` file
+### `package.json` 파일 수동 편집하기
 
-To add dependencies to a `package.json` file, in a text editor, add an attribute called `"dependencies"` that references the name and [semantic version][semver] of each dependency:
+`package.json` 파일에 dependencies를 추가하려면 텍스트 편집기에서 각 dependency의 이름과 [시맨틱 버전][semver]을 참조하는 `"dependencies"`라는 속성을 추가하세요:
 
 ```
 {
@@ -42,7 +42,7 @@ To add dependencies to a `package.json` file, in a text editor, add an attribute
 }
 ```
 
-To add devDependencies to a `package.json` file, in a text editor, add an attribute called `"devDependencies"` that references the name and [semantic version][semver] of each devDependency:
+`package.json` 파일에 devDependencies를 추가하려면 텍스트 편집기에서 각 devDependency의 이름과 [시맨틱 버전][semver]을 참조하는 `"devDependencies"`라는 속성을 추가하세요:
 
 ```
 "name": "my_package",

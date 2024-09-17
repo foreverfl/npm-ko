@@ -1,51 +1,50 @@
 ---
-title: About semantic versioning
+title: 시맨틱 버저닝에 대하여
 redirect_from:
   - /getting-started/semantic-versioning/
 ---
 
-To keep the JavaScript ecosystem healthy, reliable, and secure, every time you make significant updates to an npm package you own, we recommend publishing a new version of the package with an updated version number in the [`package.json` file][pkg-json] that follows the [semantic versioning spec][semver-org]. Following the semantic versioning spec helps other developers who depend on your code understand the extent of changes in a given version, and adjust their own code if necessary.
+JavaScript 생태계를 건강하고, 신뢰할 수 있으며, 안전하게 유지하기 위해 자신이 소유한 npm 패키지에 중요한 업데이트를 할 때마다, [시맨틱 버저닝 규격][semver-org]을 따르는 새로운 버전 번호로 [`package.json` 파일][pkg-json]을 업데이트하여 패키지의 새 버전을 게시하는 것이 좋습니다. 시맨틱 버저닝 규격을 따르면, 귀하의 코드에 의존하는 다른 개발자가 해당 버전에서 변경된 내용의 범위를 이해하고 필요에 따라 자신의 코드를 조정할 수 있습니다.
 
 <Note>
 
-**Note:** If you introduce a change that breaks a package dependency, we strongly recommend incrementing the version **major number**; see below for details.
+**참고:** 패키지 의존성을 깨뜨리는 변경을 도입하는 경우, 버전 **주 버전**을 증가시키는 것을 강력히 권장합니다. 자세한 내용은 아래를 참조하세요.
 
 </Note>
 
-## Incrementing semantic versions in published packages
+## 게시된 패키지에서 시맨틱 버전 증가시키기
 
-To help developers who rely on your code, we recommend starting your package version at `1.0.0` and incrementing as follows:
+귀하의 코드에 의존하는 개발자를 돕기 위해 패키지 버전을 `1.0.0`부터 시작하고 다음과 같이 증가시키는 것이 좋습니다:
 
-| Code status | Stage | Rule | Example version |
-| --- | --- | --- | --- |
-| First release | New product | Start with 1.0.0 | 1.0.0 |
-| Backward compatible bug fixes | Patch release | Increment the third digit | 1.0.1 |
-| Backward compatible new features | Minor release | Increment the middle digit and reset last digit to zero | 1.1.0 |
-| Changes that break backward compatibility | Major release | Increment the first digit and reset middle and last digits to zero | 2.0.0 |
+| 코드 상태               | 단계          | 규칙                                                         | 예시 버전 |
+| ----------------------- | ------------- | ------------------------------------------------------------ | --------- |
+| 첫 번째 릴리스          | 새로운 제품   | 1.0.0으로 시작                                               | 1.0.0     |
+| 하위 호환 버그 수정     | 패치 릴리스   | 세 번째 숫자를 증가                                          | 1.0.1     |
+| 하위 호환 새로운 기능   | 마이너 릴리스 | 가운데 숫자를 증가시키고 마지막 숫자를 0으로 설정            | 1.1.0     |
+| 하위 호환성을 깨는 변경 | 메이저 릴리스 | 첫 번째 숫자를 증가시키고 가운데 및 마지막 숫자를 0으로 설정 | 2.0.0     |
 
-## Using semantic versioning to specify update types your package can accept
+## 시맨틱 버저닝을 사용하여 패키지에서 허용할 업데이트 유형 지정하기
 
-You can specify which update types your package can accept from dependencies in your package's `package.json` file.
+패키지의 `package.json` 파일에서 의존성으로부터 허용할 업데이트 유형을 지정할 수 있습니다.
 
-For example, to specify acceptable version ranges up to 1.0.4, use the following syntax:
+예를 들어, 1.0.4까지의 허용 가능한 버전 범위를 지정하려면 다음과 같은 구문을 사용하세요:
 
-- Patch releases: `1.0` or `1.0.x` or `~1.0.4`
-- Minor releases: `1` or `1.x` or `^1.0.4`
-- Major releases: `*` or `x`
+- 패치 릴리스: `1.0` 또는 `1.0.x` 또는 `~1.0.4`
+- 마이너 릴리스: `1` 또는 `1.x` 또는 `^1.0.4`
+- 메이저 릴리스: `*` 또는 `x`
 
-For more information on semantic versioning syntax, see the [npm semver calculator][semver-calc].
+시맨틱 버저닝 구문에 대한 자세한 내용은 [npm semver 계산기][semver-calc]를 참조하세요.
 
-### Example
+### 예시
 
 ```json
-
 "dependencies": {
   "my_dep": "^1.0.0",
   "another_dep": "~2.2.0"
 },
 ```
 
-## Resources
+## 참고 자료
 
 <YouTube id="kK4Meix58R4" />
 

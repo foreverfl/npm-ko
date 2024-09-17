@@ -1,70 +1,70 @@
 ---
-title: Creating and publishing unscoped public packages
+title: 스코프 없는 공개 패키지 생성 및 게시
 ---
 
-As an npm user, you can create unscoped packages to use in your own projects and publish them to the npm public registry for others to use in theirs. Unscoped packages are always public and are referred to by the package name only:
+npm 사용자로서, 자신의 프로젝트에서 사용할 스코프가 없는 패키지를 만들고 다른 사람들이 자신의 프로젝트에서 사용할 수 있도록 npm 공개 레지스트리에 게시할 수 있습니다. 스코프가 없는 패키지는 항상 공개이며 패키지 이름으로만 참조됩니다:
 
 ```
 package-name
 ```
 
-For more information on package scope, access, and visibility, see "[Package scope, access level, and visibility][pkg-viz]".
+패키지 범위, 접근 수준 및 가시성에 대한 자세한 내용은 "[패키지 범위, 접근 수준 및 가시성][pkg-viz]"을 참조하세요.
 
 <Note>
 
-**Note:** Before you can publish public unscoped npm packages, you must [sign up](https://www.npmjs.com/signup) for an npm user account.
+**참고:** 공개 스코프가 없는 npm 패키지를 게시하기 전에 npm 사용자 계정에 [가입](https://www.npmjs.com/signup)해야 합니다.
 
 </Note>
 
-## Creating an unscoped public package
+## 스코프가 없는 공개 패키지 생성하기
 
-1. On the command line, create a directory for your package:
+1. 명령줄에서 패키지를 위한 디렉토리를 생성합니다:
 
    ```
    mkdir my-test-package
    ```
 
-2. Navigate to the root directory of your package:
+2. 패키지의 루트 디렉토리로 이동합니다:
 
    ```
    cd my-test-package
    ```
 
-3. If you are using git to manage your package code, in the package root directory, run the following commands, replacing `git-remote-url` with the git remote URL for your package:
+3. git을 사용하여 패키지 코드를 관리하는 경우, 패키지 루트 디렉토리에서 다음 명령을 실행하되 `git-remote-url`을 패키지의 git 원격 URL로 교체하세요:
 
    ```
    git init
    git remote add origin git://git-remote-url
    ```
 
-4. In the package root directory, run the `npm init` command.
-5. Respond to the prompts to generate a [`package.json`](https://docs.npmjs.com/about-package-json-and-package-lock-json-files) file. For help naming your package, see "[Package name guidelines][pkg-name]".
-6. Create a [README file][readme-file] that explains what your package code is and how to use it.
-7. In your preferred text editor, write the code for your package.
+4. 패키지 루트 디렉토리에서 `npm init` 명령을 실행합니다.
+5. 프롬프트에 응답하여 [`package.json`](https://docs.npmjs.com/about-package-json-and-package-lock-json-files) 파일을 생성합니다. 패키지 이름 지정에 대한 도움말은 "[패키지 이름 지침][pkg-name]"을 참조하세요.
+6. 패키지 코드의 내용과 사용 방법을 설명하는 [README 파일][readme-file]을 만듭니다.
+7. 선호하는 텍스트 편집기에서 패키지의 코드를 작성합니다.
 
-## Reviewing package contents for sensitive or unnecessary information
+## 민감하거나 불필요한 정보에 대한 패키지 내용 검토
 
-Publishing sensitive information to the registry can harm your users, compromise your development infrastructure, be expensive to fix, and put you at risk of legal action. **We strongly recommend removing sensitive information, such as private keys, passwords, [personally identifiable information][pii] (PII), and credit card data before publishing your package to the registry.**
+레지스트리에 민감한 정보를 게시하면 사용자에게 해를 끼치고, 개발 인프라를 손상시키며, 수정하는 데 비용이 많이 들고, 법적 조치의 위험에 처할 수 있습니다. **레지스트리에 패키지를 게시하기 전에 개인 키, 비밀번호, [개인 식별 정보][pii](PII) 및 신용 카드 데이터와 같은 민감한 정보를 제거할 것을 강력히 권장합니다.**
 
-For less sensitive information, such as testing data, use a `.npmignore` or `.gitignore` file to prevent publishing to the registry. For more information, see [this article][developers].
+테스트 데이터와 같은 덜 민감한 정보의 경우, `.npmignore` 또는 `.gitignore` 파일을 사용하여 레지스트리에 게시되는 것을 방지하세요. 자세한 내용은 [이 문서][developers]를 참조하세요.
 
-## Testing your package
+## 패키지 테스트하기
 
-To reduce the chances of publishing bugs, we recommend testing your package before publishing it to the npm registry. To test your package, run `npm install` with the full path to your package directory:
+버그 게시 가능성을 줄이기 위해 npm 레지스트리에 게시하기 전에 패키지를 테스트하는 것이 좋습니다. 패키지를 테스트하려면 패키지 디렉토리의 전체 경로로 `npm install`을 실행하세요:
 
 ```
 npm install path/to/my-package
 ```
 
-## Publishing unscoped public packages
+## 스코프가 없는 공개 패키지 게시하기
 
-1. On the command line, navigate to the root directory of your package.
+1. 명령줄에서 패키지의 루트 디렉토리로 이동합니다.
 
    ```
    cd /path/to/package
    ```
 
-2. To publish your public package to the npm registry, run:
+2. npm 레지스트리에 공개 패키지를 게시하려면 다음을 실행하세요:
 
    ```
    npm publish
@@ -72,13 +72,13 @@ npm install path/to/my-package
 
    <Note>
 
-   **Note:** If you use GitHub Actions to publish your packages, you can generate provenance information for each package you publish. For more information, see "[Generating provenance statements][provenance-how-to]."
+   **참고:** GitHub Actions를 사용하여 패키지를 게시하는 경우 게시하는 각 패키지에 대한 출처 정보를 생성할 수 있습니다. 자세한 내용은 "[출처 명세서 생성하기][provenance-how-to]"를 참조하세요.
 
    </Note>
 
-3. To see your public package page, visit `https://npmjs.com/package/*package-name*`, replacing `*package-name*` with the name of your package. Public packages will say `public` below the package name on the npm website.
+3. 공개 패키지 페이지를 보려면 `https://npmjs.com/package/*package-name*`을 방문하세요. `*package-name*`을 패키지 이름으로 교체하세요. 공개 패키지는 npm 웹사이트의 패키지 이름 아래에 `public`이라고 표시됩니다.
 
-For more information on the `publish` command, see the [CLI documentation][cli-publish].
+`publish` 명령에 대한 자세한 내용은 [CLI 문서][cli-publish]를 참조하세요.
 
 [pkg-viz]: package-scope-access-level-and-visibility
 [user-signup]: https://www.npmjs.com/signup

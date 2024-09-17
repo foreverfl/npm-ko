@@ -1,68 +1,68 @@
 ---
-title: About packages and modules
+title: 패키지와 모듈에 대하여
 redirect_from:
   - /getting-started/packages
 ---
 
-The npm registry contains packages, many of which are also Node modules, or contain Node modules. Read on to understand how they differ and how they interact.
+npm 레지스트리에는 패키지들이 포함되어 있으며, 이 중 많은 것들이 Node 모듈이거나 Node 모듈을 포함하고 있습니다. 이들이 어떻게 다르고 어떻게 상호작용하는지 이해하려면 계속 읽어보세요.
 
-## About packages
+## 패키지에 대하여
 
-A **package** is a file or directory that is described by a `package.json` file. A package must contain a `package.json` file in order to be published to the npm registry. For more information on creating a `package.json` file, see "[Creating a package.json file][pkg-json]".
+**패키지**는 `package.json` 파일에 의해 설명되는 파일이나 디렉토리입니다. 패키지는 npm 레지스트리에 게시되기 위해서는 반드시 `package.json` 파일을 포함해야 합니다. `package.json` 파일 생성에 대한 자세한 정보는 "[package.json 파일 만들기][pkg-json]"를 참조하세요.
 
-Packages can be unscoped or scoped to a user or organization, and scoped packages can be private or public. For more information, see
+패키지는 스코프가 없거나 사용자 또는 조직에 스코프가 지정될 수 있으며, 스코프가 지정된 패키지는 비공개 또는 공개일 수 있습니다. 자세한 정보는 다음을 참조하세요:
 
-- "[About scopes][about-scopes]"
-- "[About private packages][private-pkgs]"
-- "[Package scope, access level, and visibility][pkg-viz]"
+- "[스코프에 대하여][about-scopes]"
+- "[비공개 패키지에 대하여][private-pkgs]"
+- "[패키지 스코프, 접근 수준 및 공개 여부][pkg-viz]"
 
-### About package formats
+### 패키지 형식에 대하여
 
-A package is any of the following:
+패키지는 다음 중 하나입니다:
 
-- a) A folder containing a program described by a `package.json` file.
-- b) A gzipped tarball containing (a).
-- c) A URL that resolves to (b).
-- d) A `<name>@<version>` that is published on the registry with (c).
-- e) A `<name>@<tag>` that points to (d).
-- f) A `<name>` that has a `latest` tag satisfying (e).
-- g) A `git` url that, when cloned, results in (a).
+- a) `package.json` 파일로 설명된 프로그램을 포함하는 폴더.
+- b) (a)를 포함하는 gzip으로 압축된 tarball.
+- c) (b)로 해석되는 URL.
+- d) 레지스트리에 (c)로 게시된 `<name>@<version>`.
+- e) (d)를 가리키는 `<name>@<tag>`.
+- f) (e)를 만족하는 `latest` 태그가 있는 `<name>`.
+- g) 클론했을 때 (a)가 되는 `git` URL.
 
-### npm package git URL formats
+### npm 패키지 git URL 형식
 
-Git URLs used for npm packages can be formatted in the following ways:
+npm 패키지에 사용되는 Git URL은 다음과 같은 형식으로 작성될 수 있습니다:
 
 - `git://github.com/user/project.git#commit-ish`
 - `git+ssh://user@hostname:project.git#commit-ish`
 - `git+http://user@hostname/project/blah.git#commit-ish`
 - `git+https://user@hostname/project/blah.git#commit-ish`
 
-The `commit-ish` can be any tag, sha, or branch that can be supplied as an argument to `git checkout`. The default `commit-ish` is `HEAD`.
+`commit-ish`는 `git checkout` 명령어의 인자로 제공할 수 있는 모든 태그, sha, 또는 브랜치일 수 있습니다. 기본 `commit-ish`는 `HEAD`입니다.
 
-Installing any package directly from git will not install [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) or workspaces.
+git에서 직접 패키지를 설치하면 [git 서브모듈](https://git-scm.com/book/en/v2/Git-Tools-Submodules)이나 워크스페이스는 설치되지 않습니다.
 
-## About modules
+## 모듈에 대하여
 
-A **module** is any file or directory in the `node_modules` directory that can be loaded by the Node.js `require()` function.
+**모듈**은 Node.js `require()` 함수로 로드될 수 있는 `node_modules` 디렉토리 내의 모든 파일이나 디렉토리입니다.
 
-To be loaded by the Node.js `require()` function, a module must be one of the following:
+Node.js `require()` 함수로 로드되기 위해서는 모듈이 다음 중 하나여야 합니다:
 
-- A folder with a `package.json` file containing a `"main"` field.
-- A JavaScript file.
+- `"main"` 필드가 포함된 `package.json` 파일이 있는 폴더.
+- JavaScript 파일.
 
 <Note>
 
-**Note:** Since modules are not required to have a `package.json` file, not all modules are packages. Only modules that have a `package.json` file are also packages.
+**참고:** 모듈은 `package.json` 파일이 필요하지 않기 때문에 모든 모듈이 패키지인 것은 아닙니다. `package.json` 파일이 있는 모듈만이 패키지이기도 합니다.
 
 </Note>
 
-In the context of a Node program, the `module` is also the thing that was loaded _from_ a file. For example, in the following program:
+Node 프로그램의 맥락에서 `module`은 또한 파일에서 로드된 것입니다. 예를 들어, 다음 프로그램에서:
 
 ```
 var req = require('request')
 ```
 
-The `req` variable refers to the `request` module returned by the `require()` function.
+`req` 변수는 `require()` 함수에 의해 반환된 `request` 모듈을 참조합니다.
 
 [about-scopes]: about-scopes
 [private-pkgs]: about-private-packages

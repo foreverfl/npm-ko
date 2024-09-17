@@ -1,43 +1,43 @@
 ---
-title: Creating a package.json file
+title: package.json 파일 만들기
 redirect_from:
   - /about-package-json-and-package-lock-json-files
   - /getting-started/using-a-package.json
 ---
 
-You can add a `package.json` file to your package to make it easy for others to manage and install. Packages published to the registry must contain a `package.json` file.
+패키지에 `package.json` 파일을 추가하여 다른 사람들이 쉽게 관리하고 설치할 수 있도록 할 수 있습니다. 레지스트리에 게시된 패키지는 반드시 `package.json` 파일을 포함해야 합니다.
 
-A `package.json` file:
+`package.json` 파일은:
 
-- lists the packages your project depends on
-- specifies versions of a package that your project can use using [semantic versioning rules][semver]
-- makes your build reproducible, and therefore easier to share with other developers
+- 프로젝트가 의존하는 패키지들을 나열합니다
+- [시맨틱 버저닝 규칙][semver]을 사용하여 프로젝트가 사용할 수 있는 패키지의 버전을 지정합니다
+- 빌드를 재현 가능하게 만들어 다른 개발자들과 더 쉽게 공유할 수 있게 합니다
 
 <Note>
 
-**Note:** To make your package easier to find on the npm website, we recommend including a custom `description` in your `package.json` file.
+**참고:** npm 웹사이트에서 패키지를 더 쉽게 찾을 수 있도록 `package.json` 파일에 사용자 정의 `description`을 포함하는 것을 권장합니다.
 
 </Note>
 
-## `package.json` fields
+## `package.json` 필드
 
-### Required `name` and `version` fields
+### 필수 `name`과 `version` 필드
 
-A `package.json` file must contain `"name"` and `"version"` fields.
+`package.json` 파일은 반드시 `"name"`과 `"version"` 필드를 포함해야 합니다.
 
-The `"name"` field contains your package's name, and must be lowercase and one word, and may contain hyphens and underscores.
+`"name"` 필드는 패키지의 이름을 포함하며, 반드시 소문자여야 하고 한 단어여야 하며, 하이픈과 밑줄을 포함할 수 있습니다.
 
-The `"version"` field must be in the form `x.x.x` and follow the [semantic versioning guidelines][semver].
+`"version"` 필드는 반드시 `x.x.x` 형식이어야 하며 [시맨틱 버저닝 가이드라인][semver]을 따라야 합니다.
 
-### Author field
+### 작성자 필드
 
-If you want to include package author information in `"author"` field, use the following format (email and website are both optional):
+`"author"` 필드에 패키지 작성자 정보를 포함하고 싶다면, 다음 형식을 사용하세요 (이메일과 웹사이트는 모두 선택사항입니다):
 
 ```
 Your Name <email@example.com> (http://example.com)
 ```
 
-### Example
+### 예시
 
 ```
 {
@@ -47,41 +47,41 @@ Your Name <email@example.com> (http://example.com)
 }
 ```
 
-## Creating a new `package.json` file
+## 새로운 `package.json` 파일 만들기
 
-You can create a `package.json` file by running a CLI questionnaire or creating a default `package.json` file.
+CLI 설문을 실행하거나 기본 `package.json` 파일을 만들어 `package.json` 파일을 생성할 수 있습니다.
 
-### Running a CLI questionnaire
+### CLI 설문 실행하기
 
-To create a `package.json` file with values that you supply, use the `npm init` command.
+제공한 값으로 `package.json` 파일을 만들려면 `npm init` 명령어를 사용하세요.
 
-1. On the command line, navigate to the root directory of your package.
+1. 명령줄에서 패키지의 루트 디렉토리로 이동합니다.
 
    ```
    cd /path/to/package
    ```
 
-2. Run the following command:
+2. 다음 명령어를 실행합니다:
 
    ```
    npm init
    ```
 
-3. Answer the questions in the command line questionnaire.
+3. 명령줄 설문의 질문에 답합니다.
 
-#### Customizing the `package.json` questionnaire
+#### `package.json` 설문 사용자 정의하기
 
-If you expect to create many `package.json` files, you can customize the questions asked and fields created during the `init` process so all the `package.json` files contain a standard set of information.
+많은 `package.json` 파일을 만들 것으로 예상되는 경우, `init` 과정에서 묻는 질문과 생성되는 필드를 사용자 정의하여 모든 `package.json` 파일에 표준 정보 세트가 포함되도록 할 수 있습니다.
 
-1. In your home directory, create a file called `.npm-init.js`.
+1. 홈 디렉토리에 `.npm-init.js`라는 파일을 만듭니다.
 
-2. To add custom questions, using a text editor, add questions with the `prompt` function:
+2. 사용자 정의 질문을 추가하려면 텍스트 편집기를 사용하여 `prompt` 함수로 질문을 추가합니다:
 
    ```
    module.exports = prompt("what's your favorite flavor of ice cream, buddy?", "I LIKE THEM ALL");
    ```
 
-3. To add custom fields, using a text editor, add desired fields to the `.npm-init.js` file:
+3. 사용자 정의 필드를 추가하려면 텍스트 편집기를 사용하여 `.npm-init.js` 파일에 원하는 필드를 추가합니다:
 
    ```
    module.exports = {
@@ -90,25 +90,25 @@ If you expect to create many `package.json` files, you can customize the questio
    }
    ```
 
-To learn more about creating advanced `npm init` customizations, see the [init-package-json GitHub repository][init-pkg-json GitHub repository].
+고급 `npm init` 사용자 정의 만들기에 대해 더 알아보려면 [init-package-json GitHub 저장소][init-pkg-json GitHub repository]를 참조하세요.
 
-### Creating a default `package.json` file
+### `package.json` 파일 기본값으로 생성하기
 
-To create a default `package.json` using information extracted from the current directory, use the `npm init` command with the `--yes` or `-y` flag. For a list of default values, see "[Default values extracted from the current directory](#default-values-extracted-from-the-current-directory)".
+현재 디렉토리에서 추출한 정보를 사용하여 기본 `package.json`을 만들려면 `--yes` 또는 `-y` 플래그와 함께 `npm init` 명령어를 사용하세요. 기본값 목록은 "[현재 디렉토리에서 추출된 기본값](#현재-디렉토리에서-추출된-기본값)"을 참조하세요.
 
-1. On the command line, navigate to the root directory of your package.
+1. 명령줄에서 패키지의 루트 디렉토리로 이동합니다.
 
    ```
    cd /path/to/package
    ```
 
-2. Run the following command:
+2. 다음 명령어를 실행합니다:
 
    ```
    npm init --yes
    ```
 
-#### Example
+#### 예시
 
 ```
 > npm init --yes
@@ -135,21 +135,21 @@ Wrote to /home/monatheoctocat/my_package/package.json:
 }
 ```
 
-#### Default values extracted from the current directory
+#### 현재 디렉토리에서 추출된 기본값
 
-- `name`: the current directory name
-- `version`: always `1.0.0`
-- `description`: info from the README, or an empty string `""`
-- `scripts`: by default creates an empty `test` script
-- `keywords`: empty
-- `author`: empty
+- `name`: 현재 디렉토리 이름
+- `version`: 항상 `1.0.0`
+- `description`: README의 정보, 또는 빈 문자열 `""`
+- `scripts`: 기본적으로 빈 `test` 스크립트 생성
+- `keywords`: 비어 있음
+- `author`: 비어 있음
 - `license`: [`ISC`][isc-license]
-- `bugs`: information from the current directory, if present
-- `homepage`: information from the current directory, if present
+- `bugs`: 현재 디렉토리의 정보 (있는 경우)
+- `homepage`: 현재 디렉토리의 정보 (있는 경우)
 
-### Setting config options for the init command
+### init 명령어에 대한 config 옵션 설정하기
 
-You can set default config options for the init command. For example, to set the default author email, author name, and license, on the command line, run the following commands:
+init 명령어에 대한 기본 config 옵션을 설정할 수 있습니다. 예를 들어, 기본 작성자 이메일, 작성자 이름, 라이선스를 설정하려면 명령줄에서 다음 명령어를 실행하세요:
 
 ```
 > npm set init-author-email "example-user@example.com"
