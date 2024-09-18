@@ -57,7 +57,7 @@ const config = {
   siteMetadata: {
     title: 'npm Docs',
     shortName: 'npm',
-    description: 'Documentation for the npm registry, website, and command-line interface',
+    description: 'npm 레지스트리, 웹사이트 및 명령줄 인터페이스에 대한 문서',
     lang: 'ko',
     imageUrl: 'https://user-images.githubusercontent.com/29712634/81721690-e2fb5d80-9445-11ea-8602-4b2294c964f3.png',
     repositoryUrl: 'https://github.com/foreverfl/npm-ko',
