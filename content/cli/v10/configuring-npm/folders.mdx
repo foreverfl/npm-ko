@@ -1,109 +1,96 @@
 ---
-title: folders
+title: 폴더
 section: 5
-description: Folder Structures Used by npm
-github_repo: npm/cli
-github_branch: latest
-github_path: docs/lib/content/configuring-npm/folders.md
-redirect_from:
-  - /cli-documentation/configuring-npm/folders
-  - /cli-documentation/files/folders
-  - /cli-documentation/v10/configuring-npm/folders
-  - /cli-documentation/v10/files/folders
-  - /cli/configuring-npm/folders
-  - /cli/files/folders
-  - /cli/v10/files/folders
-  - /configuring-npm/folders
-  - /files/folders
+description: npm이 사용하는 폴더 구조
 ---
 
-### Description
+### 설명
 
-npm puts various things on your computer. That's its job.
+npm은 여러 가지를 컴퓨터에 설치합니다. 그것이 npm의 역할입니다.
 
-This document will tell you what it puts where.
+이 문서는 npm이 무엇을 어디에 설치하는지 알려줄 것입니다.
 
-#### tl;dr
+#### 요약
 
-- Local install (default): puts stuff in `./node_modules` of the current package root.
-- Global install (with `-g`): puts stuff in /usr/local or wherever node is installed.
-- Install it **locally** if you're going to `require()` it.
-- Install it **globally** if you're going to run it on the command line.
-- If you need both, then install it in both places, or use `npm link`.
+- 로컬 설치 (기본): 현재 패키지 루트의 `./node_modules`에 설치합니다.
+- 전역 설치 (`-g` 사용): node가 설치된 /usr/local 또는 다른 위치에 설치합니다.
+- `require()`로 사용할 것이라면 **로컬**로 설치하세요.
+- 명령줄에서 실행할 것이라면 **전역**으로 설치하세요.
+- 둘 다 필요하다면 두 곳에 모두 설치하거나 `npm link`를 사용하세요.
 
-#### prefix Configuration
+#### prefix 설정
 
-The [`prefix` config](/cli/v10/using-npm/config#prefix) defaults to the location where node is installed. On most systems, this is `/usr/local`. On Windows, it's `%AppData%\npm`. On Unix systems, it's one level up, since node is typically installed at `{prefix}/bin/node` rather than `{prefix}/node.exe`.
+[`prefix` 설정](/using-npm/config#prefix)은 기본적으로 node가 설치된 위치입니다. 대부분의 시스템에서는 `/usr/local`입니다. Windows에서는 `%AppData%\npm`입니다. Unix 시스템에서는 한 단계 위입니다. node가 일반적으로 `{prefix}/bin/node`에 설치되기 때문입니다 (`{prefix}/node.exe`가 아님).
 
-When the `global` flag is set, npm installs things into this prefix. When it is not set, it uses the root of the current package, or the current working directory if not in a package already.
+`global` 플래그가 설정되면 npm은 이 prefix에 설치합니다. 설정되지 않으면 현재 패키지의 루트를 사용하거나, 이미 패키지 내에 있지 않다면 현재 작업 디렉토리를 사용합니다.
 
-#### Node Modules
+#### Node 모듈
 
-Packages are dropped into the `node_modules` folder under the `prefix`. When installing locally, this means that you can `require("packagename")` to load its main module, or `require("packagename/lib/path/to/sub/module")` to load other modules.
+패키지는 `prefix` 아래의 `node_modules` 폴더에 설치됩니다. 로컬로 설치할 때, 이는 `require("패키지명")`으로 메인 모듈을 로드하거나 `require("패키지명/lib/path/to/sub/module")`로 다른 모듈을 로드할 수 있음을 의미합니다.
 
-Global installs on Unix systems go to `{prefix}/lib/node_modules`. Global installs on Windows go to `{prefix}/node_modules` (that is, no `lib` folder.)
+Unix 시스템의 전역 설치는 `{prefix}/lib/node_modules`에 위치합니다. Windows의 전역 설치는 `{prefix}/node_modules`에 위치합니다 (`lib` 폴더 없음).
 
-Scoped packages are installed the same way, except they are grouped together in a sub-folder of the relevant `node_modules` folder with the name of that scope prefix by the @ symbol, e.g. `npm install @myorg/package` would place the package in `{prefix}/node_modules/@myorg/package`. See [`scope`](/cli/v10/using-npm/scope) for more details.
+스코프가 있는 패키지도 같은 방식으로 설치되지만, 관련 `node_modules` 폴더의 하위 폴더에 @ 기호로 시작하는 해당 스코프 이름으로 그룹화됩니다. 예를 들어, `npm install @myorg/package`는 패키지를 `{prefix}/node_modules/@myorg/package`에 설치합니다. 자세한 내용은 [`scope`](/using-npm/scope)를 참조하세요.
 
-If you wish to `require()` a package, then install it locally.
+패키지를 `require()`하려면 로컬로 설치하세요.
 
-#### Executables
+#### 실행 파일
 
-When in global mode, executables are linked into `{prefix}/bin` on Unix, or directly into `{prefix}` on Windows. Ensure that path is in your terminal's `PATH` environment to run them.
+전역 모드에서는 실행 파일이 Unix의 경우 `{prefix}/bin`에, Windows의 경우 직접 `{prefix}`에 연결됩니다. 실행하려면 터미널의 `PATH` 환경에 해당 경로가 있는지 확인하세요.
 
-When in local mode, executables are linked into `./node_modules/.bin` so that they can be made available to scripts run through npm. (For example, so that a test runner will be in the path when you run `npm test`.)
+로컬 모드에서는 실행 파일이 `./node_modules/.bin`에 연결되어 npm을 통해 실행되는 스크립트에서 사용할 수 있습니다. (예: `npm test`를 실행할 때 테스트 러너가 경로에 있도록 하기 위해)
 
-#### Man Pages
+#### 매뉴얼 페이지
 
-When in global mode, man pages are linked into `{prefix}/share/man`.
+전역 모드에서 매뉴얼 페이지는 `{prefix}/share/man`에 연결됩니다.
 
-When in local mode, man pages are not installed.
+로컬 모드에서는 매뉴얼 페이지가 설치되지 않습니다.
 
-Man pages are not installed on Windows systems.
+Windows 시스템에서는 매뉴얼 페이지가 설치되지 않습니다.
 
-#### Cache
+#### 캐시
 
-See [`npm cache`](/cli/v10/commands/npm-cache). Cache files are stored in `~/.npm` on Posix, or `%LocalAppData%/npm-cache` on Windows.
+[`npm cache`](/commands/npm-cache)를 참조하세요. 캐시 파일은 Posix에서는 `~/.npm`에, Windows에서는 `%LocalAppData%/npm-cache`에 저장됩니다.
 
-This is controlled by the [`cache` config](/cli/v10/using-npm/config#cache) param.
+이는 [`cache` 설정](/using-npm/config#cache) 매개변수로 제어됩니다.
 
-#### Temp Files
+#### 임시 파일
 
-Temporary files are stored by default in the folder specified by the [`tmp` config](/cli/v10/using-npm/config#tmp), which defaults to the TMPDIR, TMP, or TEMP environment variables, or `/tmp` on Unix and `c:\windows\temp` on Windows.
+임시 파일은 기본적으로 [`tmp` 설정](/using-npm/config#tmp)에 지정된 폴더에 저장되며, 이는 기본적으로 TMPDIR, TMP, 또는 TEMP 환경 변수, 또는 Unix의 경우 `/tmp`, Windows의 경우 `c:\windows\temp`입니다.
 
-Temp files are given a unique folder under this root for each run of the program, and are deleted upon successful exit.
+임시 파일은 프로그램의 각 실행마다 이 루트 아래에 고유한 폴더를 받으며, 성공적으로 종료되면 삭제됩니다.
 
-### More Information
+### 추가 정보
 
-When installing locally, npm first tries to find an appropriate `prefix` folder. This is so that `npm install foo@1.2.3` will install to the sensible root of your package, even if you happen to have `cd`ed into some other folder.
+로컬로 설치할 때, npm은 먼저 적절한 `prefix` 폴더를 찾으려고 시도합니다. 이는 `npm install foo@1.2.3`이 다른 폴더로 `cd`했더라도 패키지의 적절한 루트에 설치되도록 하기 위함입니다.
 
-Starting at the $PWD, npm will walk up the folder tree checking for a folder that contains either a `package.json` file, or a `node_modules` folder. If such a thing is found, then that is treated as the effective "current directory" for the purpose of running npm commands. (This behavior is inspired by and similar to git's .git-folder seeking logic when running git commands in a working dir.)
+$PWD에서 시작하여, npm은 폴더 트리를 올라가면서 `package.json` 파일이나 `node_modules` 폴더를 포함하는 폴더를 찾습니다. 이러한 폴더를 발견하면 해당 폴더가 npm 명령을 실행하는 데 있어서 "현재 디렉토리"로 간주됩니다. 이 동작은 작업 디렉토리에서 git 명령을 실행할 때, `.git` 폴더를 찾는 git의 탐색 로직에서 영감을 받아 비슷하게 작동합니다.
 
-If no package root is found, then the current folder is used.
+패키지 루트를 찾지 못하면 현재 폴더가 사용됩니다.
 
-When you run `npm install foo@1.2.3`, then the package is loaded into the cache, and then unpacked into `./node_modules/foo`. Then, any of foo's dependencies are similarly unpacked into `./node_modules/foo/node_modules/...`.
+`npm install foo@1.2.3`을 실행하면 패키지가 캐시에 로드된 다음 `./node_modules/foo`에 압축 해제됩니다. 그런 다음 foo의 의존성이 유사하게 `./node_modules/foo/node_modules/...`에 압축 해제됩니다.
 
-Any bin files are symlinked to `./node_modules/.bin/`, so that they may be found by npm scripts when necessary.
+모든 bin 파일은 `./node_modules/.bin/`에 심볼릭 링크되어 필요할 때 npm 스크립트에서 찾을 수 있습니다.
 
-#### Global Installation
+#### 전역 설치
 
-If the [`global` config](/cli/v10/using-npm/config#global) is set to true, then npm will install packages "globally".
+[`global` 설정](/using-npm/config#global)이 true로 설정되면 npm은 패키지를 "전역적으로" 설치합니다.
 
-For global installation, packages are installed roughly the same way, but using the folders described above.
+전역 설치의 경우, 패키지는 대략 같은 방식으로 설치되지만 위에서 설명한 폴더를 사용합니다.
 
-#### Cycles, Conflicts, and Folder Parsimony
+#### 순환, 충돌, 그리고 폴더 절약
 
-Cycles are handled using the property of node's module system that it walks up the directories looking for `node_modules` folders. So, at every stage, if a package is already installed in an ancestor `node_modules` folder, then it is not installed at the current location.
+순환은 node의 모듈 시스템이 디렉토리를 올라가며 `node_modules` 폴더를 찾는 특성을 이용하여 처리됩니다. 따라서 모든 단계에서 패키지가 이미 상위 `node_modules` 폴더에 설치되어 있다면 현재 위치에 설치되지 않습니다.
 
-Consider the case above, where `foo -> bar -> baz`. Imagine if, in addition to that, baz depended on bar, so you'd have: `foo -> bar -> baz -> bar -> baz ...`. However, since the folder structure is: `foo/node_modules/bar/node_modules/baz`, there's no need to put another copy of bar into `.../baz/node_modules`, since when baz calls `require("bar")`, it will get the copy that is installed in `foo/node_modules/bar`.
+위의 `foo -> bar -> baz` 경우를 고려해보세요. 추가로 baz가 bar에 의존한다고 가정해봅시다: `foo -> bar -> baz -> bar -> baz ...`. 그러나 폴더 구조가 `foo/node_modules/bar/node_modules/baz`이므로 bar의 다른 복사본을 `.../baz/node_modules`에 넣을 필요가 없습니다. baz가 `require("bar")`를 호출할 때 `foo/node_modules/bar`에 설치된 복사본을 가져올 것이기 때문입니다.
 
-This shortcut is only used if the exact same version would be installed in multiple nested `node_modules` folders. It is still possible to have `a/node_modules/b/node_modules/a` if the two "a" packages are different versions. However, without repeating the exact same package multiple times, an infinite regress will always be prevented.
+이 단축은 동일한 버전이 여러 중첩된 `node_modules` 폴더에 설치될 경우에만 사용됩니다. 두 "a" 패키지가 다른 버전이라면 `a/node_modules/b/node_modules/a`가 여전히 가능합니다. 그러나 정확히 같은 패키지를 여러 번 반복하지 않고도 무한 회귀는 항상 방지됩니다.
 
-Another optimization can be made by installing dependencies at the highest level possible, below the localized "target" folder (hoisting). Since version 3, npm hoists dependencies by default.
+또 다른 최적화는 의존성을 가능한 한 높은 수준에서 지역화된 "대상" 폴더 아래에 설치하는 것입니다. 이를 "호이스팅"이라고 합니다. npm은 버전 3부터 기본적으로 의존성을 호이스팅합니다.
 
-#### Example
+#### 예시
 
-Consider this dependency graph:
+다음과 같은 의존성 그래프를 고려해보세요:
 
 ```bash
 foo
@@ -119,7 +106,7 @@ foo
         `-- bar
 ```
 
-In this case, we might expect a folder structure like this (with all dependencies hoisted to the highest level possible):
+이 경우, 우리는 다음과 같은 폴더 구조를 예상할 수 있습니다 (모든 의존성이 가능한 한 높은 수준으로 호이스트됨):
 
 ```bash
 foo
@@ -133,29 +120,29 @@ foo
     +-- quux (3.2.0) <---[E]
 ```
 
-Since foo depends directly on `bar@1.2.3` and `baz@1.2.3`, those are installed in foo's `node_modules` folder.
+foo가 `bar@1.2.3`과 `baz@1.2.3`에 직접 의존하므로 이들은 foo의 `node_modules` 폴더에 설치됩니다.
 
-Even though the latest copy of blerg is 1.3.7, foo has a specific dependency on version 1.2.5. So, that gets installed at [A]. Since the parent installation of blerg satisfies bar's dependency on `blerg@1.x`, it does not install another copy under [B].
+blerg의 최신 버전이 1.3.7이지만, foo는 특별히 버전 1.2.5에 의존합니다. 따라서 그 버전이 [A]에 설치됩니다. 부모 설치의 blerg가 bar의 `blerg@1.x` 의존성을 만족시키므로 [B] 아래에 또 다른 복사본을 설치하지 않습니다.
 
-Bar [B] also has dependencies on baz and asdf. Because it depends on `baz@2.x`, it cannot re-use the `baz@1.2.3` installed in the parent `node_modules` folder [D], and must install its own copy [C]. In order to minimize duplication, npm hoists dependencies to the top level by default, so asdf is installed under [A].
+Bar [B]는 baz와 asdf에도 의존합니다. `baz@2.x`에 의존하므로 부모 `node_modules` 폴더에 설치된 `baz@1.2.3` [D]를 재사용할 수 없어 자체 복사본 [C]를 설치해야 합니다. 중복을 최소화하기 위해 npm은 기본적으로 의존성을 최상위 수준으로 호이스트하므로 asdf는 [A] 아래에 설치됩니다.
 
-Underneath bar, the `baz -> quux -> bar` dependency creates a cycle. However, because bar is already in quux's ancestry [B], it does not unpack another copy of bar into that folder. Likewise, quux's [E] folder tree is empty, because its dependency on bar is satisfied by the parent folder copy installed at [B].
+bar 아래에서 `baz -> quux -> bar` 의존성이 순환을 만듭니다. 그러나 bar가 이미 quux의 조상 [B]에 있으므로 그 폴더에 bar의 다른 복사본을 압축 해제하지 않습니다. 마찬가지로 quux의 [E] 폴더 트리는 비어 있습니다. bar에 대한 의존성이 [B]에 설치된 부모 폴더 복사본으로 충족되기 때문입니다.
 
-For a graphical breakdown of what is installed where, use `npm ls`.
+무엇이 어디에 설치되었는지에 대한 그래픽 분석을 보려면 `npm ls`를 사용하세요.
 
-#### Publishing
+#### 배포
 
-Upon publishing, npm will look in the `node_modules` folder. If any of the items there are not in the `bundleDependencies` array, then they will not be included in the package tarball.
+배포 시, npm은 `node_modules` 폴더를 확인합니다. 거기에 있는 항목 중 `bundleDependencies` 배열에 없는 것은 패키지 tarball에 포함되지 않습니다.
 
-This allows a package maintainer to install all of their dependencies (and dev dependencies) locally, but only re-publish those items that cannot be found elsewhere. See [`package.json`](/cli/v10/configuring-npm/package-json) for more information.
+이를 통해 패키지 관리자는 모든 의존성(및 개발 의존성)을 로컬로 설치할 수 있지만 다른 곳에서 찾을 수 없는 항목만 다시 배포할 수 있습니다. 자세한 내용은 [`package.json`](/configuring-npm/package-json)을 참조하세요.
 
-### See also
+### 참조
 
-- [package.json](/cli/v10/configuring-npm/package-json)
-- [npm install](/cli/v10/commands/npm-install)
-- [npm pack](/cli/v10/commands/npm-pack)
-- [npm cache](/cli/v10/commands/npm-cache)
-- [npm config](/cli/v10/commands/npm-config)
-- [npmrc](/cli/v10/configuring-npm/npmrc)
-- [config](/cli/v10/using-npm/config)
-- [npm publish](/cli/v10/commands/npm-publish)
+- [package.json](/configuring-npm/package-json)
+- [npm install](/commands/npm-install)
+- [npm pack](/commands/npm-pack)
+- [npm cache](/commands/npm-cache)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)
+- [config](/using-npm/config)
+- [npm publish](/commands/npm-publish)

@@ -1,7 +1,7 @@
 ---
 title: npm-run-script
 section: 1
-description: Run arbitrary package scripts
+description: 임의의 패키지 스크립트 실행
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/commands/npm-run-script.md
@@ -35,7 +35,7 @@ redirect_from:
   - /commands/run-script
 ---
 
-### Synopsis
+### 개요
 
 ```bash
 npm run-script <command> [-- <args>]
@@ -43,49 +43,49 @@ npm run-script <command> [-- <args>]
 aliases: run, rum, urn
 ```
 
-### Description
+### 설명
 
-This runs an arbitrary command from a package's `"scripts"` object. If no `"command"` is provided, it will list the available scripts.
+이는 패키지의 `"scripts"` 객체에서 임의의 명령을 실행합니다. `"command"`가 제공되지 않으면 사용 가능한 스크립트를 나열합니다.
 
-`run[-script]` is used by the test, start, restart, and stop commands, but can be called directly, as well. When the scripts in the package are printed out, they're separated into lifecycle (test, start, restart) and directly-run scripts.
+`run[-script]`는 test, start, restart, stop 명령에서 사용되지만 직접 호출할 수도 있습니다. 패키지의 스크립트가 출력될 때, 수명 주기(test, start, restart)와 직접 실행 스크립트로 구분됩니다.
 
-Any positional arguments are passed to the specified script. Use `--` to pass `-`-prefixed flags and options which would otherwise be parsed by npm.
+위치 인수는 지정된 스크립트에 전달됩니다. `--`를 사용하여 npm에 의해 파싱될 수 있는 `-` 접두사가 붙은 플래그와 옵션을 전달하세요.
 
-For example:
+예를 들어:
 
 ```bash
 npm run test -- --grep="pattern"
 ```
 
-The arguments will only be passed to the script specified after `npm run` and not to any `pre` or `post` script.
+인수는 `npm run` 다음에 지정된 스크립트에만 전달되며 `pre` 또는 `post` 스크립트에는 전달되지 않습니다.
 
-The `env` script is a special built-in command that can be used to list environment variables that will be available to the script at runtime. If an "env" command is defined in your package, it will take precedence over the built-in.
+`env` 스크립트는 런타임에 스크립트에서 사용할 수 있는 환경 변수를 나열하는 데 사용할 수 있는 특별한 내장 명령입니다. 패키지에 "env" 명령이 정의되어 있으면 내장 명령보다 우선합니다.
 
-In addition to the shell's pre-existing `PATH`, `npm run` adds `node_modules/.bin` to the `PATH` provided to scripts. Any binaries provided by locally-installed dependencies can be used without the `node_modules/.bin` prefix. For example, if there is a `devDependency` on `tap` in your package, you should write:
+셸의 기존 `PATH` 외에도 `npm run`은 스크립트에 제공되는 `PATH`에 `node_modules/.bin`을 추가합니다. 로컬로 설치된 종속성이 제공하는 모든 바이너리는 `node_modules/.bin` 접두사 없이 사용할 수 있습니다. 예를 들어, 패키지에 `tap`에 대한 `devDependency`가 있는 경우 다음과 같이 작성해야 합니다:
 
 ```bash
 "scripts": {"test": "tap test/*.js"}
 ```
 
-instead of
+다음과 같이 작성하는 대신:
 
 ```bash
 "scripts": {"test": "node_modules/.bin/tap test/*.js"}
 ```
 
-The actual shell your script is run within is platform dependent. By default, on Unix-like systems it is the `/bin/sh` command, on Windows it is `cmd.exe`. The actual shell referred to by `/bin/sh` also depends on the system. You can customize the shell with the [`script-shell` config](/cli/v10/using-npm/config#script-shell).
+스크립트가 실행되는 실제 셸은 플랫폼에 따라 다릅니다. 기본적으로 유닉스 계열 시스템에서는 `/bin/sh` 명령이고, Windows에서는 `cmd.exe`입니다. `/bin/sh`가 참조하는 실제 셸도 시스템에 따라 다릅니다. [`script-shell` 설정](/cli/v10/using-npm/config#script-shell)으로 셸을 사용자 정의할 수 있습니다.
 
-Scripts are run from the root of the package folder, regardless of what the current working directory is when `npm run` is called. If you want your script to use different behavior based on what subdirectory you're in, you can use the `INIT_CWD` environment variable, which holds the full path you were in when you ran `npm run`.
+스크립트는 `npm run`이 호출된 현재 작업 디렉토리와 관계없이 패키지 폴더의 루트에서 실행됩니다. 어떤 하위 디렉토리에 있는지에 따라 스크립트가 다른 동작을 하길 원한다면 `INIT_CWD` 환경 변수를 사용할 수 있습니다. 이 변수는 `npm run`을 실행했을 때의 전체 경로를 담고 있습니다.
 
-`npm run` sets the `NODE` environment variable to the `node` executable with which `npm` is executed.
+`npm run`은 `NODE` 환경 변수를 `npm`이 실행된 `node` 실행 파일로 설정합니다.
 
-If you try to run a script without having a `node_modules` directory and it fails, you will be given a warning to run `npm install`, just in case you've forgotten.
+`node_modules` 디렉토리 없이 스크립트를 실행하려고 하고 실패하면 `npm install`을 실행하라는 경고가 표시됩니다. 혹시 잊어버렸을 경우를 대비한 것입니다.
 
-### Workspaces support
+### 작업 공간 지원
 
-You may use the [`workspace`](/cli/v10/using-npm/config#workspace) or [`workspaces`](/cli/v10/using-npm/config#workspaces) configs in order to run an arbitrary command from a package's `"scripts"` object in the context of the specified workspaces. If no `"command"` is provided, it will list the available scripts for each of these configured workspaces.
+[`workspace`](/cli/v10/using-npm/config#workspace) 또는 [`workspaces`](/cli/v10/using-npm/config#workspaces) 설정을 사용하여 지정된 작업 공간의 컨텍스트에서 패키지의 `"scripts"` 객체에서 임의의 명령을 실행할 수 있습니다. `"command"`가 제공되지 않으면 이러한 구성된 작업 공간 각각에 대해 사용 가능한 스크립트를 나열합니다.
 
-Given a project with configured workspaces, e.g:
+구성된 작업 공간이 있는 프로젝트가 주어졌다고 가정해 봅시다. 예:
 
 ```
 .
@@ -99,7 +99,7 @@ Given a project with configured workspaces, e.g:
        `-- package.json
 ```
 
-Assuming the workspace configuration is properly set up at the root level `package.json` file. e.g:
+작업 공간 구성이 루트 레벨 `package.json` 파일에 제대로 설정되어 있다고 가정합니다. 예:
 
 ```
 {
@@ -107,106 +107,107 @@ Assuming the workspace configuration is properly set up at the root level `packa
 }
 ```
 
-And that each of the configured workspaces has a configured `test` script, we can run tests in all of them using the [`workspaces` config](/cli/v10/using-npm/config#workspaces):
+그리고 구성된 각 작업 공간에 `test` 스크립트가 구성되어 있다면, [`workspaces` 설정](/cli/v10/using-npm/config#workspaces)을 사용하여 모든 작업 공간에서 테스트를 실행할 수 있습니다:
 
 ```
 npm test --workspaces
 ```
 
-#### Filtering workspaces
+#### 작업 공간 필터링
 
-It's also possible to run a script in a single workspace using the `workspace` config along with a name or directory path:
+`workspace` 설정과 함께 이름이나 디렉토리 경로를 사용하여 단일 작업 공간에서 스크립트를 실행할 수도 있습니다:
 
 ```
 npm test --workspace=a
 ```
 
-The `workspace` config can also be specified multiple times in order to run a specific script in the context of multiple workspaces. When defining values for the `workspace` config in the command line, it also possible to use `-w` as a shorthand, e.g:
+`workspace` 설정은 여러 작업 공간의 컨텍스트에서 특정 스크립트를 실행하기 위해 여러 번 지정할 수도 있습니다. 명령줄에서 `workspace` 설정 값을 정의할 때 `-w`를 단축어로 사용할 수도 있습니다. 예:
 
 ```
 npm test -w a -w b
 ```
 
-This last command will run `test` in both `./packages/a` and `./packages/b` packages.
+이 마지막 명령은 `./packages/a`와 `./packages/b` 패키지 모두에서 `test`를 실행합니다.
 
-### Configuration
+### 구성
 
 #### `workspace`
 
-- Default:
-- Type: String (can be set multiple times)
+- 기본값:
+- 유형: String (여러 번 설정 가능)
 
-Enable running a command in the context of the configured workspaces of the current project while filtering by running only the workspaces defined by this configuration option.
+현재 프로젝트의 구성된 작업 공간의 컨텍스트에서 명령을 실행하되 이 구성 옵션에 의해 정의된 작업 공간만 실행하도록 필터링합니다.
 
-Valid values for the `workspace` config are either:
+`workspace` 설정에 대한 유효한 값은 다음과 같습니다:
 
-- Workspace names
-- Path to a workspace directory
-- Path to a parent workspace directory (will result in selecting all workspaces within that folder)
+- 작업 공간 이름
+- 작업 공간 디렉토리 경로
+- 상위 작업 공간 디렉토리 경로 (해당 폴더 내의 모든 작업 공간 선택)
 
-When set for the `npm init` command, this may be set to the folder of a workspace which does not yet exist, to create the folder and set it up as a brand new workspace within the project.
+`npm init` 명령에 대해 설정된 경우, 아직 존재하지 않는 작업 공간의 폴더로 설정하여 폴더를 생성하고 프로젝트 내의 새로운 작업 공간으로 설정할 수 있습니다.
 
-This value is not exported to the environment for child processes.
+이 값은 하위 프로세스에 대한 환경으로 내보내지지 않습니다.
 
 #### `workspaces`
 
-- Default: null
-- Type: null or Boolean
+- 기본값: null
+- 유형: null 또는 Boolean
 
-Set to true to run the command in the context of **all** configured workspaces.
+true로 설정하면 구성된 **모든** 작업 공간의 컨텍스트에서 명령을 실행합니다.
 
-Explicitly setting this to false will cause commands like `install` to ignore workspaces altogether. When not set explicitly:
+명시적으로 false로 설정하면 `install`과 같은 명령이 작업 공간을 완전히 무시하게 됩니다. 명시적으로 설정되지 않은 경우:
 
-- Commands that operate on the `node_modules` tree (install, update, etc.) will link workspaces into the `node_modules` folder. - Commands that do other things (test, exec, publish, etc.) will operate on the root project, _unless_ one or more workspaces are specified in the `workspace` config.
+- `node_modules` 트리에서 작동하는 명령(install, update 등)은 작업 공간을 `node_modules` 폴더에 연결합니다.
+- 다른 작업을 수행하는 명령(test, exec, publish 등)은 `workspace` 설정에 하나 이상의 작업 공간이 지정되지 않는 한 루트 프로젝트에서 작동합니다.
 
-This value is not exported to the environment for child processes.
+이 값은 하위 프로세스에 대한 환경으로 내보내지지 않습니다.
 
 #### `include-workspace-root`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-Include the workspace root when workspaces are enabled for a command.
+명령에 대해 작업 공간이 활성화된 경우 작업 공간 루트를 포함합니다.
 
-When false, specifying individual workspaces via the `workspace` config, or all workspaces via the `workspaces` flag, will cause npm to operate only on the specified workspaces, and not on the root project.
+false일 때 `workspace` 설정을 통해 개별 작업 공간을 지정하거나 `workspaces` 플래그를 통해 모든 작업 공간을 지정하면 npm이 지정된 작업 공간에서만 작동하고 루트 프로젝트에서는 작동하지 않습니다.
 
-This value is not exported to the environment for child processes.
+이 값은 하위 프로세스에 대한 환경으로 내보내지지 않습니다.
 
 #### `if-present`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-If true, npm will not exit with an error code when `run-script` is invoked for a script that isn't defined in the `scripts` section of `package.json`. This option can be used when it's desirable to optionally run a script when it's present and fail if the script fails. This is useful, for example, when running scripts that may only apply for some builds in an otherwise generic CI setup.
+true로 설정하면 `package.json`의 `scripts` 섹션에 정의되지 않은 스크립트에 대해 `run-script`가 호출될 때 npm이 오류 코드로 종료되지 않습니다. 이 옵션은 스크립트가 존재할 때 선택적으로 실행하고 스크립트가 실패할 경우 실패하도록 하는 것이 바람직할 때 사용할 수 있습니다. 예를 들어, 그렇지 않으면 일반적인 CI 설정에서 일부 빌드에만 적용될 수 있는 스크립트를 실행할 때 유용합니다.
 
-This value is not exported to the environment for child processes.
+이 값은 하위 프로세스에 대한 환경으로 내보내지지 않습니다.
 
 #### `ignore-scripts`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-If true, npm does not run scripts specified in package.json files.
+true로 설정하면 npm은 package.json 파일에 지정된 스크립트를 실행하지 않습니다.
 
-Note that commands explicitly intended to run a particular script, such as `npm start`, `npm stop`, `npm restart`, `npm test`, and `npm run-script` will still run their intended script if `ignore-scripts` is set, but they will _not_ run any pre- or post-scripts.
+`npm start`, `npm stop`, `npm restart`, `npm test`, `npm run-script`와 같이 특정 스크립트를 실행하기 위한 명령은 `ignore-scripts`가 설정되어 있어도 여전히 의도한 스크립트를 실행하지만, 사전 또는 사후 스크립트는 실행하지 _않습니다_.
 
 #### `foreground-scripts`
 
-- Default: `false` unless when using `npm pack` or `npm publish` where it defaults to `true`
-- Type: Boolean
+- 기본값: `npm pack` 또는 `npm publish`를 사용할 때는 `true`, 그 외에는 `false`
+- 유형: Boolean
 
-Run all build scripts (ie, `preinstall`, `install`, and `postinstall`) scripts for installed packages in the foreground process, sharing standard input, output, and error with the main npm process.
+설치된 패키지의 모든 빌드 스크립트(즉, `preinstall`, `install`, `postinstall`)를 전경 프로세스에서 실행하여 주 npm 프로세스와 표준 입력, 출력 및 오류를 공유합니다.
 
-Note that this will generally make installs run slower, and be much noisier, but can be useful for debugging.
+이렇게 하면 일반적으로 설치 속도가 느려지고 훨씬 더 시끄러워지지만 디버깅에 유용할 수 있습니다.
 
 #### `script-shell`
 
-- Default: '/bin/sh' on POSIX systems, 'cmd.exe' on Windows
-- Type: null or String
+- 기본값: POSIX 시스템에서는 '/bin/sh', Windows에서는 'cmd.exe'
+- 유형: null 또는 String
 
-The shell to use for scripts run with the `npm exec`, `npm run` and `npm init <package-spec>` commands.
+`npm exec`, `npm run` 및 `npm init <package-spec>` 명령으로 실행되는 스크립트에 사용할 셸입니다.
 
-### See Also
+### 참조
 
 - [npm scripts](/cli/v10/using-npm/scripts)
 - [npm test](/cli/v10/commands/npm-test)

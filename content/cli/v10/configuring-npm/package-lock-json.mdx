@@ -1,7 +1,7 @@
 ---
 title: package-lock.json
 section: 5
-description: A manifestation of the manifest
+description: 매니페스트의 구현
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/configuring-npm/package-lock-json.md
@@ -27,133 +27,133 @@ redirect_from:
   - /files/package-lock.json
 ---
 
-### Description
+### 설명
 
-`package-lock.json` is automatically generated for any operations where npm modifies either the `node_modules` tree, or `package.json`. It describes the exact tree that was generated, such that subsequent installs are able to generate identical trees, regardless of intermediate dependency updates.
+`package-lock.json`은 npm이 `node_modules` 트리나 `package.json`을 수정하는 작업을 수행할 때 자동으로 생성됩니다. 이는 생성된 정확한 트리를 설명하여 후속 설치에서 중간 의존성 업데이트와 관계없이 동일한 트리를 생성할 수 있도록 합니다.
 
-This file is intended to be committed into source repositories, and serves various purposes:
+이 파일은 소스 저장소에 커밋되도록 의도되었으며 다음과 같은 다양한 목적을 제공합니다:
 
-- Describe a single representation of a dependency tree such that teammates, deployments, and continuous integration are guaranteed to install exactly the same dependencies.
+- 팀원, 배포, 지속적 통합이 정확히 동일한 의존성을 설치하도록 보장하는 단일 의존성 트리 표현을 설명합니다.
 
-- Provide a facility for users to "time-travel" to previous states of `node_modules` without having to commit the directory itself.
+- 사용자가 `node_modules` 디렉토리 자체를 커밋하지 않고도 이전 상태로 "시간 여행"할 수 있는 기능을 제공합니다.
 
-- Facilitate greater visibility of tree changes through readable source control diffs.
+- 읽기 쉬운 소스 제어 차이를 통해 트리 변경에 대한 더 큰 가시성을 촉진합니다.
 
-- Optimize the installation process by allowing npm to skip repeated metadata resolutions for previously-installed packages.
+- 이전에 설치된 패키지에 대해 반복적인 메타데이터 해결을 건너뛸 수 있도록 하여 설치 프로세스를 최적화합니다.
 
-- As of npm v7, lockfiles include enough information to gain a complete picture of the package tree, reducing the need to read `package.json` files, and allowing for significant performance improvements.
+- npm v7부터 lockfile에는 패키지 트리의 완전한 그림을 얻기에 충분한 정보가 포함되어 있어 `package.json` 파일을 읽을 필요성이 줄어들고 상당한 성능 향상이 가능합니다.
 
-When `npm` creates or updates `package-lock.json`, it will infer line endings and indentation from `package.json` so that the formatting of both files matches.
+`npm`이 `package-lock.json`을 생성하거나 업데이트할 때, 두 파일의 형식이 일치하도록 `package.json`의 줄 끝과 들여쓰기를 기반으로 합니다.
 
 ### `package-lock.json` vs `npm-shrinkwrap.json`
 
-Both of these files have the same format, and perform similar functions in the root of a project.
+이 두 파일은 동일한 형식을 가지며 프로젝트의 루트에서 유사한 기능을 수행합니다.
 
-The difference is that `package-lock.json` cannot be published, and it will be ignored if found in any place other than the root project.
+차이점은 `package-lock.json`은 게시될 수 없으며 루트 프로젝트 이외의 다른 곳에서 발견되면 무시된다는 것입니다.
 
-In contrast, [npm-shrinkwrap.json](/cli/v10/configuring-npm/npm-shrinkwrap-json) allows publication, and defines the dependency tree from the point encountered. This is not recommended unless deploying a CLI tool or otherwise using the publication process for producing production packages.
+반면에 [npm-shrinkwrap.json](/cli/v10/configuring-npm/npm-shrinkwrap-json)은 게시를 허용하고 만난 지점부터 의존성 트리를 정의합니다. 이는 CLI 도구를 배포하거나 생산 패키지를 생성하기 위해 게시 프로세스를 사용하는 경우가 아니라면 권장되지 않습니다.
 
-If both `package-lock.json` and `npm-shrinkwrap.json` are present in the root of a project, `npm-shrinkwrap.json` will take precedence and `package-lock.json` will be ignored.
+프로젝트의 루트에 `package-lock.json`과 `npm-shrinkwrap.json`이 모두 있는 경우, `npm-shrinkwrap.json`이 우선되고 `package-lock.json`은 무시됩니다.
 
-### Hidden Lockfiles
+### 숨겨진 Lockfiles
 
-In order to avoid processing the `node_modules` folder repeatedly, npm as of v7 uses a "hidden" lockfile present in `node_modules/.package-lock.json`. This contains information about the tree, and is used in lieu of reading the entire `node_modules` hierarchy provided that the following conditions are met:
+`node_modules` 폴더를 반복적으로 처리하는 것을 피하기 위해, npm v7부터는 `node_modules/.package-lock.json`에 있는 "숨겨진" lockfile을 사용합니다. 이는 트리에 대한 정보를 포함하고 있으며 다음 조건이 충족되는 경우 전체 `node_modules` 계층을 읽는 대신 사용됩니다:
 
-- All package folders it references exist in the `node_modules` hierarchy.
-- No package folders exist in the `node_modules` hierarchy that are not listed in the lockfile.
-- The modified time of the file is at least as recent as all of the package folders it references.
+- 참조하는 모든 패키지 폴더가 `node_modules` 계층에 존재합니다.
+- lockfile에 나열되지 않은 패키지 폴더가 `node_modules` 계층에 존재하지 않습니다.
+- 파일의 수정 시간이 참조하는 모든 패키지 폴더만큼 최신입니다.
 
-That is, the hidden lockfile will only be relevant if it was created as part of the most recent update to the package tree. If another CLI mutates the tree in any way, this will be detected, and the hidden lockfile will be ignored.
+즉, 숨겨진 lockfile은 패키지 트리의 가장 최근 업데이트의 일부로 생성된 경우에만 관련이 있습니다. 다른 CLI가 트리를 어떤 방식으로든 변경하면 이것이 감지되고 숨겨진 lockfile은 무시됩니다.
 
-Note that it _is_ possible to manually change the _contents_ of a package in such a way that the modified time of the package folder is unaffected. For example, if you add a file to `node_modules/foo/lib/bar.js`, then the modified time on `node_modules/foo` will not reflect this change. If you are manually editing files in `node_modules`, it is generally best to delete the file at `node_modules/.package-lock.json`.
+패키지 폴더의 수정 시간에 영향을 주지 않고 패키지의 *내용*을 수동으로 변경하는 것이 *가능*하다는 점에 유의하세요. 예를 들어, `node_modules/foo/lib/bar.js`에 파일을 추가하면 `node_modules/foo`의 수정 시간은 이 변경을 반영하지 않습니다. `node_modules`에서 수동으로 파일을 편집하는 경우, 일반적으로 `node_modules/.package-lock.json` 파일을 삭제하는 것이 가장 좋습니다.
 
-As the hidden lockfile is ignored by older npm versions, it does not contain the backwards compatibility affordances present in "normal" lockfiles. That is, it is `lockfileVersion: 3`, rather than `lockfileVersion: 2`.
+숨겨진 lockfile은 이전 npm 버전에서 무시되므로 "정상적인" lockfile에 존재하는 하위 호환성 제공을 포함하지 않습니다. 즉, `lockfileVersion: 2` 대신 `lockfileVersion: 3`입니다.
 
-### Handling Old Lockfiles
+### 이전 Lockfiles 처리
 
-When npm detects a lockfile from npm v6 or before during the package installation process, it is automatically updated to fetch missing information from either the `node_modules` tree or (in the case of empty `node_modules` trees or very old lockfile formats) the npm registry.
+npm이 패키지 설치 프로세스 중에 npm v6 이전의 lockfile을 감지하면 자동으로 업데이트되어 `node_modules` 트리에서 누락된 정보를 가져오거나 (빈 `node_modules` 트리나 매우 오래된 lockfile 형식의 경우) npm 레지스트리에서 가져옵니다.
 
-### File Format
+### 파일 형식
 
 #### `name`
 
-The name of the package this is a package-lock for. This will match what's in `package.json`.
+이것이 package-lock인 패키지의 이름입니다. 이는 `package.json`의 내용과 일치합니다.
 
 #### `version`
 
-The version of the package this is a package-lock for. This will match what's in `package.json`.
+이것이 package-lock인 패키지의 버전입니다. 이는 `package.json`의 내용과 일치합니다.
 
 #### `lockfileVersion`
 
-An integer version, starting at `1` with the version number of this document whose semantics were used when generating this `package-lock.json`.
+이 `package-lock.json`을 생성할 때 사용된 의미론을 가진 문서의 버전 번호로 시작하는 정수 버전입니다.
 
-Note that the file format changed significantly in npm v7 to track information that would have otherwise required looking in `node_modules` or the npm registry. Lockfiles generated by npm v7 will contain `lockfileVersion: 2`.
+npm v7에서 파일 형식이 크게 변경되어 그렇지 않으면 `node_modules`나 npm 레지스트리를 보아야 했을 정보를 추적한다는 점에 유의하세요. npm v7에서 생성된 Lockfile은 `lockfileVersion: 2`를 포함합니다.
 
-- No version provided: an "ancient" shrinkwrap file from a version of npm prior to npm v5.
-- `1`: The lockfile version used by npm v5 and v6.
-- `2`: The lockfile version used by npm v7 and v8. Backwards compatible to v1 lockfiles.
-- `3`: The lockfile version used by npm v9 and above. Backwards compatible to npm v7.
+- 버전이 제공되지 않음: npm v5 이전 버전의 "고대" shrinkwrap 파일.
+- `1`: npm v5와 v6에서 사용된 lockfile 버전.
+- `2`: npm v7과 v8에서 사용된 lockfile 버전. v1 lockfile과 하위 호환됩니다.
+- `3`: npm v9 이상에서 사용된 lockfile 버전. npm v7과 하위 호환됩니다.
 
-npm will always attempt to get whatever data it can out of a lockfile, even if it is not a version that it was designed to support.
+npm은 항상 지원하도록 설계되지 않은 버전이라도 lockfile에서 가능한 모든 데이터를 얻으려고 시도합니다.
 
 #### `packages`
 
-This is an object that maps package locations to an object containing the information about that package.
+이는 패키지 위치를 해당 패키지에 대한 정보를 포함하는 객체에 매핑하는 객체입니다.
 
-The root project is typically listed with a key of `""`, and all other packages are listed with their relative paths from the root project folder.
+루트 프로젝트는 일반적으로 `""`라는 키로 나열되며, 다른 모든 패키지는 루트 프로젝트 폴더에서의 상대 경로로 나열됩니다.
 
-Package descriptors have the following fields:
+패키지 설명자에는 다음 필드가 있습니다:
 
-- version: The version found in `package.json`
+- version: `package.json`에서 찾은 버전
 
-- resolved: The place where the package was actually resolved from. In the case of packages fetched from the registry, this will be a url to a tarball. In the case of git dependencies, this will be the full git url with commit sha. In the case of link dependencies, this will be the location of the link target. `registry.npmjs.org` is a magic value meaning "the currently configured registry".
+- resolved: 패키지가 실제로 해결된 위치. 레지스트리에서 가져온 패키지의 경우 이는 tarball에 대한 url이 됩니다. git 의존성의 경우 커밋 sha가 포함된 전체 git url이 됩니다. 링크 의존성의 경우 이는 링크 대상의 위치가 됩니다. `registry.npmjs.org`는 "현재 구성된 레지스트리"를 의미하는 매직 값입니다.
 
-- integrity: A `sha512` or `sha1` [Standard Subresource Integrity](https://w3c.github.io/webappsec/specs/subresourceintegrity/) string for the artifact that was unpacked in this location.
+- integrity: 이 위치에 압축 해제된 아티팩트에 대한 `sha512` 또는 `sha1` [표준 하위 리소스 무결성](https://w3c.github.io/webappsec/specs/subresourceintegrity/) 문자열입니다.
 
-- link: A flag to indicate that this is a symbolic link. If this is present, no other fields are specified, since the link target will also be included in the lockfile.
+- link: 이것이 심볼릭 링크임을 나타내는 플래그. 이것이 존재하면 링크 대상도 lockfile에 포함되므로 다른 필드는 지정되지 않습니다.
 
-- dev, optional, devOptional: If the package is strictly part of the `devDependencies` tree, then `dev` will be true. If it is strictly part of the `optionalDependencies` tree, then `optional` will be set. If it is both a `dev` dependency _and_ an `optional` dependency of a non-dev dependency, then `devOptional` will be set. (An `optional` dependency of a `dev` dependency will have both `dev` and `optional` set.)
+- dev, optional, devOptional: 패키지가 엄격하게 `devDependencies` 트리의 일부인 경우 `dev`가 true가 됩니다. 엄격하게 `optionalDependencies` 트리의 일부인 경우 `optional`이 설정됩니다. 비 dev 의존성의 `dev` 의존성이면서 동시에 `optional` 의존성인 경우 `devOptional`이 설정됩니다. (`dev` 의존성의 `optional` 의존성은 `dev`와 `optional`이 모두 설정됩니다.)
 
-- inBundle: A flag to indicate that the package is a bundled dependency.
+- inBundle: 패키지가 번들된 의존성임을 나타내는 플래그.
 
-- hasInstallScript: A flag to indicate that the package has a `preinstall`, `install`, or `postinstall` script.
+- hasInstallScript: 패키지에 `preinstall`, `install`, 또는 `postinstall` 스크립트가 있음을 나타내는 플래그.
 
-- hasShrinkwrap: A flag to indicate that the package has an `npm-shrinkwrap.json` file.
+- hasShrinkwrap: 패키지에 `npm-shrinkwrap.json` 파일이 있음을 나타내는 플래그.
 
-- bin, license, engines, dependencies, optionalDependencies: fields from `package.json`
+- bin, license, engines, dependencies, optionalDependencies: `package.json`의 필드들
 
 #### dependencies
 
-Legacy data for supporting versions of npm that use `lockfileVersion: 1`. This is a mapping of package names to dependency objects. Because the object structure is strictly hierarchical, symbolic link dependencies are somewhat challenging to represent in some cases.
+npm의 `lockfileVersion: 1`을 사용하는 버전을 지원하기 위한 레거시 데이터입니다. 이는 패키지 이름을 종속성 객체에 매핑한 것입니다. 객체 구조가 엄격히 계층적이기 때문에, 일부 경우에 심볼릭 링크 종속성을 표현하는 것이 다소 까다로울 수 있습니다.
 
-npm v7 ignores this section entirely if a `packages` section is present, but does keep it up to date in order to support switching between npm v6 and npm v7.
+npm v7은 `packages` 섹션이 있으면 이 섹션을 완전히 무시하지만, npm v6와 npm v7 사이를 전환할 수 있도록 이를 최신 상태로 유지합니다.
 
-Dependency objects have the following fields:
+종속성 객체는 다음과 같은 필드를 가집니다:
 
-- version: a specifier that varies depending on the nature of the package, and is usable in fetching a new copy of it.
+- version: 패키지의 특성에 따라 다양한 지정자로, 새로운 복사본을 가져오는 데 사용할 수 있습니다.
 
-  - bundled dependencies: Regardless of source, this is a version number that is purely for informational purposes.
-  - registry sources: This is a version number. (eg, `1.2.3`)
-  - git sources: This is a git specifier with resolved committish. (eg, `git+https://example.com/foo/bar#115311855adb0789a0466714ed48a1499ffea97e`)
-  - http tarball sources: This is the URL of the tarball. (eg, `https://example.com/example-1.3.0.tgz`)
-  - local tarball sources: This is the file URL of the tarball. (eg `file:///opt/storage/example-1.3.0.tgz`)
-  - local link sources: This is the file URL of the link. (eg `file:libs/our-module`)
+  - 번들 종속성: 소스에 관계없이, 이는 순전히 정보 제공 목적의 버전 번호입니다.
+  - 레지스트리 소스: 이는 버전 번호입니다. (예: `1.2.3`)
+  - git 소스: 이는 해결된 커밋을 포함한 git 지정자입니다. (예: `git+https://example.com/foo/bar#115311855adb0789a0466714ed48a1499ffea97e`)
+  - http 타르볼 소스: 이는 타르볼의 URL입니다. (예: `https://example.com/example-1.3.0.tgz`)
+  - 로컬 타르볼 소스: 이는 타르볼의 파일 URL입니다. (예: `file:///opt/storage/example-1.3.0.tgz`)
+  - 로컬 링크 소스: 이는 링크의 파일 URL입니다. (예: `file:libs/our-module`)
 
-- integrity: A `sha512` or `sha1` [Standard Subresource Integrity](https://w3c.github.io/webappsec/specs/subresourceintegrity/) string for the artifact that was unpacked in this location. For git dependencies, this is the commit sha.
+- integrity: 이 위치에 압축 해제된 아티팩트에 대한 `sha512` 또는 `sha1` [표준 하위 리소스 무결성](https://w3c.github.io/webappsec/specs/subresourceintegrity/) 문자열입니다. git 종속성의 경우 이는 커밋 sha입니다.
 
-- resolved: For registry sources this is path of the tarball relative to the registry URL. If the tarball URL isn't on the same server as the registry URL then this is a complete URL. `registry.npmjs.org` is a magic value meaning "the currently configured registry".
+- resolved: 레지스트리 소스의 경우 이는 레지스트리 URL에 상대적인 타르볼 경로입니다. 타르볼 URL이 레지스트리 URL과 같은 서버에 없는 경우 이는 완전한 URL입니다. `registry.npmjs.org`는 "현재 구성된 레지스트리"를 의미하는 매직 값입니다.
 
-- bundled: If true, this is the bundled dependency and will be installed by the parent module. When installing, this module will be extracted from the parent module during the extract phase, not installed as a separate dependency.
+- bundled: true인 경우, 이는 번들 종속성이며 부모 모듈에 의해 설치됩니다. 설치 시 이 모듈은 별도의 종속성으로 설치되는 것이 아니라 추출 단계에서 부모 모듈로부터 추출됩니다.
 
-- dev: If true then this dependency is either a development dependency ONLY of the top level module or a transitive dependency of one. This is false for dependencies that are both a development dependency of the top level and a transitive dependency of a non-development dependency of the top level.
+- dev: true인 경우 이 종속성은 최상위 모듈의 개발 종속성이거나 그것의 전이적 종속성입니다. 이는 최상위의 개발 종속성이면서 동시에 비개발 종속성의 전이적 종속성인 경우 false입니다.
 
-- optional: If true then this dependency is either an optional dependency ONLY of the top level module or a transitive dependency of one. This is false for dependencies that are both an optional dependency of the top level and a transitive dependency of a non-optional dependency of the top level.
+- optional: true인 경우 이 종속성은 최상위 모듈의 선택적 종속성이거나 그것의 전이적 종속성입니다. 이는 최상위의 선택적 종속성이면서 동시에 비선택적 종속성의 전이적 종속성인 경우 false입니다.
 
-- requires: This is a mapping of module name to version. This is a list of everything this module requires, regardless of where it will be installed. The version should match via normal matching rules a dependency either in our `dependencies` or in a level higher than us.
+- requires: 이는 모듈 이름을 버전에 매핑한 것입니다. 이는 이 모듈이 설치될 위치에 관계없이 필요로 하는 모든 것의 목록입니다. 버전은 일반적인 매칭 규칙을 통해 우리의 `dependencies`나 우리보다 높은 레벨의 종속성과 일치해야 합니다.
 
-- dependencies: The dependencies of this dependency, exactly as at the top level.
+- dependencies: 이 종속성의 종속성으로, 최상위 레벨과 정확히 동일합니다.
 
-### See also
+### 참조
 
 - [npm shrinkwrap](/cli/v10/commands/npm-shrinkwrap)
 - [npm-shrinkwrap.json](/cli/v10/configuring-npm/npm-shrinkwrap-json)

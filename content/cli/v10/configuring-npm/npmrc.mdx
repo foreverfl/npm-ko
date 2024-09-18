@@ -1,7 +1,7 @@
 ---
 title: npmrc
 section: 5
-description: The npm config files
+description: npm 설정 파일
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/configuring-npm/npmrc.md
@@ -17,110 +17,110 @@ redirect_from:
   - /files/npmrc
 ---
 
-### Description
+### 설명
 
-npm gets its config settings from the command line, environment variables, and `npmrc` files.
+npm은 명령줄, 환경 변수 및 `npmrc` 파일에서 설정을 가져옵니다.
 
-The `npm config` command can be used to update and edit the contents of the user and global npmrc files.
+`npm config` 명령을 사용하여 사용자 및 전역 npmrc 파일의 내용을 업데이트하고 편집할 수 있습니다.
 
-For a list of available configuration options, see [config](/cli/v10/using-npm/config).
+사용 가능한 설정 옵션 목록은 [config](/cli/v10/using-npm/config)를 참조하세요.
 
-### Files
+### 파일
 
-The four relevant files are:
+관련된 네 가지 파일은 다음과 같습니다:
 
-- per-project config file (`/path/to/my/project/.npmrc`)
-- per-user config file (`~/.npmrc`)
-- global config file (`$PREFIX/etc/npmrc`)
-- npm builtin config file (`/path/to/npm/npmrc`)
+- 프로젝트별 설정 파일 (`/path/to/my/project/.npmrc`)
+- 사용자별 설정 파일 (`~/.npmrc`)
+- 전역 설정 파일 (`$PREFIX/etc/npmrc`)
+- npm 내장 설정 파일 (`/path/to/npm/npmrc`)
 
-All npm config files are an ini-formatted list of `key = value` parameters. Environment variables can be replaced using `${VARIABLE_NAME}`. For example:
+모든 npm 설정 파일은 `key = value` 매개변수의 ini 형식 목록입니다. 환경 변수는 `${VARIABLE_NAME}`을 사용하여 대체할 수 있습니다. 예를 들어:
 
 ```bash
 cache = ${HOME}/.npm-packages
 ```
 
-Each of these files is loaded, and config options are resolved in priority order. For example, a setting in the userconfig file would override the setting in the globalconfig file.
+이 파일들은 각각 로드되며 설정 옵션은 우선순위에 따라 결정됩니다. 예를 들어, userconfig 파일의 설정은 globalconfig 파일의 설정을 덮어씁니다.
 
-Array values are specified by adding "[]" after the key name. For example:
+배열 값은 키 이름 뒤에 "[]"를 추가하여 지정합니다. 예를 들어:
 
 ```bash
 key[] = "first value"
 key[] = "second value"
 ```
 
-#### Comments
+#### 주석
 
-Lines in `.npmrc` files are interpreted as comments when they begin with a `;` or `#` character. `.npmrc` files are parsed by [npm/ini](https://github.com/npm/ini), which specifies this comment syntax.
+`.npmrc` 파일의 줄은 `;` 또는 `#` 문자로 시작할 때 주석으로 해석됩니다. `.npmrc` 파일은 [npm/ini](https://github.com/npm/ini)에 의해 파싱되며, 이는 이 주석 구문을 지정합니다.
 
-For example:
+예를 들어:
 
 ```bash
-# last modified: 01 Jan 2016
-; Set a new registry for a scoped package
+# 마지막 수정: 2016년 1월 1일
+; 스코프 패키지에 대한 새 레지스트리 설정
 @myscope:registry=https://mycustomregistry.example.org
 ```
 
-#### Per-project config file
+#### 프로젝트별 설정 파일
 
-When working locally in a project, a `.npmrc` file in the root of the project (ie, a sibling of `node_modules` and `package.json`) will set config values specific to this project.
+프로젝트에서 로컬로 작업할 때, 프로젝트 루트의 `.npmrc` 파일(즉, `node_modules`와 `package.json`의 형제)은 이 프로젝트에 특정한 설정 값을 설정합니다.
 
-Note that this only applies to the root of the project that you're running npm in. It has no effect when your module is published. For example, you can't publish a module that forces itself to install globally, or in a different location.
+이는 npm을 실행하는 프로젝트의 루트에만 적용된다는 점에 유의하세요. 모듈이 게시될 때는 영향을 미치지 않습니다. 예를 들어, 전역적으로 설치되거나 다른 위치에 설치되도록 강제하는 모듈을 게시할 수는 없습니다.
 
-Additionally, this file is not read in global mode, such as when running `npm install -g`.
+또한 이 파일은 `npm install -g`를 실행할 때와 같은 전역 모드에서는 읽히지 않습니다.
 
-#### Per-user config file
+#### 사용자별 설정 파일
 
-`$HOME/.npmrc` (or the `userconfig` param, if set in the environment or on the command line)
+`$HOME/.npmrc` (또는 환경이나 명령줄에서 설정된 경우 `userconfig` 매개변수)
 
-#### Global config file
+#### 전역 설정 파일
 
-`$PREFIX/etc/npmrc` (or the `globalconfig` param, if set above): This file is an ini-file formatted list of `key = value` parameters. Environment variables can be replaced as above.
+`$PREFIX/etc/npmrc` (또는 위에서 설정된 경우 `globalconfig` 매개변수): 이 파일은 `key = value` 매개변수의 ini 형식 목록입니다. 환경 변수는 위와 같이 대체될 수 있습니다.
 
-#### Built-in config file
+#### 내장 설정 파일
 
 `path/to/npm/itself/npmrc`
 
-This is an unchangeable "builtin" configuration file that npm keeps consistent across updates. Set fields in here using the `./configure` script that comes with npm. This is primarily for distribution maintainers to override default configs in a standard and consistent manner.
+이는 npm이 업데이트 간에 일관성을 유지하는 변경 불가능한 "내장" 설정 파일입니다. npm과 함께 제공되는 `./configure` 스크립트를 사용하여 여기에 필드를 설정하세요. 이는 주로 배포 관리자가 표준적이고 일관된 방식으로 기본 설정을 재정의하기 위한 것입니다.
 
-### Auth related configuration
+### 인증 관련 설정
 
-The settings `_auth`, `_authToken`, `username` and `_password` must all be scoped to a specific registry. This ensures that `npm` will never send credentials to the wrong host.
+`_auth`, `_authToken`, `username` 및 `_password` 설정은 모두 특정 레지스트리에 대해 범위가 지정되어야 합니다. 이는 `npm`이 결코 잘못된 호스트에 자격 증명을 보내지 않도록 보장합니다.
 
-The full list is:
+전체 목록은 다음과 같습니다:
 
-- `_auth` (base64 authentication string)
-- `_authToken` (authentication token)
+- `_auth` (base64 인증 문자열)
+- `_authToken` (인증 토큰)
 - `username`
 - `_password`
 - `email`
-- `certfile` (path to certificate file)
-- `keyfile` (path to key file)
+- `certfile` (인증서 파일 경로)
+- `keyfile` (키 파일 경로)
 
-In order to scope these values, they must be prefixed by a URI fragment. If the credential is meant for any request to a registry on a single host, the scope may look like `//registry.npmjs.org/:`. If it must be scoped to a specific path on the host that path may also be provided, such as `//my-custom-registry.org/unique/path:`.
+이 값들의 범위를 지정하려면 URI 단편으로 접두사를 붙여야 합니다. 자격 증명이 단일 호스트의 레지스트리에 대한 모든 요청에 사용되는 경우, 범위는 `//registry.npmjs.org/:`와 같이 보일 수 있습니다. 호스트의 특정 경로에 대해 범위를 지정해야 하는 경우, `//my-custom-registry.org/unique/path:`와 같이 해당 경로도 제공될 수 있습니다.
 
 ```
-; bad config
+; 잘못된 설정
 _authToken=MYTOKEN
 
-; good config
+; 올바른 설정
 @myorg:registry=https://somewhere-else.com/myorg
 @another:registry=https://somewhere-else.com/another
 //registry.npmjs.org/:_authToken=MYTOKEN
 
-; would apply to both @myorg and @another
+; @myorg와 @another 모두에 적용됨
 //somewhere-else.com/:_authToken=MYTOKEN
 
-; would apply only to @myorg
+; @myorg에만 적용됨
 //somewhere-else.com/myorg/:_authToken=MYTOKEN1
 
-; would apply only to @another
+; @another에만 적용됨
 //somewhere-else.com/another/:_authToken=MYTOKEN2
 ```
 
-### See also
+### 참조
 
-- [npm folders](/cli/v10/configuring-npm/folders)
+- [npm 폴더](/cli/v10/configuring-npm/folders)
 - [npm config](/cli/v10/commands/npm-config)
 - [config](/cli/v10/using-npm/config)
 - [package.json](/cli/v10/configuring-npm/package-json)

@@ -1,7 +1,7 @@
 ---
 title: package-spec
 section: 7
-description: Package name specifier
+description: 패키지 이름 지정자
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/using-npm/package-spec.md
@@ -17,20 +17,20 @@ redirect_from:
   - /using-npm/package-spec
 ---
 
-### Description
+### 설명
 
-Commands like `npm install` and the dependency sections in the `package.json` use a package name specifier. This can be many different things that all refer to a "package". Examples include a package name, git url, tarball, or local directory. These will generally be referred to as `<package-spec>` in the help output for the npm commands that use this package name specifier.
+`npm install`과 같은 명령어와 `package.json`의 종속성 섹션에서는 패키지 이름 지정자를 사용합니다. 이는 "패키지"를 참조하는 다양한 형태일 수 있습니다. 예를 들어 패키지 이름, git URL, tarball, 또는 로컬 디렉토리 등이 있습니다. 이들은 일반적으로 이 패키지 이름 지정자를 사용하는 npm 명령어의 도움말 출력에서 `<package-spec>`으로 표시됩니다.
 
-### Package name
+### 패키지 이름
 
 - `[<@scope>/]<pkg>`
 - `[<@scope>/]<pkg>@<tag>`
 - `[<@scope>/]<pkg>@<version>`
 - `[<@scope>/]<pkg>@<version range>`
 
-Refers to a package by name, with or without a scope, and optionally tag, version, or version range. This is typically used in combination with the [registry](/cli/v10/using-npm/config#registry) config to refer to a package in a registry.
+범위가 있거나 없는 이름으로 패키지를 참조하며, 선택적으로 태그, 버전 또는 버전 범위를 포함할 수 있습니다. 이는 일반적으로 [registry](/cli/v10/using-npm/config#registry) 설정과 함께 사용되어 레지스트리의 패키지를 참조합니다.
 
-Examples:
+예시:
 
 - `npm`
 - `@npmcli/arborist`
@@ -38,51 +38,51 @@ Examples:
 - `npm@6.13.1`
 - `npm@^4.0.0`
 
-### Aliases
+### 별칭
 
 - `<alias>@npm:<name>`
 
-Primarily used by commands like `npm install` and in the dependency sections in the `package.json`, this refers to a package by an alias. The `<alias>` is the name of the package as it is reified in the `node_modules` folder, and the `<name>` refers to a package name as found in the configured registry.
+주로 `npm install` 같은 명령어와 `package.json`의 종속성 섹션에서 사용되며, 별칭으로 패키지를 참조합니다. `<alias>`는 `node_modules` 폴더에서 구체화되는 패키지의 이름이고, `<name>`은 구성된 레지스트리에서 찾을 수 있는 패키지 이름을 나타냅니다.
 
-See `Package name` above for more info on referring to a package by name, and [registry](/cli/v10/using-npm/config#registry) for configuring which registry is used when referring to a package by name.
+이름으로 패키지를 참조하는 방법에 대한 자세한 정보는 위의 '패키지 이름'을 참조하세요. 이름으로 패키지를 참조할 때 사용되는 레지스트리 구성에 대해서는 [registry](/cli/v10/using-npm/config#registry)를 참조하세요.
 
-Examples:
+예시:
 
 - `semver:@npm:@npmcli/semver-with-patch`
 - `semver:@npm:semver@7.2.2`
 - `semver:@npm:semver@legacy`
 
-### Folders
+### 폴더
 
 - `<folder>`
 
-This refers to a package on the local filesystem. Specifically this is a folder with a `package.json` file in it. This _should_ always be prefixed with a `/` or `./` (or your OS equivalent) to reduce confusion. npm currently will parse a string with more than one `/` in it as a folder, but this is legacy behavior that may be removed in a future version.
+이는 로컬 파일 시스템의 패키지를 나타냅니다. 구체적으로 `package.json` 파일이 있는 폴더를 의미합니다. 혼동을 줄이기 위해 항상 `/` 또는 `./`(또는 귀하의 OS에 해당하는 것)로 시작해야 합니다. npm은 현재 하나 이상의 `/`가 포함된 문자열을 폴더로 해석하지만, 이는 레거시 동작으로 향후 버전에서 제거될 수 있습니다.
 
-Examples:
+예시:
 
 - `./my-package`
 - `/opt/npm/my-package`
 
-### Tarballs
+### Tarball
 
 - `<tarball file>`
 - `<tarball url>`
 
-Examples:
+예시:
 
 - `./my-package.tgz`
 - `https://registry.npmjs.org/semver/-/semver-1.0.0.tgz`
 
-Refers to a package in a tarball format, either on the local filesystem or remotely via url. This is the format that packages exist in when uploaded to a registry.
+로컬 파일 시스템이나 URL을 통해 원격으로 tarball 형식의 패키지를 나타냅니다. 이는 패키지가 레지스트리에 업로드될 때 존재하는 형식입니다.
 
-### git urls
+### git URL
 
 - `<git:// url>`
 - `<github username>/<github project>`
 
-Refers to a package in a git repo. This can be a full git url, git shorthand, or a username/package on GitHub. You can specify a git tag, branch, or other git ref by appending `#ref`.
+git 저장소의 패키지를 나타냅니다. 이는 전체 git URL, git 축약형, 또는 GitHub의 사용자 이름/패키지일 수 있습니다. git 태그, 브랜치 또는 기타 git 참조를 `#ref`를 추가하여 지정할 수 있습니다.
 
-Examples:
+예시:
 
 - `https://github.com/npm/cli.git`
 - `git@github.com:npm/cli.git`
@@ -90,7 +90,7 @@ Examples:
 - `github:npm/cli#HEAD`
 - `npm/cli#c12ea07`
 
-### See also
+### 참조
 
 - [npm-package-arg](https://npm.im/npm-package-arg)
 - [scope](/cli/v10/using-npm/scope)

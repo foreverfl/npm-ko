@@ -1,14 +1,14 @@
 import React from 'react'
-import {Heading, Box, Details, useDetails, Button, NavList} from '@primer/react'
-import {ChevronDownIcon, ChevronRightIcon} from '@primer/octicons-react'
-import {SCROLL_MARGIN_TOP} from '../constants'
+import { Heading, Box, Details, useDetails, Button, NavList } from '@primer/react'
+import { ChevronDownIcon, ChevronRightIcon } from '@primer/octicons-react'
+import { SCROLL_MARGIN_TOP } from '../constants'
 import usePage from '../hooks/use-page'
 
-const TableOfContentsItems = ({items, depth}) => (
+const TableOfContentsItems = ({ items, depth }) => (
   <>
     {items.map(item => (
       <React.Fragment key={item.title}>
-        <NavList.Item href={item.url} sx={{pl: depth > 1 ? 4 : 2}}>
+        <NavList.Item href={item.url} sx={{ pl: depth > 1 ? 4 : 2 }}>
           {item.title}
         </NavList.Item>
         {item.items ? <TableOfContentsItems items={item.items} depth={depth + 1} /> : null}
@@ -17,7 +17,7 @@ const TableOfContentsItems = ({items, depth}) => (
   </>
 )
 
-const TableOfContents = ({'aria-labelledby': ariaLabelledBy, items, depth = 1, ...props}) => (
+const TableOfContents = ({ 'aria-labelledby': ariaLabelledBy, items, depth = 1, ...props }) => (
   <NavList aria-labelledby={ariaLabelledBy} {...props}>
     <TableOfContentsItems items={items} depth={depth} />
   </NavList>
@@ -25,16 +25,16 @@ const TableOfContents = ({'aria-labelledby': ariaLabelledBy, items, depth = 1, .
 
 const withTableOfContents = Component => {
   const WithTableOfContents = props => {
-    const {tableOfContents} = usePage().pageContext
+    const { tableOfContents } = usePage().pageContext
     return tableOfContents ? <Component {...props} items={tableOfContents} /> : null
   }
   return WithTableOfContents
 }
 
-export const Mobile = withTableOfContents(({items}) => {
-  const {getDetailsProps, open} = useDetails({defaultOpen: true})
+export const Mobile = withTableOfContents(({ items }) => {
+  const { getDetailsProps, open } = useDetails({ defaultOpen: true })
   return (
-    <Box sx={{display: ['block', null, 'none'], mb: 3, mt: 4}}>
+    <Box sx={{ display: ['block', null, 'none'], mb: 3, mt: 4 }}>
       <Details
         {...getDetailsProps()}
         sx={{
@@ -56,7 +56,7 @@ export const Mobile = withTableOfContents(({items}) => {
           }}
           leadingIcon={open ? ChevronDownIcon : ChevronRightIcon}
         >
-          Table of contents
+          목차
         </Button>
         <TableOfContents items={items} />
       </Details>
@@ -64,7 +64,7 @@ export const Mobile = withTableOfContents(({items}) => {
   )
 })
 
-export const Desktop = withTableOfContents(({items}) => (
+export const Desktop = withTableOfContents(({ items }) => (
   <Box
     sx={{
       width: 220,
@@ -76,8 +76,8 @@ export const Desktop = withTableOfContents(({items}) => (
       maxHeight: `calc(100vh - ${SCROLL_MARGIN_TOP}px)`,
     }}
   >
-    <Heading as="h3" sx={{fontSize: 1, display: 'inline-block', fontWeight: 'bold'}} id="toc-heading">
-      Table of contents
+    <Heading as="h3" sx={{ fontSize: 1, display: 'inline-block', fontWeight: 'bold' }} id="toc-heading">
+      목차
     </Heading>
     <Box
       sx={{
@@ -86,7 +86,7 @@ export const Desktop = withTableOfContents(({items}) => (
         overflowY: 'auto',
       }}
     >
-      <TableOfContents aria-labelledby="toc-heading" items={items} sx={{ml: -2}} />
+      <TableOfContents aria-labelledby="toc-heading" items={items} sx={{ ml: -2 }} />
     </Box>
   </Box>
 ))

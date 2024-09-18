@@ -1,7 +1,7 @@
 ---
 title: npm-unstar
 section: 1
-description: Remove an item from your favorite packages
+description: 즐겨찾는 패키지에서 항목 제거
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/commands/npm-unstar.md
@@ -35,56 +35,56 @@ redirect_from:
   - /commands/unstar
 ---
 
-### Synopsis
+### 개요
 
 ```bash
 npm unstar [<package-spec>...]
 ```
 
-Note: This command is unaware of workspaces.
+참고: 이 명령은 작업 공간을 인식하지 않습니다.
 
-### Description
+### 설명
 
-"Unstarring" a package is the opposite of [`npm star`](/cli/v10/commands/npm-star), it removes an item from your list of favorite packages.
+패키지를 "unstar"하는 것은 [`npm star`](/cli/v10/commands/npm-star)의 반대로, 즐겨찾는 패키지 목록에서 항목을 제거합니다.
 
-### More
+### 추가 정보
 
-There's also these extra commands to help you manage your favorite packages:
+즐겨찾는 패키지를 관리하는 데 도움이 되는 추가 명령어들이 있습니다:
 
-#### Star
+#### 스타
 
-You can "star" a package using [`npm star`](/cli/v10/commands/npm-star)
+[`npm star`](/cli/v10/commands/npm-star)를 사용하여 패키지에 "스타"를 줄 수 있습니다.
 
-#### Listing stars
+#### 스타 목록 보기
 
-You can see all your starred packages using [`npm stars`](/cli/v10/commands/npm-stars)
+[`npm stars`](/cli/v10/commands/npm-stars)를 사용하여 스타를 준 모든 패키지를 볼 수 있습니다.
 
-### Configuration
+### 설정
 
 #### `registry`
 
-- Default: "https://registry.npmjs.org/"
-- Type: URL
+- 기본값: "https://registry.npmjs.org/"
+- 유형: URL
 
-The base URL of the npm registry.
+npm 레지스트리의 기본 URL입니다.
 
 #### `unicode`
 
-- Default: false on windows, true on mac/unix systems with a unicode locale, as defined by the `LC_ALL`, `LC_CTYPE`, or `LANG` environment variables.
-- Type: Boolean
+- 기본값: Windows에서는 false, Mac/Unix 시스템에서는 `LC_ALL`, `LC_CTYPE`, 또는 `LANG` 환경 변수에 의해 정의된 유니코드 로케일이 있는 경우 true
+- 유형: Boolean
 
-When set to true, npm uses unicode characters in the tree output. When false, it uses ascii characters instead of unicode glyphs.
+true로 설정되면 npm은 트리 출력에 유니코드 문자를 사용합니다. false일 때는 유니코드 글리프 대신 아스키 문자를 사용합니다.
 
 #### `otp`
 
-- Default: null
-- Type: null or String
+- 기본값: null
+- 유형: null 또는 String
 
-This is a one-time password from a two-factor authenticator. It's needed when publishing or changing package permissions with `npm access`.
+이것은 2단계 인증기에서 제공하는 일회용 비밀번호입니다. 패키지를 게시하거나 `npm access`로 패키지 권한을 변경할 때 필요합니다.
 
-If not set, and a registry response fails with a challenge for a one-time password, npm will prompt on the command line for one.
+설정되지 않았고 레지스트리 응답이 일회용 비밀번호를 요구하는 경우, npm은 명령줄에서 입력을 요청합니다.
 
-### See Also
+### 참조
 
 - [npm star](/cli/v10/commands/npm-star)
 - [npm stars](/cli/v10/commands/npm-stars)

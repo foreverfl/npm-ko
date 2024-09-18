@@ -1,7 +1,7 @@
 ---
 title: npm-shrinkwrap.json
 section: 5
-description: A publishable lockfile
+description: 배포 가능한 잠금 파일
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/configuring-npm/npm-shrinkwrap-json.md
@@ -27,17 +27,17 @@ redirect_from:
   - /files/npm-shrinkwrap.json
 ---
 
-### Description
+### 설명
 
-`npm-shrinkwrap.json` is a file created by [`npm shrinkwrap`](/cli/v10/commands/npm-shrinkwrap). It is identical to `package-lock.json`, with one major caveat: Unlike `package-lock.json`, `npm-shrinkwrap.json` may be included when publishing a package.
+`npm-shrinkwrap.json`은 [`npm shrinkwrap`](/cli/v10/commands/npm-shrinkwrap)에 의해 생성된 파일입니다. 이는 `package-lock.json`과 동일하지만, 한 가지 주요한 차이점이 있습니다: `package-lock.json`과 달리 `npm-shrinkwrap.json`은 패키지를 배포할 때 포함될 수 있습니다.
 
-The recommended use-case for `npm-shrinkwrap.json` is applications deployed through the publishing process on the registry: for example, daemons and command-line tools intended as global installs or `devDependencies`. It's strongly discouraged for library authors to publish this file, since that would prevent end users from having control over transitive dependency updates.
+`npm-shrinkwrap.json`의 권장 사용 사례는 레지스트리의 배포 프로세스를 통해 배포되는 애플리케이션입니다. 예를 들어, 전역 설치나 `devDependencies`로 의도된 데몬 및 명령줄 도구가 있습니다. 라이브러리 작성자가 이 파일을 배포하는 것은 강력히 권장되지 않습니다. 왜냐하면 그렇게 하면 최종 사용자가 종속성 업데이트를 제어할 수 없게 되기 때문입니다.
 
-If both `package-lock.json` and `npm-shrinkwrap.json` are present in a package root, `npm-shrinkwrap.json` will be preferred over the `package-lock.json` file.
+패키지 루트에 `package-lock.json`과 `npm-shrinkwrap.json`이 모두 존재하는 경우, `npm-shrinkwrap.json`이 `package-lock.json` 파일보다 우선됩니다.
 
-For full details and description of the `npm-shrinkwrap.json` file format, refer to the manual page for [package-lock.json](/cli/v10/configuring-npm/package-lock-json).
+`npm-shrinkwrap.json` 파일 형식의 전체 세부사항과 설명은 [package-lock.json](/cli/v10/configuring-npm/package-lock-json) 매뉴얼 페이지를 참조하세요.
 
-### See also
+### 참조
 
 - [npm shrinkwrap](/cli/v10/commands/npm-shrinkwrap)
 - [package-lock.json](/cli/v10/configuring-npm/package-lock-json)

@@ -11,7 +11,9 @@
       shortName: 계정 설정하기
       url: /getting-started/setting-up-your-npm-user-account
       children:
-        - title: 공개 레지스트리에 새 사용자 계정 만들기
+        - title: |
+            공개 레지스트리에
+            새 사용자 계정 만들기
           url: /creating-a-new-npm-user-account
         - title: 강력한 비밀번호 만들기
           url: /creating-a-strong-password
@@ -21,7 +23,9 @@
           url: /about-two-factor-authentication
         - title: 2단계 인증 설정하기
           url: /configuring-two-factor-authentication
-        - title: 2단계 인증을 사용하여 npm에 접근하기
+        - title: |
+            2단계 인증을 사용하여
+            npm에 접근하기
           url: /accessing-npm-using-2fa
         - title: 2FA가 활성화된 계정 복구하기
           url: /recovering-your-2fa-enabled-account
@@ -276,8 +280,8 @@
       url: /policies/security
     - title: 복제 및 웹 크롤러 정책
       url: /policies/crawlers
-- title: 위협 및 완화
-  shortName: 위협 및 완화
+- title: 보안 위협과 대응 방안
+  shortName: 보안 위협과 대응 방안
   url: /threats-and-mitigations
 - title: npm CLI
   shortName: CLI
@@ -783,4 +787,814 @@
               description: 깨끗한 상태로 만들기
             - title: 변경 로그
               url: /cli/v7/using-npm/changelog
+              description: 각 버전의 변경 로그 노트
+    - title: 버전 8.19.4
+      shortName: v8
+      url: /cli/v8
+      default: false
+      type: legacy
+      children:
+        - title: CLI 명령어
+          shortName: 명령어
+          url: /cli/v8/commands
+          children:
+            - title: npm
+              url: /cli/v8/commands/npm
+              description: JavaScript 패키지 관리자
+            - title: npm access
+              url: /cli/v8/commands/npm-access
+              description: 게시된 패키지의 접근 수준 설정
+            - title: npm adduser
+              url: /cli/v8/commands/npm-adduser
+              description: 레지스트리 사용자 계정 추가
+            - title: npm audit
+              url: /cli/v8/commands/npm-audit
+              description: 보안 감사 실행
+            - title: npm bin
+              url: /cli/v8/commands/npm-bin
+              description: npm bin 폴더 표시
+            - title: npm bugs
+              url: /cli/v8/commands/npm-bugs
+              description: 웹 브라우저에서 패키지의 버그 페이지 열기
+            - title: npm cache
+              url: /cli/v8/commands/npm-cache
+              description: 패키지 캐시 조작
+            - title: npm ci
+              url: /cli/v8/commands/npm-ci
+              description: 깨끗한 상태로 프로젝트 설치
+            - title: npm completion
+              url: /cli/v8/commands/npm-completion
+              description: npm 탭 완성
+            - title: npm config
+              url: /cli/v8/commands/npm-config
+              description: npm 구성 파일 관리
+            - title: npm dedupe
+              url: /cli/v8/commands/npm-dedupe
+              description: 중복 감소
+            - title: npm deprecate
+              url: /cli/v8/commands/npm-deprecate
+              description: 패키지의 버전 폐기
+            - title: npm diff
+              url: /cli/v8/commands/npm-diff
+              description: 레지스트리 diff 명령어
+            - title: npm dist-tag
+              url: /cli/v8/commands/npm-dist-tag
+              description: 패키지 배포 태그 수정
+            - title: npm docs
+              url: /cli/v8/commands/npm-docs
+              description: 웹 브라우저에서 패키지 문서 열기
+            - title: npm doctor
+              url: /cli/v8/commands/npm-doctor
+              description: 환경 확인
+            - title: npm edit
+              url: /cli/v8/commands/npm-edit
+              description: 설치된 패키지 편집
+            - title: npm exec
+              url: /cli/v8/commands/npm-exec
+              description: npm 패키지에서 명령 실행
+            - title: npm explain
+              url: /cli/v8/commands/npm-explain
+              description: 설치된 패키지 설명
+            - title: npm explore
+              url: /cli/v8/commands/npm-explore
+              description: 설치된 패키지 탐색
+            - title: npm find-dupes
+              url: /cli/v8/commands/npm-find-dupes
+              description: 패키지 트리에서 중복 찾기
+            - title: npm fund
+              url: /cli/v8/commands/npm-fund
+              description: 자금 지원 정보 검색
+            - title: npm help
+              url: /cli/v8/commands/npm-help
+              description: npm 도움말 문서 검색
+            - title: npm help-search
+              url: /cli/v8/commands/npm-help-search
+              description: npm에 대한 도움말 얻기
+            - title: npm hook
+              url: /cli/v8/commands/npm-hook
+              description: 레지스트리 훅 관리
+            - title: npm init
+              url: /cli/v8/commands/npm-init
+              description: package.json 파일 생성
+            - title: npm install
+              url: /cli/v8/commands/npm-install
+              description: 패키지 설치
+            - title: npm install-ci-test
+              url: /cli/v8/commands/npm-install-ci-test
+              description: 깨끗한 상태로 프로젝트 설치 및 테스트 실행
+            - title: npm install-test
+              url: /cli/v8/commands/npm-install-test
+              description: 패키지 설치 및 테스트 실행
+            - title: npm link
+              url: /cli/v8/commands/npm-link
+              description: 패키지 폴더 심볼릭 링크
+            - title: npm logout
+              url: /cli/v8/commands/npm-logout
+              description: 레지스트리에서 로그아웃
+            - title: npm ls
+              url: /cli/v8/commands/npm-ls
+              description: 설치된 패키지 나열
+            - title: npm org
+              url: /cli/v8/commands/npm-org
+              description: 조직 관리
+            - title: npm outdated
+              url: /cli/v8/commands/npm-outdated
+              description: 오래된 패키지 확인
+            - title: npm owner
+              url: /cli/v8/commands/npm-owner
+              description: 패키지 소유자 관리
+            - title: npm pack
+              url: /cli/v8/commands/npm-pack
+              description: 패키지에서 tarball 생성
+            - title: npm ping
+              url: /cli/v8/commands/npm-ping
+              description: npm 레지스트리 ping
+            - title: npm pkg
+              url: /cli/v8/commands/npm-pkg
+              description: package.json 관리
+            - title: npm prefix
+              url: /cli/v8/commands/npm-prefix
+              description: 접두사 표시
+            - title: npm profile
+              url: /cli/v8/commands/npm-profile
+              description: 레지스트리 프로필 설정 변경
+            - title: npm prune
+              url: /cli/v8/commands/npm-prune
+              description: 불필요한 패키지 제거
+            - title: npm publish
+              url: /cli/v8/commands/npm-publish
+              description: 패키지 게시
+            - title: npm query
+              url: /cli/v8/commands/npm-query
+              description: 필터링된 패키지 목록 검색
+            - title: npm rebuild
+              url: /cli/v8/commands/npm-rebuild
+              description: 패키지 재구축
+            - title: npm repo
+              url: /cli/v8/commands/npm-repo
+              description: 브라우저에서 패키지 저장소 페이지 열기
+            - title: npm restart
+              url: /cli/v8/commands/npm-restart
+              description: 패키지 재시작
+            - title: npm root
+              url: /cli/v8/commands/npm-root
+              description: npm 루트 표시
+            - title: npm run-script
+              url: /cli/v8/commands/npm-run-script
+              description: 임의의 패키지 스크립트 실행
+            - title: npm search
+              url: /cli/v8/commands/npm-search
+              description: 패키지 검색
+            - title: npm set-script
+              url: /cli/v8/commands/npm-set-script
+              description: package.json의 scripts 섹션에 작업 설정
+            - title: npm shrinkwrap
+              url: /cli/v8/commands/npm-shrinkwrap
+              description: 게시를 위한 의존성 버전 잠금
+            - title: npm star
+              url: /cli/v8/commands/npm-star
+              description: 좋아하는 패키지 표시
+            - title: npm stars
+              url: /cli/v8/commands/npm-stars
+              description: 좋아요 표시한 패키지 보기
+            - title: npm start
+              url: /cli/v8/commands/npm-start
+              description: 패키지 시작
+            - title: npm stop
+              url: /cli/v8/commands/npm-stop
+              description: 패키지 중지
+            - title: npm team
+              url: /cli/v8/commands/npm-team
+              description: 조직 팀 및 팀 멤버십 관리
+            - title: npm test
+              url: /cli/v8/commands/npm-test
+              description: 패키지 테스트
+            - title: npm token
+              url: /cli/v8/commands/npm-token
+              description: 인증 토큰 관리
+            - title: npm uninstall
+              url: /cli/v8/commands/npm-uninstall
+              description: 패키지 제거
+            - title: npm unpublish
+              url: /cli/v8/commands/npm-unpublish
+              description: 레지스트리에서 패키지 제거
+            - title: npm unstar
+              url: /cli/v8/commands/npm-unstar
+              description: 좋아하는 패키지에서 항목 제거
+            - title: npm update
+              url: /cli/v8/commands/npm-update
+              description: 패키지 업데이트
+            - title: npm version
+              url: /cli/v8/commands/npm-version
+              description: 패키지 버전 증가
+            - title: npm view
+              url: /cli/v8/commands/npm-view
+              description: 레지스트리 정보 보기
+            - title: npm whoami
+              url: /cli/v8/commands/npm-whoami
+              description: npm 사용자 이름 표시
+            - title: npx
+              url: /cli/v8/commands/npx
+              description: npm 패키지에서 명령 실행
+        - title: npm 구성
+          shortName: 구성
+          url: /cli/v8/configuring-npm
+          children:
+            - title: 설치
+              url: /cli/v8/configuring-npm/install
+              description: node와 npm 다운로드 및 설치
+            - title: 폴더
+              url: /cli/v8/configuring-npm/folders
+              description: npm이 사용하는 폴더 구조
+            - title: .npmrc
+              url: /cli/v8/configuring-npm/npmrc
+              description: npm 구성 파일
+            - title: npm-shrinkwrap.json
+              url: /cli/v8/configuring-npm/npm-shrinkwrap-json
+              description: 게시 가능한 잠금 파일
+            - title: package.json
+              url: /cli/v8/configuring-npm/package-json
+              description: npm의 package.json 처리 세부사항
+            - title: package-lock.json
+              url: /cli/v8/configuring-npm/package-lock-json
+              description: 매니페스트의 구현
+        - title: npm 사용
+          shortName: 사용
+          url: /cli/v8/using-npm
+          children:
+            - title: 레지스트리
+              url: /cli/v8/using-npm/registry
+              description: JavaScript 패키지 레지스트리
+            - title: 패키지 명세
+              url: /cli/v8/using-npm/package-spec
+              description: 패키지 이름 지정자
+            - title: 구성
+              url: /cli/v8/using-npm/config
+              description: npm 구성에 대하여
+            - title: 로깅
+              url: /cli/v8/using-npm/logging
+              description: 로그를 하는 이유, 내용 및 방법
+            - title: 스코프
+              url: /cli/v8/using-npm/scope
+              description: 스코프가 지정된 패키지
+            - title: 스크립트
+              url: /cli/v8/using-npm/scripts
+              description: npm이 "scripts" 필드를 처리하는 방법
+            - title: 워크스페이스
+              url: /cli/v8/using-npm/workspaces
+              description: 워크스페이스 작업
+            - title: 조직
+              url: /cli/v8/using-npm/orgs
+              description: 팀 및 조직 작업
+            - title: 의존성 선택자
+              url: /cli/v8/using-npm/dependency-selectors
+              description: 의존성 선택자 구문 및 쿼리
+            - title: 개발자
+              url: /cli/v8/using-npm/developers
+              description: 개발자 가이드
+            - title: 제거
+              url: /cli/v8/using-npm/removal
+              description: 깨끗이 정리하기
+            - title: 변경 로그
+              url: /cli/v8/using-npm/changelog
+              description: 각 버전의 변경 로그 노트
+    - title: 버전 9.9.3
+      shortName: v9
+      url: /cli/v9
+      default: false
+      type: legacy
+      children:
+        - title: CLI 명령어
+          shortName: 명령어
+          url: /cli/v9/commands
+          children:
+            - title: npm
+              url: /cli/v9/commands/npm
+              description: JavaScript 패키지 관리자
+            - title: npm access
+              url: /cli/v9/commands/npm-access
+              description: 게시된 패키지의 접근 수준 설정
+            - title: npm adduser
+              url: /cli/v9/commands/npm-adduser
+              description: 레지스트리 사용자 계정 추가
+            - title: npm audit
+              url: /cli/v9/commands/npm-audit
+              description: 보안 감사 실행
+            - title: npm bugs
+              url: /cli/v9/commands/npm-bugs
+              description: 웹 브라우저에서 패키지의 버그 페이지 열기
+            - title: npm cache
+              url: /cli/v9/commands/npm-cache
+              description: 패키지 캐시 조작
+            - title: npm ci
+              url: /cli/v9/commands/npm-ci
+              description: 깨끗한 상태로 프로젝트 설치
+            - title: npm completion
+              url: /cli/v9/commands/npm-completion
+              description: npm 탭 완성
+            - title: npm config
+              url: /cli/v9/commands/npm-config
+              description: npm 구성 파일 관리
+            - title: npm dedupe
+              url: /cli/v9/commands/npm-dedupe
+              description: 중복 감소
+            - title: npm deprecate
+              url: /cli/v9
+              description: 패키지의 버전 폐기
+            - title: npm diff
+              url: /cli/v9/commands/npm-diff
+              description: 레지스트리 diff 명령어
+            - title: npm dist-tag
+              url: /cli/v9/commands/npm-dist-tag
+              description: 패키지 배포 태그 수정
+            - title: npm docs
+              url: /cli/v9/commands/npm-docs
+              description: 웹 브라우저에서 패키지 문서 열기
+            - title: npm doctor
+              url: /cli/v9/commands/npm-doctor
+              description: 환경 확인
+            - title: npm edit
+              url: /cli/v9/commands/npm-edit
+              description: 설치된 패키지 편집
+            - title: npm exec
+              url: /cli/v9/commands/npm-exec
+              description: npm 패키지에서 명령 실행
+            - title: npm explain
+              url: /cli/v9/commands/npm-explain
+              description: 설치된 패키지 설명
+            - title: npm explore
+              url: /cli/v9/commands/npm-explore
+              description: 설치된 패키지 탐색
+            - title: npm find-dupes
+              url: /cli/v9/commands/npm-find-dupes
+              description: 패키지 트리에서 중복 찾기
+            - title: npm fund
+              url: /cli/v9/commands/npm-fund
+              description: 자금 지원 정보 검색
+            - title: npm help
+              url: /cli/v9/commands/npm-help
+              description: npm 도움말 문서 검색
+            - title: npm help-search
+              url: /cli/v9/commands/npm-help-search
+              description: npm에 대한 도움말 얻기
+            - title: npm hook
+              url: /cli/v9/commands/npm-hook
+              description: 레지스트리 훅 관리
+            - title: npm init
+              url: /cli/v9/commands/npm-init
+              description: package.json 파일 생성
+            - title: npm install
+              url: /cli/v9/commands/npm-install
+              description: 패키지 설치
+            - title: npm install-ci-test
+              url: /cli/v9/commands/npm-install-ci-test
+              description: 깨끗한 상태로 프로젝트 설치 및 테스트 실행
+            - title: npm install-test
+              url: /cli/v9/commands/npm-install-test
+              description: 패키지 설치 및 테스트 실행
+            - title: npm link
+              url: /cli/v9/commands/npm-link
+              description: 패키지 폴더 심볼릭 링크
+            - title: npm login
+              url: /cli/v9/commands/npm-login
+              description: 레지스트리 사용자 계정으로 로그인
+            - title: npm logout
+              url: /cli/v9/commands/npm-logout
+              description: 레지스트리에서 로그아웃
+            - title: npm ls
+              url: /cli/v9/commands/npm-ls
+              description: 설치된 패키지 나열
+            - title: npm org
+              url: /cli/v9/commands/npm-org
+              description: 조직 관리
+            - title: npm outdated
+              url: /cli/v9/commands/npm-outdated
+              description: 오래된 패키지 확인
+            - title: npm owner
+              url: /cli/v9/commands/npm-owner
+              description: 패키지 소유자 관리
+            - title: npm pack
+              url: /cli/v9/commands/npm-pack
+              description: 패키지에서 tarball 생성
+            - title: npm ping
+              url: /cli/v9/commands/npm-ping
+              description: npm 레지스트리 ping
+            - title: npm pkg
+              url: /cli/v9/commands/npm-pkg
+              description: package.json 관리
+            - title: npm prefix
+              url: /cli/v9/commands/npm-prefix
+              description: 접두사 표시
+            - title: npm profile
+              url: /cli/v9/commands/npm-profile
+              description: 레지스트리 프로필 설정 변경
+            - title: npm prune
+              url: /cli/v9/commands/npm-prune
+              description: 불필요한 패키지 제거
+            - title: npm publish
+              url: /cli/v9/commands/npm-publish
+              description: 패키지 게시
+            - title: npm query
+              url: /cli/v9/commands/npm-query
+              description: 필터링된 패키지 목록 검색
+            - title: npm rebuild
+              url: /cli/v9/commands/npm-rebuild
+              description: 패키지 재구축
+            - title: npm repo
+              url: /cli/v9/commands/npm-repo
+              description: 브라우저에서 패키지 저장소 페이지 열기
+            - title: npm restart
+              url: /cli/v9/commands/npm-restart
+              description: 패키지 재시작
+            - title: npm root
+              url: /cli/v9/commands/npm-root
+              description: npm 루트 표시
+            - title: npm run-script
+              url: /cli/v9/commands/npm-run-script
+              description: 임의의 패키지 스크립트 실행
+            - title: npm sbom
+              url: /cli/v9/commands/npm-sbom
+              description: 소프트웨어 구성 요소 명세서(SBOM) 생성
+            - title: npm search
+              url: /cli/v9/commands/npm-search
+              description: 패키지 검색
+            - title: npm shrinkwrap
+              url: /cli/v9/commands/npm-shrinkwrap
+              description: 게시를 위한 의존성 버전 잠금
+            - title: npm star
+              url: /cli/v9/commands/npm-star
+              description: 좋아하는 패키지 표시
+            - title: npm stars
+              url: /cli/v9/commands/npm-stars
+              description: 좋아요 표시한 패키지 보기
+            - title: npm start
+              url: /cli/v9/commands/npm-start
+              description: 패키지 시작
+            - title: npm stop
+              url: /cli/v9/commands/npm-stop
+              description: 패키지 중지
+            - title: npm team
+              url: /cli/v9/commands/npm-team
+              description: 조직 팀 및 팀 멤버십 관리
+            - title: npm test
+              url: /cli/v9/commands/npm-test
+              description: 패키지 테스트
+            - title: npm token
+              url: /cli/v9/commands/npm-token
+              description: 인증 토큰 관리
+            - title: npm uninstall
+              url: /cli/v9/commands/npm-uninstall
+              description: 패키지 제거
+            - title: npm unpublish
+              url: /cli/v9/commands/npm-unpublish
+              description: 레지스트리에서 패키지 제거
+            - title: npm unstar
+              url: /cli/v9/commands/npm-unstar
+              description: 좋아하는 패키지에서 항목 제거
+            - title: npm update
+              url: /cli/v9/commands/npm-update
+              description: 패키지 업데이트
+            - title: npm version
+              url: /cli/v9/commands/npm-version
+              description: 패키지 버전 증가
+            - title: npm view
+              url: /cli/v9/commands/npm-view
+              description: 레지스트리 정보 보기
+            - title: npm whoami
+              url: /cli/v9/commands/npm-whoami
+              description: npm 사용자 이름 표시
+            - title: npx
+              url: /cli/v9/commands/npx
+              description: npm 패키지에서 명령 실행
+        - title: npm 구성
+          shortName: 구성
+          url: /cli/v9/configuring-npm
+          children:
+            - title: 설치
+              url: /cli/v9/configuring-npm/install
+              description: node와 npm 다운로드 및 설치
+            - title: 폴더
+              url: /cli/v9/configuring-npm/folders
+              description: npm이 사용하는 폴더 구조
+            - title: .npmrc
+              url: /cli/v9/configuring-npm/npmrc
+              description: npm 구성 파일
+            - title: npm-shrinkwrap.json
+              url: /cli/v9/configuring-npm/npm-shrinkwrap-json
+              description: 게시 가능한 잠금 파일
+            - title: package.json
+              url: /cli/v9/configuring-npm/package-json
+              description: npm의 package.json 처리 세부사항
+            - title: package-lock.json
+              url: /cli/v9/configuring-npm/package-lock-json
+              description: 매니페스트의 구현
+        - title: npm 사용
+          shortName: 사용
+          url: /cli/v9/using-npm
+          children:
+            - title: 레지스트리
+              url: /cli/v9/using-npm/registry
+              description: JavaScript 패키지 레지스트리
+            - title: 패키지 명세
+              url: /cli/v9/using-npm/package-spec
+              description: 패키지 이름 지정자
+            - title: 구성
+              url: /cli/v9/using-npm/config
+              description: npm 구성에 대하여
+            - title: 로깅
+              url: /cli/v9/using-npm/logging
+              description: 로그를 하는 이유, 내용 및 방법
+            - title: 스코프
+              url: /cli/v9/using-npm/scope
+              description: 스코프가 지정된 패키지
+            - title: 스크립트
+              url: /cli/v9/using-npm/scripts
+              description: npm이 "scripts" 필드를 처리하는 방법
+            - title: 워크스페이스
+              url: /cli/v9/using-npm/workspaces
+              description: 워크스페이스 작업
+            - title: 조직
+              url: /cli/v9/using-npm/orgs
+              description: 팀 및 조직 작업
+            - title: 의존성 선택자
+              url: /cli/v9/using-npm/dependency-selectors
+              description: 의존성 선택자 구문 및 쿼리
+            - title: 개발자
+              url: /cli/v9/using-npm/developers
+              description: 개발자 가이드
+            - title: 제거
+              url: /cli/v9/using-npm/removal
+              description: 깨끗이 정리하기
+            - title: 변경 로그
+              url: /cli/v9/using-npm/changelog
+              description: 각 버전의 변경 로그 노트
+    - title: 버전 10.8.3
+      shortName: v10
+      url: /cli/v10
+      default: true
+      type: latest
+      children:
+        - title: CLI 명령어
+          shortName: 명령어
+          url: /cli/v10/commands
+          children:
+            - title: npm
+              url: /cli/v10/commands/npm
+              description: JavaScript 패키지 관리자
+            - title: npm access
+              url: /cli/v10/commands/npm-access
+              description: 게시된 패키지의 접근 수준 설정
+            - title: npm adduser
+              url: /cli/v10/commands/npm-adduser
+              description: 레지스트리 사용자 계정 추가
+            - title: npm audit
+              url: /cli/v10/commands/npm-audit
+              description: 보안 감사 실행
+            - title: npm bugs
+              url: /cli/v10/commands/npm-bugs
+              description: 웹 브라우저에서 패키지의 버그 페이지 열기
+            - title: npm cache
+              url: /cli/v10/commands/npm-cache
+              description: 패키지 캐시 조작
+            - title: npm ci
+              url: /cli/v10/commands/npm-ci
+              description: 깨끗한 상태로 프로젝트 설치
+            - title: npm completion
+              url: /cli/v10/commands/npm-completion
+              description: npm 탭 완성
+            - title: npm config
+              url: /cli/v10/commands/npm-config
+              description: npm 구성 파일 관리
+            - title: npm dedupe
+              url: /cli/v10/commands/npm-dedupe
+              description: 중복 감소
+            - title: npm deprecate
+              url: /cli/v10/commands/npm-deprecate
+              description: 패키지의 버전 폐기
+            - title: npm diff
+              url: /cli/v10/commands/npm-diff
+              description: 레지스트리 diff 명령어
+            - title: npm dist-tag
+              url: /cli/v10/commands/npm-dist-tag
+              description: 패키지 배포 태그 수정
+            - title: npm docs
+              url: /cli/v10/commands/npm-docs
+              description: 웹 브라우저에서 패키지 문서 열기
+            - title: npm doctor
+              url: /cli/v10/commands/npm-doctor
+              description: 환경 확인
+            - title: npm edit
+              url: /cli/v10/commands/npm-edit
+              description: 설치된 패키지 편집
+            - title: npm exec
+              url: /cli/v10/commands/npm-exec
+              description: npm 패키지에서 명령 실행
+            - title: npm explain
+              url: /cli/v10/commands/npm-explain
+              description: 설치된 패키지 설명
+            - title: npm explore
+              url: /cli/v10/commands/npm-explore
+              description: 설치된 패키지 탐색
+            - title: npm find-dupes
+              url: /cli/v10/commands/npm-find-dupes
+              description: 패키지 트리에서 중복 찾기
+            - title: npm fund
+              url: /cli/v10/commands/npm-fund
+              description: 자금 지원 정보 검색
+            - title: npm help
+              url: /cli/v10/commands/npm-help
+              description: npm 도움말 문서 검색
+            - title: npm help-search
+              url: /cli/v10/commands/npm-help-search
+              description: npm에 대한 도움말 얻기
+            - title: npm hook
+              url: /cli/v10/commands/npm-hook
+              description: 레지스트리 훅 관리
+            - title: npm init
+              url: /cli/v10/commands/npm-init
+              description: package.json 파일 생성
+            - title: npm install
+              url: /cli/v10/commands/npm-install
+              description: 패키지 설치
+            - title: npm install-ci-test
+              url: /cli/v10/commands/npm-install-ci-test
+              description: 깨끗한 상태로 프로젝트 설치 및 테스트 실행
+            - title: npm install-test
+              url: /cli/v10/commands/npm-install-test
+              description: 패키지 설치 및 테스트 실행
+            - title: npm link
+              url: /cli/v10/commands/npm-link
+              description: 패키지 폴더 심볼릭 링크
+            - title: npm login
+              url: /cli/v10/commands/npm-login
+              description: 레지스트리 사용자 계정으로 로그인
+            - title: npm logout
+              url: /cli/v10/commands/npm-logout
+              description: 레지스트리에서 로그아웃
+            - title: npm ls
+              url: /cli/v10/commands/npm-ls
+              description: 설치된 패키지 나열
+            - title: npm org
+              url: /cli/v10/commands/npm-org
+              description: 조직 관리
+            - title: npm outdated
+              url: /cli/v10/commands/npm-outdated
+              description: 오래된 패키지 확인
+            - title: npm owner
+              url: /cli/v10/commands/npm-owner
+              description: 패키지 소유자 관리
+            - title: npm pack
+              url: /cli/v10/commands/npm-pack
+              description: 패키지에서 tarball 생성
+            - title: npm ping
+              url: /cli/v10/commands/npm-ping
+              description: npm 레지스트리 ping
+            - title: npm pkg
+              url: /cli/v10/commands/npm-pkg
+              description: package.json 관리
+            - title: npm prefix
+              url: /cli/v10/commands/npm-prefix
+              description: 접두사 표시
+            - title: npm profile
+              url: /cli/v10/commands/npm-profile
+              description: 레지스트리 프로필 설정 변경
+            - title: npm prune
+              url: /cli/v10/commands/npm-prune
+              description: 불필요한 패키지 제거
+            - title: npm publish
+              url: /cli/v10/commands/npm-publish
+              description: 패키지 게시
+            - title: npm query
+              url: /cli/v10/commands/npm-query
+              description: 필터링된 패키지 목록 검색
+            - title: npm rebuild
+              url: /cli/v10/commands/npm-rebuild
+              description: 패키지 재구축
+            - title: npm repo
+              url: /cli/v10/commands/npm-repo
+              description: 브라우저에서 패키지 저장소 페이지 열기
+            - title: npm restart
+              url: /cli/v10/commands/npm-restart
+              description: 패키지 재시작
+            - title: npm root
+              url: /cli/v10/commands/npm-root
+              description: npm 루트 표시
+            - title: npm run-script
+              url: /cli/v10/commands/npm-run-script
+              description: 임의의 패키지 스크립트 실행
+            - title: npm sbom
+              url: /cli/v10/commands/npm-sbom
+              description: 소프트웨어 구성 요소 명세서(SBOM) 생성
+            - title: npm search
+              url: /cli/v10/commands/npm-search
+              description: 패키지 검색
+            - title: npm shrinkwrap
+              url: /cli/v10/commands/npm-shrinkwrap
+              description: 게시를 위한 의존성 버전 잠금
+            - title: npm star
+              url: /cli/v10/commands/npm-star
+              description: 좋아하는 패키지 표시
+            - title: npm stars
+              url: /cli/v10/commands/npm-stars
+              description: 좋아요 표시한 패키지 보기
+            - title: npm start
+              url: /cli/v10/commands/npm-start
+              description: 패키지 시작
+            - title: npm stop
+              url: /cli/v10/commands/npm-stop
+              description: 패키지 중지
+            - title: npm team
+              url: /cli/v10/commands/npm-team
+              description: 조직 팀 및 팀 멤버십 관리
+            - title: npm test
+              url: /cli/v10/commands/npm-test
+              description: 패키지 테스트
+            - title: npm token
+              url: /cli/v10/commands/npm-token
+              description: 인증 토큰 관리
+            - title: npm uninstall
+              url: /cli/v10/commands/npm-uninstall
+              description: 패키지 제거
+            - title: npm unpublish
+              url: /cli/v10/commands/npm-unpublish
+              description: 레지스트리에서 패키지 제거
+            - title: npm unstar
+              url: /cli/v10/commands/npm-unstar
+              description: 좋아하는 패키지에서 항목 제거
+            - title: npm update
+              url: /cli/v10/commands/npm-update
+              description: 패키지 업데이트
+            - title: npm version
+              url: /cli/v10/commands/npm-version
+              description: 패키지 버전 증가
+            - title: npm view
+              url: /cli/v10/commands/npm-view
+              description: 레지스트리 정보 보기
+            - title: npm whoami
+              url: /cli/v10/commands/npm-whoami
+              description: npm 사용자 이름 표시
+            - title: npx
+              url: /cli/v10/commands/npx
+              description: npm 패키지에서 명령 실행
+        - title: npm 구성
+          shortName: 구성
+          url: /cli/v10/configuring-npm
+          children:
+            - title: 설치
+              url: /cli/v10/configuring-npm/install
+              description: node와 npm 다운로드 및 설치
+            - title: 폴더
+              url: /cli/v10/configuring-npm/folders
+              description: npm이 사용하는 폴더 구조
+            - title: .npmrc
+              url: /cli/v10/configuring-npm/npmrc
+              description: npm 구성 파일
+            - title: npm-shrinkwrap.json
+              url: /cli/v10/configuring-npm/npm-shrinkwrap-json
+              description: 게시 가능한 잠금 파일
+            - title: package.json
+              url: /cli/v10/configuring-npm/package-json
+              description: npm의 package.json 처리 세부사항
+            - title: package-lock.json
+              url: /cli/v10/configuring-npm/package-lock-json
+              description: 매니페스트의 구현
+        - title: npm 사용
+          shortName: 사용
+          url: /cli/v10/using-npm
+          children:
+            - title: 레지스트리
+              url: /cli/v10/using-npm/registry
+              description: JavaScript 패키지 레지스트리
+            - title: 패키지 명세
+              url: /cli/v10/using-npm/package-spec
+              description: 패키지 이름 지정자
+            - title: 구성
+              url: /cli/v10/using-npm/config
+              description: npm 구성에 대하여
+            - title: 로깅
+              url: /cli/v10/using-npm/logging
+              description: 로그를 하는 이유, 내용 및 방법
+            - title: 스코프
+              url: /cli/v10/using-npm/scope
+              description: 스코프가 지정된 패키지
+            - title: 스크립트
+              url: /cli/v10/using-npm/scripts
+              description: npm이 "scripts" 필드를 처리하는 방법
+            - title: 워크스페이스
+              url: /cli/v10/using-npm/workspaces
+              description: 워크스페이스 작업
+            - title: 조직
+              url: /cli/v10/using-npm/orgs
+              description: 팀 및 조직 작업
+            - title: 의존성 선택자
+              url: /cli/v10/using-npm/dependency-selectors
+              description: 의존성 선택자 구문 및 쿼리
+            - title: 개발자
+              url: /cli/v10/using-npm/developers
+              description: 개발자 가이드
+            - title: 제거
+              url: /cli/v10/using-npm/removal
+              description: 깨끗이 정리하기
+            - title: 변경 로그
+              url: /cli/v10/using-npm/changelog
               description: 각 버전의 변경 로그 노트

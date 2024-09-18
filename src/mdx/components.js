@@ -1,16 +1,16 @@
 import React from 'react'
-import {Box, Heading, themeGet, Octicon} from '@primer/react'
+import { Box, Heading, themeGet, Octicon } from '@primer/react'
 import styled from 'styled-components'
-import {variant as styledVariant} from 'styled-system'
-import {LinkIcon} from '@primer/octicons-react'
+import { variant as styledVariant } from 'styled-system'
+import { LinkIcon } from '@primer/octicons-react'
 import textContent from 'react-addons-text-content'
-import {SCROLL_MARGIN_TOP} from '../constants'
+import { SCROLL_MARGIN_TOP } from '../constants'
 import usePage from '../hooks/use-page'
-import SiteLink, {LinkNoUnderline} from '../components/link'
+import SiteLink, { LinkNoUnderline } from '../components/link'
 import Code from './code'
 
-export {Code}
-export {default as Index} from './nav-hierarchy'
+export { Code }
+export { default as Index } from './nav-hierarchy'
 
 const required = (prop, name) => {
   if (!prop) {
@@ -26,6 +26,7 @@ const StyledHeading = styled(Heading)`
   margin-bottom: ${themeGet('space.3')};
   scroll-margin-top: ${SCROLL_MARGIN_TOP}px;
   line-height: ${themeGet('lineHeights.condensed')};
+  font-weight: bold;
 
   @media (hover: hover) {
     & .octicon-link {
@@ -39,9 +40,9 @@ const StyledHeading = styled(Heading)`
   }
 `
 
-const HeaderLink = ({autolink, children, ...props}) =>
+const HeaderLink = ({ autolink, children, ...props }) =>
   autolink ? (
-    <LinkNoUnderline {...props} sx={{color: 'inherit'}}>
+    <LinkNoUnderline {...props} sx={{ color: 'inherit' }}>
       {children}
       <Octicon
         icon={LinkIcon}
@@ -59,22 +60,22 @@ const HeaderLink = ({autolink, children, ...props}) =>
   )
 
 const Headings = {
-  Markdown: ({children, autolink = true, ...props}) => {
+  Markdown: ({ children, autolink = true, ...props }) => {
     const childArray = React.Children.toArray(children)
     const childLink =
       React.Children.count(children) > 1 && childArray[0].type?.name === 'Link' ? childArray.shift() : null
 
-    const {slugger} = usePage()
+    const { slugger } = usePage()
     const text = children ? textContent(children) : ''
     const id = text ? slugger.slug(text) : ''
     const linkProps = {
       autolink,
       'aria-label': `${text} permalink`.trim(),
-      ...(id ? {href: `#${id}`} : {}),
+      ...(id ? { href: `#${id}` } : {}),
     }
 
     return (
-      <StyledHeading {...(autolink && id ? {id} : {})} {...props}>
+      <StyledHeading {...(autolink && id ? { id } : {})} {...props}>
         {childLink ? (
           <React.Fragment>
             {childLink}
@@ -90,30 +91,27 @@ const Headings = {
       </StyledHeading>
     )
   },
-  h1: styled(StyledHeading).attrs({as: 'h1'})`
+  h1: styled(StyledHeading).attrs({ as: 'h1' })`
     padding-bottom: ${themeGet('space.2')};
     font-size: ${themeGet('fontSizes.6')};
     border-bottom: 1px solid ${themeGet('colors.border.default')};
     margin-top: 0;
   `,
-  h2: styled(StyledHeading).attrs({as: 'h2'})`
+  h2: styled(StyledHeading).attrs({ as: 'h2' })`
     padding-bottom: ${themeGet('space.2')};
     font-size: ${themeGet('fontSizes.4')};
     border-bottom: 1px solid ${themeGet('colors.border.default')};
-    font-weight: ${themeGet('fontWeights.semibold')};
   `,
-  h3: styled(StyledHeading).attrs({as: 'h3'})`
+  h3: styled(StyledHeading).attrs({ as: 'h3' })`
     font-size: ${themeGet('fontSizes.3')};
-    font-weight: ${themeGet('fontWeights.semibold')};
   `,
-  h4: styled(StyledHeading).attrs({as: 'h4'})`
+  h4: styled(StyledHeading).attrs({ as: 'h4' })`
     font-size: ${themeGet('fontSizes.2')};
-    font-weight: ${themeGet('fontWeights.semibold')};
   `,
-  h5: styled(StyledHeading).attrs({as: 'h5'})`
+  h5: styled(StyledHeading).attrs({ as: 'h5' })`
     font-size: ${themeGet('fontSizes.1')};
   `,
-  h6: styled(StyledHeading).attrs({as: 'h6'})`
+  h6: styled(StyledHeading).attrs({ as: 'h6' })`
     font-size: ${themeGet('fontSizes.1')};
     color: ${themeGet('colors.fg.muted')};
   `,
@@ -262,28 +260,28 @@ const StyledNote = styled.div`
   }
 
   ${styledVariant({
-    variants: {
-      info: {
-        borderColor: 'accent.muted',
-        bg: 'accent.subtle',
-      },
-      warning: {
-        borderColor: 'attention.muted',
-        bg: 'attention.subtle',
-      },
-      danger: {
-        borderColor: 'danger.muted',
-        bg: 'danger.subtle',
-      },
+  variants: {
+    info: {
+      borderColor: 'accent.muted',
+      bg: 'accent.subtle',
     },
-  })}
+    warning: {
+      borderColor: 'attention.muted',
+      bg: 'attention.subtle',
+    },
+    danger: {
+      borderColor: 'danger.muted',
+      bg: 'danger.subtle',
+    },
+  },
+})}
 `
 
-export const Note = ({variant = 'info', ...props}) => <StyledNote variant={variant} {...props} />
+export const Note = ({ variant = 'info', ...props }) => <StyledNote variant={variant} {...props} />
 
 export const Prompt = props => <Code prompt={true} {...props} />
 
-const RequiredImage = ({src, alt, ...props}) => <img src={required(src, 'src')} alt={required(alt, 'alt')} {...props} />
+const RequiredImage = ({ src, alt, ...props }) => <img src={required(src, 'src')} alt={required(alt, 'alt')} {...props} />
 
 export const Image = styled(RequiredImage)`
   max-width: 100%;
@@ -299,10 +297,10 @@ export const Screenshot = styled(RequiredImage)`
   display: block;
 `
 
-export const YouTube = ({id}) => (
+export const YouTube = ({ id }) => (
   <Box
     as="iframe"
-    sx={{aspectRatio: '16 / 9', width: '100%'}}
+    sx={{ aspectRatio: '16 / 9', width: '100%' }}
     title="YouTube video"
     src={`https://www.youtube.com/embed/${id}`}
     frameBorder="0"

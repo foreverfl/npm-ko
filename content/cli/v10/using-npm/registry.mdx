@@ -1,7 +1,7 @@
 ---
 title: registry
 section: 7
-description: The JavaScript Package Registry
+description: JavaScript 패키지 레지스트리
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/using-npm/registry.md
@@ -17,44 +17,44 @@ redirect_from:
   - /using-npm/registry
 ---
 
-### Description
+### 설명
 
-To resolve packages by name and version, npm talks to a registry website that implements the CommonJS Package Registry specification for reading package info.
+npm은 패키지 정보를 읽기 위해 CommonJS 패키지 레지스트리 사양을 구현하는 레지스트리 웹사이트와 통신하여 이름과 버전으로 패키지를 해결합니다.
 
-npm is configured to use the **npm public registry** at [https://registry.npmjs.org](https://registry.npmjs.org) by default. Use of the npm public registry is subject to terms of use available at [https://docs.npmjs.com/policies/terms](https://docs.npmjs.com/policies/terms).
+npm은 기본적으로 [https://registry.npmjs.org](https://registry.npmjs.org)에 있는 **npm 공개 레지스트리**를 사용하도록 구성되어 있습니다. npm 공개 레지스트리의 사용은 [https://docs.npmjs.com/policies/terms](https://docs.npmjs.com/policies/terms)에서 확인할 수 있는 이용 약관의 적용을 받습니다.
 
-You can configure npm to use any compatible registry you like, and even run your own registry. Use of someone else's registry may be governed by their terms of use.
+원하는 호환 가능한 레지스트리를 사용하도록 npm을 구성할 수 있으며, 심지어 자신만의 레지스트리를 운영할 수도 있습니다. 다른 사람의 레지스트리 사용은 해당 레지스트리의 이용 약관의 적용을 받을 수 있습니다.
 
-npm's package registry implementation supports several write APIs as well, to allow for publishing packages and managing user account information.
+npm의 패키지 레지스트리 구현은 패키지 발행과 사용자 계정 정보 관리를 위한 여러 쓰기 API도 지원합니다.
 
-The npm public registry is powered by a CouchDB database, of which there is a public mirror at [https://skimdb.npmjs.com/registry](https://skimdb.npmjs.com/registry).
+npm 공개 레지스트리는 CouchDB 데이터베이스로 구동되며, [https://skimdb.npmjs.com/registry](https://skimdb.npmjs.com/registry)에서 공개 미러를 확인할 수 있습니다.
 
-The registry URL used is determined by the scope of the package (see [`scope`](/cli/v10/using-npm/scope). If no scope is specified, the default registry is used, which is supplied by the [`registry` config](/cli/v10/using-npm/config#registry) parameter. See [`npm config`](/cli/v10/commands/npm-config), [`npmrc`](/cli/v10/configuring-npm/npmrc), and [`config`](/cli/v10/using-npm/config) for more on managing npm's configuration. Authentication configuration such as auth tokens and certificates are configured specifically scoped to an individual registry. See [Auth Related Configuration](/cli/v10/configuring-npm/npmrc#auth-related-configuration)
+사용되는 레지스트리 URL은 패키지의 범위에 따라 결정됩니다([`scope`](/cli/v10/using-npm/scope) 참조). 범위가 지정되지 않은 경우, [`registry` 설정](/cli/v10/using-npm/config#registry) 매개변수에 의해 제공되는 기본 레지스트리가 사용됩니다. npm 구성 관리에 대한 자세한 내용은 [`npm config`](/cli/v10/commands/npm-config), [`npmrc`](/cli/v10/configuring-npm/npmrc), 그리고 [`config`](/cli/v10/using-npm/config)를 참조하세요. 인증 토큰 및 인증서와 같은 인증 구성은 개별 레지스트리에 특별히 범위가 지정됩니다. [인증 관련 구성](/cli/v10/configuring-npm/npmrc#auth-related-configuration)을 참조하세요.
 
-When the default registry is used in a package-lock or shrinkwrap it has the special meaning of "the currently configured registry". If you create a lock file while using the default registry you can switch to another registry and npm will install packages from the new registry, but if you create a lock file while using a custom registry packages will be installed from that registry even after you change to another registry.
+기본 레지스트리가 package-lock 또는 shrinkwrap에서 사용될 때, 이는 "현재 구성된 레지스트리"라는 특별한 의미를 가집니다. 기본 레지스트리를 사용하는 동안 잠금 파일을 생성한 경우 다른 레지스트리로 전환할 수 있으며 npm은 새 레지스트리에서 패키지를 설치합니다. 하지만 사용자 정의 레지스트리를 사용하는 동안 잠금 파일을 생성한 경우, 다른 레지스트리로 변경한 후에도 해당 레지스트리에서 패키지가 설치됩니다.
 
-### Does npm send any information about me back to the registry?
+### npm이 레지스트리로 내 정보를 보내나요?
 
-Yes.
+네, 그렇습니다.
 
-When making requests of the registry npm adds two headers with information about your environment:
+레지스트리에 요청을 할 때 npm은 사용자 환경에 대한 정보가 포함된 두 개의 헤더를 추가합니다:
 
-- `Npm-Scope` – If your project is scoped, this header will contain its scope. In the future npm hopes to build registry features that use this information to allow you to customize your experience for your organization.
-- `Npm-In-CI` – Set to "true" if npm believes this install is running in a continuous integration environment, "false" otherwise. This is detected by looking for the following environment variables: `CI`, `TDDIUM`, `JENKINS_URL`, `bamboo.buildKey`. If you'd like to learn more you may find the [original PR](https://github.com/npm/npm-registry-client/pull/129) interesting. This is used to gather better metrics on how npm is used by humans, versus build farms.
+- `Npm-Scope` – 프로젝트가 범위가 지정된 경우, 이 헤더에는 해당 범위가 포함됩니다. 향후 npm은 이 정보를 사용하여 조직에 맞는 경험을 제공할 수 있는 레지스트리 기능을 구축할 계획입니다.
+- `Npm-In-CI` – npm이 이 설치가 지속적 통합 환경에서 실행 중이라고 판단하면 "true", 그렇지 않으면 "false"로 설정됩니다. 이는 다음 환경 변수를 확인하여 감지됩니다: `CI`, `TDDIUM`, `JENKINS_URL`, `bamboo.buildKey`. 자세히 알고 싶다면 [원본 PR](https://github.com/npm/npm-registry-client/pull/129)을 참조하시면 흥미로울 수 있습니다. 이는 npm이 사람에 의해 사용되는지, 빌드 팜에 의해 사용되는지에 대한 더 나은 메트릭을 수집하는 데 사용됩니다.
 
-The npm registry does not try to correlate the information in these headers with any authenticated accounts that may be used in the same requests.
+npm 레지스트리는 이러한 헤더의 정보를 동일한 요청에서 사용될 수 있는 인증된 계정과 연관시키려 하지 않습니다.
 
-### How can I prevent my package from being published in the official registry?
+### 패키지가 공식 레지스트리에 게시되는 것을 어떻게 방지할 수 있나요?
 
-Set `"private": true` in your `package.json` to prevent it from being published at all, or `"publishConfig":{"registry":"http://my-internal-registry.local"}` to force it to be published only to your internal/private registry.
+`package.json`에 `"private": true`를 설정하여 완전히 게시되는 것을 방지하거나, `"publishConfig":{"registry":"http://my-internal-registry.local"}`을 설정하여 내부/개인 레지스트리에만 게시되도록 강제할 수 있습니다.
 
-See [`package.json`](/cli/v10/configuring-npm/package-json) for more info on what goes in the package.json file.
+package.json 파일에 들어갈 내용에 대한 자세한 정보는 [`package.json`](/cli/v10/configuring-npm/package-json)을 참조하세요.
 
-### Where can I find my (and others') published packages?
+### 내 (그리고 다른 사람의) 게시된 패키지는 어디서 찾을 수 있나요?
 
 [https://www.npmjs.com/](https://www.npmjs.com/)
 
-### See also
+### 참조
 
 - [npm config](/cli/v10/commands/npm-config)
 - [config](/cli/v10/using-npm/config)

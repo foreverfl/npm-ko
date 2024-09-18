@@ -1,57 +1,57 @@
 ---
-title: Creating a new user account on the public registry
+title: 공개 레지스트리에 새 사용자 계정 만들기
 ---
 
-If you do not already have an npm user account, you can create an account in order to share and download Javascript packages on the public registry.
+npm 사용자 계정이 아직 없다면, 공개 레지스트리에서 JavaScript 패키지를 공유하고 다운로드하기 위해 계정을 만들 수 있습니다.
 
-## Creating an account on the website
+## 웹사이트에서 계정 만들기
 
-1. Go to the [npm signup page](https://www.npmjs.com/signup)
+1. [npm 가입 페이지](https://www.npmjs.com/signup)로 이동합니다.
 
-2. In the user signup form, type in the fields:
+2. 사용자 가입 양식에서 다음 필드를 입력합니다:
 
-   - **Username:** The username that will be displayed when you publish packages or interact with other npm users on npmjs.com. Your username must be lower case, and can contain hyphens and numerals.
-   - **Email address:** Your public email address will be added to the metadata of your packages and will be visible to anyone who downloads your packages. We will also send email to this account when you update packages, as well as occasional product updates and information.
-   - **Password**: Your password must meet [our password guidelines](creating-a-strong-password).
+   - **사용자 이름:** 패키지를 게시하거나 npmjs.com에서 다른 npm 사용자와 상호 작용할 때 표시될 사용자 이름입니다. 사용자 이름은 소문자여야 하며 하이픈과 숫자를 포함할 수 있습니다.
+   - **이메일 주소:** 공개 이메일 주소는 패키지의 메타데이터에 추가되며 패키지를 다운로드하는 모든 사람에게 표시됩니다. 또한 패키지를 업데이트할 때와 가끔 있는 제품 업데이트 및 정보를 이 계정으로 이메일을 보낼 것입니다.
+   - **비밀번호**: 비밀번호는 [비밀번호 가이드라인](creating-a-strong-password)을 충족해야 합니다.
 
-   <Screenshot src="/getting-started/setting-up-your-npm-user-account/signup-form.png" alt="Screenshot of the signup form" />
+   <Screenshot src="/getting-started/setting-up-your-npm-user-account/signup-form.png" alt="가입 양식의 스크린샷" />
 
-3. Read the [End User License Agreement](https://www.npmjs.com/policies/terms) and [Privacy Policy](https://www.npmjs.com/policies/privacy), and indicate that you agree to them.
+3. [최종 사용자 라이선스 계약](https://www.npmjs.com/policies/terms)과 [개인정보 보호정책](https://www.npmjs.com/policies/privacy)을 읽고 동의한다는 표시를 합니다.
 
-   <Screenshot src="/getting-started/setting-up-your-npm-user-account/privacy-policy.png" alt="Screenshot of the privacy policy" />
+   <Screenshot src="/getting-started/setting-up-your-npm-user-account/privacy-policy.png" alt="개인정보 보호정책의 스크린샷" />
 
-4. Click **Create An Account**.
+4. **계정 만들기**를 클릭합니다.
 
-   <Screenshot src="/getting-started/setting-up-your-npm-user-account/create-account-button.png" alt="Screenshot of the create account button" />
-
-<Note>
-
-**Note:** After signing up for an npm account, you will receive an account verification email. You must verify your email address in order to publish packages to the registry.
-
-</Note>
-
-## Testing your new account with npm login
-
-Use the [`npm login`](https://docs.npmjs.com/cli/adduser) command to test logging in to your new account.
+   <Screenshot src="/getting-started/setting-up-your-npm-user-account/create-account-button.png" alt="계정 만들기 버튼의 스크린샷" />
 
 <Note>
 
-**Note:** If you misspell your existing account username when you log in with the `npm login` command, you will create a new account with the misspelled name. For help with accidentally-created accounts, [contact npm Support](https://www.npmjs.com/support).
+**참고:** npm 계정에 가입한 후 계정 확인 이메일을 받게 됩니다. 레지스트리에 패키지를 게시하려면 이메일 주소를 확인해야 합니다.
 
 </Note>
 
-1. On the command line, type the following command:
+## npm login으로 새 계정 테스트하기
+
+[`npm login`](https://docs.npmjs.com/cli/adduser) 명령을 사용하여 새 계정으로 로그인을 테스트합니다.
+
+<Note>
+
+**참고:** `npm login` 명령으로 로그인할 때 기존 계정 사용자 이름을 잘못 입력하면, 잘못 입력된 이름으로 새 계정이 생성됩니다. 실수로 만들어진 계정에 대한 도움이 필요하면 [npm 지원팀에 문의](https://www.npmjs.com/support)하세요.
+
+</Note>
+
+1. 명령줄에서 다음 명령을 입력합니다:
 
    ```
    npm login
    ```
 
-2. When prompted, enter your username, password, and email address.
-3. If you have [two-factor authentication](about-two-factor-authentication) enabled, when prompted, enter a one-time password.
-4. To test that you have successfully logged in, type:
+2. 메시지가 표시되면 사용자 이름, 비밀번호, 이메일 주소를 입력합니다.
+3. [2단계 인증](about-two-factor-authentication)이 활성화되어 있다면, 메시지가 표시될 때 일회용 비밀번호를 입력합니다.
+4. 성공적으로 로그인했는지 테스트하려면 다음을 입력합니다:
 
    ```
    npm whoami
    ```
 
-   Your npm username should be displayed.
+   npm 사용자 이름이 표시되어야 합니다.

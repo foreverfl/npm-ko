@@ -3,7 +3,7 @@ import fs from 'fs'
 import remarkGfm from 'remark-gfm'
 import remarkFm from 'remark-frontmatter'
 
-const {NODE_ENV, GATSBY_CONTENT_ALLOW, GATSBY_CONTENT_IGNORE, GATSBY_CONTENT_DIR = 'content'} = process.env
+const { NODE_ENV, GATSBY_CONTENT_ALLOW, GATSBY_CONTENT_IGNORE, GATSBY_CONTENT_DIR = 'content' } = process.env
 const DEV = NODE_ENV === 'development'
 const CONTENT_DIR = path.resolve(GATSBY_CONTENT_DIR)
 
@@ -38,7 +38,7 @@ const getContentOptions = () => {
         }
         return acc
       },
-      {include: [], ignore: []},
+      { include: [], ignore: [] },
     )
 
   const ignoreGlobs = paths.ignore.map(p => path.join('**', p, '**'))
@@ -58,9 +58,9 @@ const config = {
     title: 'npm Docs',
     shortName: 'npm',
     description: 'Documentation for the npm registry, website, and command-line interface',
-    lang: 'en',
+    lang: 'ko',
     imageUrl: 'https://user-images.githubusercontent.com/29712634/81721690-e2fb5d80-9445-11ea-8602-4b2294c964f3.png',
-    repositoryUrl: 'https://github.com/npm/documentation',
+    repositoryUrl: 'https://github.com/foreverfl/npm-ko',
   },
   flags: {
     DEV_SSR: !!process.env.GATSBY_DEV_SSR,

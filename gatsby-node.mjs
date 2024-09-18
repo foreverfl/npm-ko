@@ -1,51 +1,51 @@
-import {join, relative} from 'path'
-import {Octokit as CoreOctokit} from '@octokit/rest'
-import {throttling} from '@octokit/plugin-throttling'
-import {retry} from '@octokit/plugin-retry'
+import { join, relative } from 'path'
+import { Octokit as CoreOctokit } from '@octokit/rest'
+import { throttling } from '@octokit/plugin-throttling'
+import { retry } from '@octokit/plugin-retry'
 import webpackConfig from './webpack.config.js'
 
 const CI = !!process.env.CI
 const CWD = process.cwd()
 const SRC = join(CWD, 'src')
-const REPO_URL = 'https://github.com/npm/documentation'
+const REPO_URL = 'https://github.com/foreverfl/npm-ko';
 const NWO = new URL(REPO_URL).pathname.slice(1)
 const REPO_BRANCH = 'main'
 const TEST_CONTRIBUTORS = [
   {
-    author: {login: 'mona'},
-    commit: {author: {date: new Date('2023-03-21').toJSON()}},
+    author: { login: 'mona' },
+    commit: { author: { date: new Date('2023-03-21').toJSON() } },
     html_url: REPO_URL,
   },
 ]
 
-const createOctokit = ({reporter}) => {
+const createOctokit = ({ reporter }) => {
   const Octokit = CoreOctokit.plugin(throttling).plugin(retry)
   return new Octokit({
     log: {
-      debug: () => {},
+      debug: () => { },
       info: reporter.info,
       warn: reporter.warn,
       error: reporter.error,
     },
     auth: process.env.GITHUB_TOKEN,
     throttle: {
-      onRateLimit: (retryAfter, options, {log}, retryCount) => {
+      onRateLimit: (retryAfter, options, { log }, retryCount) => {
         log.warn(`Request quota exhausted for request ${options.method} ${options.url}`)
         if (retryCount < 2) {
           log.info(`Retrying after ${retryAfter} seconds`)
           return true
         }
       },
-      onSecondaryRateLimit: (_, options, {log}) => {
+      onSecondaryRateLimit: (_, options, { log }) => {
         log.warn(`SecondaryRateLimit detected for request ${options.method} ${options.url}`)
       },
     },
   })
 }
 
-export const onCreateNode = ({node, actions, getNode}) => {
+export const onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === 'Mdx') {
-    const {name, relativeDirectory: dir} = getNode(node.parent)
+    const { name, relativeDirectory: dir } = getNode(node.parent)
 
     // These paths are unchanged:
     // - directory indexes
@@ -64,7 +64,7 @@ export const onCreateNode = ({node, actions, getNode}) => {
   }
 }
 
-export const onCreateWebpackConfig = ({stage, actions}) => {
+export const onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig({
     ...webpackConfig,
   })
@@ -76,7 +76,7 @@ export const onCreateWebpackConfig = ({stage, actions}) => {
   }
 }
 
-export const createSchemaCustomization = ({actions: {createTypes}}) => {
+export const createSchemaCustomization = ({ actions: { createTypes } }) => {
   createTypes(`
     type Mdx implements Node {
       frontmatter: MdxFrontmatter
@@ -97,7 +97,7 @@ export const createSchemaCustomization = ({actions: {createTypes}}) => {
   `)
 }
 
-export const createPages = async ({graphql, actions, reporter}) => {
+export const createPages = async ({ graphql, actions, reporter }) => {
   const response = await graphql(`
     {
       allMdx {
@@ -135,7 +135,7 @@ export const createPages = async ({graphql, actions, reporter}) => {
     return
   }
 
-  const octokit = createOctokit({reporter})
+  const octokit = createOctokit({ reporter })
 
   // Turn every MDX file into a page.
   return Promise.all(
@@ -146,7 +146,7 @@ export const createPages = async ({graphql, actions, reporter}) => {
         node.frontmatter.redirect_from ||= []
         node.tableOfContents ||= {}
         node.tableOfContents.items ||= []
-        return await createPage(node, {actions, reporter, octokit})
+        return await createPage(node, { actions, reporter, octokit })
       } catch (err) {
         reporter.panic(`Error creating page: ${JSON.stringify(node, null, 2)}`, err)
       }
@@ -157,13 +157,13 @@ export const createPages = async ({graphql, actions, reporter}) => {
 const createPage = async (
   {
     id,
-    internal: {contentFilePath},
-    fields: {slug},
+    internal: { contentFilePath },
+    fields: { slug },
     frontmatter = {},
     tableOfContents = {},
-    parent: {relativeDirectory, name: parentName},
+    parent: { relativeDirectory, name: parentName },
   },
-  {actions, reporter, octokit},
+  { actions, reporter, octokit },
 ) => {
   const path = relative(CWD, contentFilePath)
   // sites can programmatically override slug, that takes priority
@@ -181,7 +181,7 @@ const createPage = async (
   // have any editable content
   if (frontmatter.edit_on_github !== false) {
     context.editUrl = getRepo(path, frontmatter).replace(`https://github.com/{nwo}/edit/{branch}/{path}`)
-    Object.assign(context, await fetchContributors(path, frontmatter, {reporter, octokit}))
+    Object.assign(context, await fetchContributors(path, frontmatter, { reporter, octokit }))
   }
 
   actions.createPage({
@@ -209,7 +209,7 @@ const createPage = async (
   }
 }
 
-const getTableOfConents = ({items}) => {
+const getTableOfConents = ({ items }) => {
   // Fix some old CLI pages which have mismatched headings at the top level.
   // All top level headings should be the same level.
   const tableOfContents = items.reduce((acc, item) => {
@@ -230,8 +230,8 @@ const getRepo = (path, fm) => {
   const result = {
     nwo: NWO,
     branch: REPO_BRANCH,
-    ...(fm.github_repo ? {nwo: fm.github_repo} : {}),
-    ...(fm.github_branch ? {branch: fm.github_branch} : {}),
+    ...(fm.github_repo ? { nwo: fm.github_repo } : {}),
+    ...(fm.github_branch ? { branch: fm.github_branch } : {}),
     path: fm.github_path || path,
   }
   const [owner, repo] = result.nwo.split('/')
@@ -242,7 +242,7 @@ const getRepo = (path, fm) => {
 }
 
 let warnOnNoContributors = true
-const fetchContributors = async (path, fm, {reporter, octokit}) => {
+const fetchContributors = async (path, fm, { reporter, octokit }) => {
   const noAuth = (await octokit.auth()).type === 'unauthenticated'
   if (noAuth) {
     const msg = `Cannot fetch contributors without GitHub authentication.`
@@ -260,14 +260,14 @@ const fetchContributors = async (path, fm, {reporter, octokit}) => {
   try {
     const repo = getRepo(path, fm)
     const resp = noAuth
-      ? {data: TEST_CONTRIBUTORS}
+      ? { data: TEST_CONTRIBUTORS }
       : await octokit.rest.repos.listCommits({
-          repo: repo.repo,
-          owner: repo.owner,
-          path: repo.path,
-          sha: repo.branch,
-          per_page: 100,
-        })
+        repo: repo.repo,
+        owner: repo.owner,
+        path: repo.path,
+        sha: repo.branch,
+        per_page: 100,
+      })
 
     const contributors = new Set()
     let latestCommit = null

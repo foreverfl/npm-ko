@@ -1,7 +1,7 @@
 ---
 title: npm-ls
 section: 1
-description: List installed packages
+description: 설치된 패키지 나열
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/commands/npm-ls.md
@@ -35,7 +35,7 @@ redirect_from:
   - /commands/npm-ls
 ---
 
-### Synopsis
+### 개요
 
 ```bash
 npm ls <package-spec>
@@ -43,13 +43,13 @@ npm ls <package-spec>
 alias: list
 ```
 
-### Description
+### 설명
 
-This command will print to stdout all the versions of packages that are installed, as well as their dependencies when `--all` is specified, in a tree structure.
+이 명령은 설치된 모든 패키지의 버전과 `--all`이 지정된 경우 해당 종속성을 트리 구조로 stdout에 출력합니다.
 
-Note: to get a "bottoms up" view of why a given package is included in the tree at all, use [`npm explain`](/cli/v10/commands/npm-explain).
+참고: 주어진 패키지가 트리에 포함된 이유에 대한 "아래에서 위로(bottoms up)" 보기를 얻으려면 [`npm explain`](/cli/v10/commands/npm-explain)을 사용하세요.
 
-Positional arguments are `name@version-range` identifiers, which will limit the results to only the paths to the packages named. Note that nested packages will _also_ show the paths to the specified packages. For example, running `npm ls promzard` in npm's source tree will show:
+위치 인수는 `name@version-range` 식별자로, 결과를 지정된 패키지로의 경로만으로 제한합니다. 중첩된 패키지도 지정된 패키지로의 경로를 보여줍니다. 예를 들어, npm의 소스 트리에서 `npm ls promzard`를 실행하면 다음과 같이 표시됩니다:
 
 ```bash
 npm@10.8.3 /path/to/npm
@@ -57,180 +57,181 @@ npm@10.8.3 /path/to/npm
   └── promzard@0.1.5
 ```
 
-It will print out extraneous, missing, and invalid packages.
+외부, 누락 및 잘못된 패키지를 출력합니다.
 
-If a project specifies git urls for dependencies these are shown in parentheses after the `name@version` to make it easier for users to recognize potential forks of a project.
+프로젝트가 종속성에 대해 git url을 지정하는 경우, 사용자가 프로젝트의 잠재적 포크를 쉽게 인식할 수 있도록 `name@version` 뒤에 괄호 안에 표시됩니다.
 
-The tree shown is the logical dependency tree, based on package dependencies, not the physical layout of your `node_modules` folder.
+표시되는 트리는 `node_modules` 폴더의 물리적 레이아웃이 아닌 패키지 종속성을 기반으로 한 논리적 종속성 트리입니다.
 
-When run as `ll` or `la`, it shows extended information by default.
+`ll` 또는 `la`로 실행하면 기본적으로 확장된 정보를 표시합니다.
 
-### Note: Design Changes Pending
+### 참고: 설계 변경 예정
 
-The `npm ls` command's output and behavior made a _ton_ of sense when npm created a `node_modules` folder that naively nested every dependency. In such a case, the logical dependency graph and physical tree of packages on disk would be roughly identical.
+`npm ls` 명령의 출력과 동작은 npm이 모든 종속성을 단순하게 중첩한 `node_modules` 폴더를 만들었을 때 _매우_ 의미가 있었습니다. 이 경우 논리적 종속성 그래프와 디스크의 물리적 패키지 트리가 대략적으로 동일했습니다.
 
-With the advent of automatic install-time deduplication of dependencies in npm v3, the `ls` output was modified to display the logical dependency graph as a tree structure, since this was more useful to most users. However, without using `npm ls -l`, it became impossible to show _where_ a package was actually installed much of the time!
+npm v3에서 설치 시 종속성의 자동 중복 제거가 도입되면서 `ls` 출력은 대부분의 사용자에게 더 유용한 논리적 종속성 그래프를 트리 구조로 표시하도록 수정되었습니다. 그러나 `npm ls -l`을 사용하지 않으면 패키지가 실제로 어디에 설치되었는지 보여주는 것이 대부분의 경우 불가능해졌습니다!
 
-With the advent of automatic installation of `peerDependencies` in npm v7, this gets even more curious, as `peerDependencies` are logically "underneath" their dependents in the dependency graph, but are always physically at or above their location on disk.
+npm v7에서 `peerDependencies`의 자동 설치가 도입되면서 이는 더욱 흥미로워집니다. `peerDependencies`는 논리적으로 종속성 그래프에서 종속 항목의 "아래"에 있지만 디스크에서는 항상 해당 위치에 있거나 그 위에 있습니다.
 
-Also, in the years since npm got an `ls` command (in version 0.0.2!), dependency graphs have gotten much larger as a general rule. Therefore, in order to avoid dumping an excessive amount of content to the terminal, `npm ls` now only shows the _top_ level dependencies, unless `--all` is provided.
+또한 npm이 `ls` 명령을 얻은 이후(버전 0.0.2에서!) 종속성 그래프는 일반적으로 훨씬 더 커졌습니다. 따라서 터미널에 과도한 양의 내용을 덤프하지 않기 위해 `npm ls`는 이제 `--all`이 제공되지 않는 한 _최상위_ 레벨 종속성만 표시합니다.
 
-A thorough re-examination of the use cases, intention, behavior, and output of this command, is currently underway. Expect significant changes to at least the default human-readable `npm ls` output in npm v8.
+이 명령의 사용 사례, 의도, 동작 및 출력에 대한 철저한 재검토가 현재 진행 중입니다. npm v8에서는 적어도 기본 사람이 읽을 수 있는 `npm ls` 출력에 상당한 변경이 있을 것으로 예상됩니다.
 
-### Configuration
+### 구성
 
 #### `all`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-When running `npm outdated` and `npm ls`, setting `--all` will show all outdated or installed packages, rather than only those directly depended upon by the current project.
+`npm outdated`와 `npm ls`를 실행할 때 `--all`을 설정하면 현재 프로젝트에 직접 의존하는 패키지만이 아닌 모든 오래된 또는 설치된 패키지를 표시합니다.
 
 #### `json`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-Whether or not to output JSON data, rather than the normal output.
+일반 출력 대신 JSON 데이터를 출력할지 여부입니다.
 
-- In `npm pkg set` it enables parsing set values with JSON.parse() before saving them to your `package.json`.
+- `npm pkg set`에서는 설정 값을 `package.json`에 저장하기 전에 JSON.parse()로 파싱하는 것을 활성화합니다.
 
-Not supported by all npm commands.
+모든 npm 명령에서 지원되지는 않습니다.
 
 #### `long`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-Show extended information in `ls`, `search`, and `help-search`.
+`ls`, `search`, `help-search`에서 확장된 정보를 표시합니다.
 
 #### `parseable`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-Output parseable results from commands that write to standard output. For `npm search`, this will be tab-separated table format.
+표준 출력에 쓰는 명령에서 파싱 가능한 결과를 출력합니다. `npm search`의 경우 탭으로 구분된 테이블 형식이 됩니다.
 
 #### `global`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-Operates in "global" mode, so that packages are installed into the `prefix` folder instead of the current working directory. See [folders](/cli/v10/configuring-npm/folders) for more on the differences in behavior.
+"전역" 모드로 작동하여 패키지를 현재 작업 디렉토리 대신 `prefix` 폴더에 설치합니다. 동작의 차이점에 대한 자세한 내용은 [folders](/cli/v10/configuring-npm/folders)를 참조하세요.
 
-- packages are installed into the `{prefix}/lib/node_modules` folder, instead of the current working directory.
-- bin files are linked to `{prefix}/bin`
-- man pages are linked to `{prefix}/share/man`
+- 패키지는 현재 작업 디렉토리 대신 `{prefix}/lib/node_modules` 폴더에 설치됩니다.
+- bin 파일은 `{prefix}/bin`에 연결됩니다
+- man 페이지는 `{prefix}/share/man`에 연결됩니다
 
 #### `depth`
 
-- Default: `Infinity` if `--all` is set, otherwise `1`
-- Type: null or Number
+- 기본값: `--all`이 설정된 경우 `Infinity`, 그렇지 않으면 `1`
+- 유형: null 또는 Number
 
-The depth to go when recursing packages for `npm ls`.
+`npm ls`에 대한 패키지 재귀 시 깊이입니다.
 
-If not set, `npm ls` will show only the immediate dependencies of the root project. If `--all` is set, then npm will show all dependencies by default.
+설정되지 않은 경우 `npm ls`는 루트 프로젝트의 직접적인 종속성만 표시합니다. `--all`이 설정된 경우 npm은 기본적으로 모든 종속성을 표시합니다.
 
 #### `omit`
 
-- Default: 'dev' if the `NODE_ENV` environment variable is set to 'production', otherwise empty.
-- Type: "dev", "optional", or "peer" (can be set multiple times)
+- 기본값: `NODE_ENV` 환경 변수가 'production'으로 설정된 경우 'dev', 그렇지 않으면 비어 있음.
+- 유형: "dev", "optional", 또는 "peer" (여러 번 설정 가능)
 
-Dependency types to omit from the installation tree on disk.
+디스크의 설치 트리에서 생략할 종속성 유형입니다.
 
-Note that these dependencies _are_ still resolved and added to the `package-lock.json` or `npm-shrinkwrap.json` file. They are just not physically installed on disk.
+이러한 종속성은 여전히 해결되어 `package-lock.json` 또는 `npm-shrinkwrap.json` 파일에 추가됩니다. 단지 디스크에 물리적으로 설치되지 않을 뿐입니다.
 
-If a package type appears in both the `--include` and `--omit` lists, then it will be included.
+패키지 유형이 `--include`와 `--omit` 목록 모두에 나타나면 포함됩니다.
 
-If the resulting omit list includes `'dev'`, then the `NODE_ENV` environment variable will be set to `'production'` for all lifecycle scripts.
+결과 생략 목록에 `'dev'`가 포함되면 모든 수명 주기 스크립트에 대해 `NODE_ENV` 환경 변수가 `'production'`으로 설정됩니다.
 
 #### `include`
 
-- Default:
-- Type: "prod", "dev", "optional", or "peer" (can be set multiple times)
+- 기본값:
+- 유형: "prod", "dev", "optional", 또는 "peer" (여러 번 설정 가능)
 
-Option that allows for defining which types of dependencies to install.
+설치할 종속성 유형을 정의할 수 있는 옵션입니다.
 
-This is the inverse of `--omit=<type>`.
+이는 `--omit=<type>`의 반대입니다.
 
-Dependency types specified in `--include` will not be omitted, regardless of the order in which omit/include are specified on the command-line.
+`--include`에 지정된 종속성 유형은 명령줄에서 생략/포함이 지정된 순서에 관계없이 생략되지 않습니다.
 
 #### `link`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-Used with `npm ls`, limiting output to only those packages that are linked.
+`npm ls`와 함께 사용되며, 출력을 링크된 패키지로만 제한합니다.
 
 #### `package-lock-only`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-If set to true, the current operation will only use the `package-lock.json`, ignoring `node_modules`.
+true로 설정하면 현재 작업은 `node_modules`를 무시하고 `package-lock.json`만 사용합니다.
 
-For `update` this means only the `package-lock.json` will be updated, instead of checking `node_modules` and downloading dependencies.
+`update`의 경우 이는 `node_modules`를 확인하고 종속성을 다운로드하는 대신 `package-lock.json`만 업데이트됨을 의미합니다.
 
-For `list` this means the output will be based on the tree described by the `package-lock.json`, rather than the contents of `node_modules`.
+`list`의 경우 이는 출력이 `node_modules`의 내용 대신 `package-lock.json`에 설명된 트리를 기반으로 함을 의미합니다.
 
 #### `unicode`
 
-- Default: false on windows, true on mac/unix systems with a unicode locale, as defined by the `LC_ALL`, `LC_CTYPE`, or `LANG` environment variables.
-- Type: Boolean
+- 기본값: 윈도우에서는 false, `LC_ALL`, `LC_CTYPE`, 또는 `LANG` 환경 변수로 정의된 유니코드 로케일이 있는 mac/unix 시스템에서는 true.
+- 유형: Boolean
 
-When set to true, npm uses unicode characters in the tree output. When false, it uses ascii characters instead of unicode glyphs.
+true로 설정하면 npm은 트리 출력에 유니코드 문자를 사용합니다. false일 때는 유니코드 글리프 대신 ascii 문자를 사용합니다.
 
 #### `workspace`
 
-- Default:
-- Type: String (can be set multiple times)
+- 기본값:
+- 유형: String (여러 번 설정 가능)
 
-Enable running a command in the context of the configured workspaces of the current project while filtering by running only the workspaces defined by this configuration option.
+현재 프로젝트의 구성된 작업 공간의 컨텍스트에서 명령을 실행하되 이 구성 옵션에 의해 정의된 작업 공간만 실행하도록 필터링합니다.
 
-Valid values for the `workspace` config are either:
+`workspace` 구성에 대한 유효한 값은 다음과 같습니다:
 
-- Workspace names
-- Path to a workspace directory
-- Path to a parent workspace directory (will result in selecting all workspaces within that folder)
+- 작업 공간 이름
+- 작업 공간 디렉토리 경로
+- 상위 작업 공간 디렉토리 경로 (해당 폴더 내의 모든 작업 공간 선택)
 
-When set for the `npm init` command, this may be set to the folder of a workspace which does not yet exist, to create the folder and set it up as a brand new workspace within the project.
+`npm init` 명령에 대해 설정된 경우, 아직 존재하지 않는 작업 공간의 폴더로 설정하여 폴더를 생성하고 프로젝트 내의 새로운 작업 공간으로 설정할 수 있습니다.
 
-This value is not exported to the environment for child processes.
+이 값은 하위 프로세스에 대한 환경으로 내보내지지 않습니다.
 
 #### `workspaces`
 
-- Default: null
-- Type: null or Boolean
+- 기본값: null
+- 유형: null 또는 Boolean
 
-Set to true to run the command in the context of **all** configured workspaces.
+true로 설정하면 구성된 **모든** 작업 공간의 컨텍스트에서 명령을 실행합니다.
 
-Explicitly setting this to false will cause commands like `install` to ignore workspaces altogether. When not set explicitly:
+명시적으로 false로 설정하면 `install`과 같은 명령이 작업 공간을 완전히 무시하게 됩니다. 명시적으로 설정되지 않은 경우:
 
-- Commands that operate on the `node_modules` tree (install, update, etc.) will link workspaces into the `node_modules` folder. - Commands that do other things (test, exec, publish, etc.) will operate on the root project, _unless_ one or more workspaces are specified in the `workspace` config.
+- `node_modules` 트리에서 작동하는 명령(install, update 등)은 작업 공간을 `node_modules` 폴더에 연결합니다.
+- 다른 작업을 수행하는 명령(test, exec, publish 등)은 `workspace` 구성에 하나 이상의 작업 공간이 지정되지 않는 한 루트 프로젝트에서 작동합니다.
 
-This value is not exported to the environment for child processes.
+이 값은 하위 프로세스에 대한 환경으로 내보내지지 않습니다.
 
 #### `include-workspace-root`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-Include the workspace root when workspaces are enabled for a command.
+명령에 대해 작업 공간이 활성화된 경우 작업 공간 루트를 포함합니다.
 
-When false, specifying individual workspaces via the `workspace` config, or all workspaces via the `workspaces` flag, will cause npm to operate only on the specified workspaces, and not on the root project.
+false일 때 `workspace` 구성을 통해 개별 작업 공간을 지정하거나 `workspaces` 플래그를 통해 모든 작업 공간을 지정하면 npm이 지정된 작업 공간에서만 작동하고 루트 프로젝트에서는 작동하지 않습니다.
 
-This value is not exported to the environment for child processes.
+이 값은 하위 프로세스에 대한 환경으로 내보내지지 않습니다.
 
 #### `install-links`
 
-- Default: false
-- Type: Boolean
+- 기본값: false
+- 유형: Boolean
 
-When set file: protocol dependencies will be packed and installed as regular dependencies instead of creating a symlink. This option has no effect on workspaces.
+설정되면 file: 프로토콜 종속성이 심볼릭 링크를 생성하는 대신 일반 종속성으로 패킹되어 설치됩니다. 이 옵션은 작업 공간에는 영향을 미치지 않습니다.
 
-### See Also
+### 참조
 
-- [package spec](/cli/v10/using-npm/package-spec)
+- [패키지 스펙](/cli/v10/using-npm/package-spec)
 - [npm explain](/cli/v10/commands/npm-explain)
 - [npm config](/cli/v10/commands/npm-config)
 - [npmrc](/cli/v10/configuring-npm/npmrc)

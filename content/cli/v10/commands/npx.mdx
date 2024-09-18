@@ -1,7 +1,7 @@
 ---
 title: npx
 section: 1
-description: Run a command from a local or remote npm package
+description: 로컬 또는 원격 npm 패키지에서 명령 실행
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/commands/npx.md
@@ -21,7 +21,7 @@ redirect_from:
   - /commands/npx
 ---
 
-### Synopsis
+### 개요
 
 ```bash
 npx -- <pkg>[@<version>] [args...]
@@ -30,102 +30,102 @@ npx -c '<cmd> [args...]'
 npx --package=foo -c '<cmd> [args...]'
 ```
 
-### Description
+### 설명
 
-This command allows you to run an arbitrary command from an npm package (either one installed locally, or fetched remotely), in a similar context as running it via `npm run`.
+이 명령을 사용하면 npm 패키지(로컬에 설치되었거나 원격에서 가져온)에서 임의의 명령을 `npm run`을 통해 실행하는 것과 유사한 context에서 실행할 수 있습니다.
 
-Whatever packages are specified by the `--package` option will be provided in the `PATH` of the executed command, along with any locally installed package executables. The `--package` option may be specified multiple times, to execute the supplied command in an environment where all specified packages are available.
+`--package` 옵션으로 지정된 모든 패키지는 실행된 명령의 `PATH`에 제공되며, 로컬에 설치된 패키지 실행 파일도 함께 제공됩니다. `--package` 옵션은 여러 번 지정할 수 있으며, 지정된 모든 패키지를 사용할 수 있는 환경에서 제공된 명령을 실행합니다.
 
-If any requested packages are not present in the local project dependencies, then they are installed to a folder in the npm cache, which is added to the `PATH` environment variable in the executed process. A prompt is printed (which can be suppressed by providing either `--yes` or `--no`).
+요청된 패키지가 로컬 프로젝트 종속성에 없는 경우, npm 캐시의 폴더에 설치되며 이 폴더는 실행된 프로세스의 `PATH` 환경 변수에 추가됩니다. 프롬프트가 출력되며 (`--yes` 또는 `--no`를 제공하여 이를 생략할 수 있습니다).
 
-Package names provided without a specifier will be matched with whatever version exists in the local project. Package names with a specifier will only be considered a match if they have the exact same name and version as the local dependency.
+지정자 없이 제공된 패키지 이름은 로컬 프로젝트에 존재하는 버전과 일치합니다. 지정자가 있는 패키지 이름은 로컬 종속성과 정확히 동일한 이름과 버전을 가진 경우에만 일치로 간주됩니다.
 
-If no `-c` or `--call` option is provided, then the positional arguments are used to generate the command string. If no `--package` options are provided, then npm will attempt to determine the executable name from the package specifier provided as the first positional argument according to the following heuristic:
+`-c` 또는 `--call` 옵션이 제공되지 않으면 위치 인수를 사용하여 명령 문자열을 생성합니다. `--package` 옵션이 제공되지 않으면 npm은 다음 휴리스틱에 따라 첫 번째 위치 인수로 제공된 패키지 지정자에서 실행 파일 이름을 결정하려고 시도합니다:
 
-- If the package has a single entry in its `bin` field in `package.json`, or if all entries are aliases of the same command, then that command will be used.
-- If the package has multiple `bin` entries, and one of them matches the unscoped portion of the `name` field, then that command will be used.
-- If this does not result in exactly one option (either because there are no bin entries, or none of them match the `name` of the package), then `npm exec` exits with an error.
+- 패키지의 `package.json`에 `bin` 필드에 단일 항목이 있거나 모든 항목이 동일한 명령의 별칭인 경우 해당 명령이 사용됩니다.
+- 패키지에 여러 `bin` 항목이 있고 그 중 하나가 `name` 필드의 범위가 지정되지 않은 부분과 일치하는 경우 해당 명령이 사용됩니다.
+- 이것이 정확히 하나의 옵션으로 결과가 나오지 않으면 (bin 항목이 없거나 패키지의 `name`과 일치하는 것이 없기 때문에) `npm exec`는 오류와 함께 종료됩니다.
 
-To run a binary _other than_ the named binary, specify one or more `--package` options, which will prevent npm from inferring the package from the first command argument.
+명명된 바이너리 _이외의_ 바이너리를 실행하려면 하나 이상의 `--package` 옵션을 지정하세요. 이렇게 하면 npm이 첫 번째 명령 인수에서 패키지를 추론하는 것을 방지합니다.
 
 ### `npx` vs `npm exec`
 
-When run via the `npx` binary, all flags and options _must_ be set prior to any positional arguments. When run via `npm exec`, a double-hyphen `--` flag can be used to suppress npm's parsing of switches and options that should be sent to the executed command.
+`npx` 바이너리를 통해 실행할 때는 모든 플래그와 옵션을 위치 인수 _이전에_ 설정해야 합니다. `npm exec`를 통해 실행할 때는 이중 하이픈 `--` 플래그를 사용하여 실행된 명령으로 전송되어야 하는 스위치와 옵션의 npm 파싱을 억제할 수 있습니다.
 
-For example:
+예를 들어:
 
 ```
 $ npx foo@latest bar --package=@npmcli/foo
 ```
 
-In this case, npm will resolve the `foo` package name, and run the following command:
+이 경우 npm은 `foo` 패키지 이름을 해결하고 다음 명령을 실행합니다:
 
 ```
 $ foo bar --package=@npmcli/foo
 ```
 
-Since the `--package` option comes _after_ the positional arguments, it is treated as an argument to the executed command.
+`--package` 옵션이 위치 인수 _뒤에_ 오기 때문에 실행된 명령의 인수로 취급됩니다.
 
-In contrast, due to npm's argument parsing logic, running this command is different:
+반면에 npm의 인수 파싱 로직으로 인해 이 명령을 실행하는 것은 다릅니다:
 
 ```
 $ npm exec foo@latest bar --package=@npmcli/foo
 ```
 
-In this case, npm will parse the `--package` option first, resolving the `@npmcli/foo` package. Then, it will execute the following command in that context:
+이 경우 npm은 먼저 `--package` 옵션을 파싱하여 `@npmcli/foo` 패키지를 해결합니다. 그런 다음 해당 context에서 다음 명령을 실행합니다:
 
 ```
 $ foo@latest bar
 ```
 
-The double-hyphen character is recommended to explicitly tell npm to stop parsing command line options and switches. The following command would thus be equivalent to the `npx` command above:
+이중 하이픈 문자는 npm에게 명령줄 옵션과 스위치 파싱을 중지하라고 명시적으로 알리는 데 권장됩니다. 따라서 다음 명령은 위의 `npx` 명령과 동일합니다:
 
 ```
 $ npm exec -- foo@latest bar --package=@npmcli/foo
 ```
 
-### Examples
+### 예시
 
-Run the version of `tap` in the local dependencies, with the provided arguments:
+로컬 종속성에 있는 `tap` 버전을 제공된 인수와 함께 실행합니다:
 
 ```
 $ npm exec -- tap --bail test/foo.js
 $ npx tap --bail test/foo.js
 ```
 
-Run a command _other than_ the command whose name matches the package name by specifying a `--package` option:
+`--package` 옵션을 지정하여 패키지 이름과 일치하는 명령 _이외의_ 명령을 실행합니다:
 
 ```
 $ npm exec --package=foo -- bar --bar-argument
-# ~ or ~
+# ~ 또는 ~
 $ npx --package=foo bar --bar-argument
 ```
 
-Run an arbitrary shell script, in the context of the current project:
+현재 프로젝트의 context에서 임의의 shell 스크립트를 실행합니다:
 
 ```
 $ npm x -c 'eslint && say "hooray, lint passed"'
 $ npx -c 'eslint && say "hooray, lint passed"'
 ```
 
-### Compatibility with Older npx Versions
+### 이전 npx 버전과의 호환성
 
-The `npx` binary was rewritten in npm v7.0.0, and the standalone `npx` package deprecated at that time. `npx` uses the `npm exec` command instead of a separate argument parser and install process, with some affordances to maintain backwards compatibility with the arguments it accepted in previous versions.
+`npx` 바이너리는 npm v7.0.0에서 다시 작성되었으며, 독립 실행형 `npx` 패키지는 그 시점에 더 이상 사용되지 않습니다. `npx`는 별도의 인수 파서와 설치 프로세스 대신 `npm exec` 명령을 사용하며, 이전 버전에서 허용했던 인수와의 하위 호환성을 유지하기 위한 일부 조정이 있습니다.
 
-This resulted in some shifts in its functionality:
+이로 인해 기능에 일부 변화가 있었습니다:
 
-- Any `npm` config value may be provided.
-- To prevent security and user-experience problems from mistyping package names, `npx` prompts before installing anything. Suppress this prompt with the `-y` or `--yes` option.
-- The `--no-install` option is deprecated, and will be converted to `--no`.
-- Shell fallback functionality is removed, as it is not advisable.
-- The `-p` argument is a shorthand for `--parseable` in npm, but shorthand for `--package` in npx. This is maintained, but only for the `npx` executable.
-- The `--ignore-existing` option is removed. Locally installed bins are always present in the executed process `PATH`.
-- The `--npm` option is removed. `npx` will always use the `npm` it ships with.
-- The `--node-arg` and `-n` options have been removed. Use [`NODE_OPTIONS`](https://nodejs.org/api/cli.html#node_optionsoptions) instead: e.g., `NODE_OPTIONS="--trace-warnings --trace-exit" npx foo --random=true`
-- The `--always-spawn` option is redundant, and thus removed.
-- The `--shell` option is replaced with `--script-shell`, but maintained in the `npx` executable for backwards compatibility.
+- 모든 `npm` 설정 값을 제공할 수 있습니다.
+- 패키지 이름 오타로 인한 보안 및 사용자 경험 문제를 방지하기 위해 `npx`는 설치 전에 프롬프트를 표시합니다. `-y` 또는 `--yes` 옵션으로 이 프롬프트를 억제할 수 있습니다.
+- `--no-install` 옵션은 더 이상 사용되지 않으며 `--no`로 변환됩니다.
+- shell 폴백 기능은 권장되지 않으므로 제거되었습니다.
+- `-p` 인수는 npm에서는 `--parseable`의 축약형이지만 npx에서는 `--package`의 축약형입니다. 이는 유지되지만 `npx` 실행 파일에서만 유지됩니다.
+- `--ignore-existing` 옵션이 제거되었습니다. 로컬에 설치된 bin은 항상 실행된 프로세스 `PATH`에 존재합니다.
+- `--npm` 옵션이 제거되었습니다. `npx`는 항상 함께 제공되는 `npm`을 사용합니다.
+- `--node-arg` 및 `-n` 옵션이 제거되었습니다. 대신 [`NODE_OPTIONS`](https://nodejs.org/api/cli.html#node_optionsoptions)를 사용하세요: 예, `NODE_OPTIONS="--trace-warnings --trace-exit" npx foo --random=true`
+- `--always-spawn` 옵션은 중복되므로 제거되었습니다.
+- `--shell` 옵션은 `--script-shell`로 대체되었지만 하위 호환성을 위해 `npx` 실행 파일에서 유지됩니다.
 
-### See Also
+### 참조
 
 - [npm run-script](/cli/v10/commands/npm-run-script)
 - [npm scripts](/cli/v10/using-npm/scripts)

@@ -1,7 +1,7 @@
 ---
 title: package.json
 section: 5
-description: Specifics of npm's package.json handling
+description: npm의 package.json 처리 세부사항
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/configuring-npm/package-json.md
@@ -27,53 +27,53 @@ redirect_from:
   - /files/package.json
 ---
 
-### Description
+### 설명
 
-This document is all you need to know about what's required in your package.json file. It must be actual JSON, not just a JavaScript object literal.
+이 문서는 package.json 파일에 필요한 모든 것에 대해 알려줍니다. 실제 JSON이어야 하며, 단순한 JavaScript 객체 리터럴이 아니어야 합니다.
 
-A lot of the behavior described in this document is affected by the config settings described in [`config`](/cli/v10/using-npm/config).
+이 문서에 설명된 많은 동작은 [`config`](/cli/v10/using-npm/config)에 설명된 설정에 영향을 받습니다.
 
 ### name
 
-If you plan to publish your package, the _most_ important things in your package.json are the name and version fields as they will be required. The name and version together form an identifier that is assumed to be completely unique. Changes to the package should come along with changes to the version. If you don't plan to publish your package, the name and version fields are optional.
+패키지를 배포할 계획이라면, package.json에서 _가장_ 중요한 것은 name과 version 필드입니다. 이들은 필수입니다. name과 version은 함께 완전히 고유한 식별자를 형성한다고 가정됩니다. 패키지의 변경 사항은 버전의 변경과 함께 이루어져야 합니다. 패키지를 배포할 계획이 없다면 name과 version 필드는 선택 사항입니다.
 
-The name is what your thing is called.
+name은 당신의 것이 무엇이라고 불리는지입니다.
 
-Some rules:
+몇 가지 규칙:
 
-- The name must be less than or equal to 214 characters. This includes the scope for scoped packages.
-- The names of scoped packages can begin with a dot or an underscore. This is not permitted without a scope.
-- New packages must not have uppercase letters in the name.
-- The name ends up being part of a URL, an argument on the command line, and a folder name. Therefore, the name can't contain any non-URL-safe characters.
+- name은 영어로 214자 이하여야 합니다. 여기에는 스코프가 있는 패키지의 스코프가 포함됩니다.
+- 스코프가 있는 패키지의 이름은 점이나 밑줄로 시작할 수 있습니다. 스코프 없이는 이것이 허용되지 않습니다.
+- 새 패키지는 이름에 대문자를 포함할 수 없습니다.
+- 이름은 결국 URL의 일부, 명령줄의 인수, 폴더 이름이 됩니다. 따라서 이름에는 URL에 안전하지 않은 문자를 포함할 수 없습니다.
 
-Some tips:
+몇 가지 팁:
 
-- Don't use the same name as a core Node module.
-- Don't put "js" or "node" in the name. It's assumed that it's js, since you're writing a package.json file, and you can specify the engine using the "[engines](#engines)" field. (See below.)
-- The name will probably be passed as an argument to require(), so it should be something short, but also reasonably descriptive.
-- You may want to check the npm registry to see if there's something by that name already, before you get too attached to it. [https://www.npmjs.com/](https://www.npmjs.com/)
+- 핵심 Node 모듈과 같은 이름을 사용하지 마세요.
+- 이름에 "js"나 "node"를 넣지 마세요. package.json 파일을 작성하고 있으므로 js라고 가정됩니다. "[engines](#engines)" 필드를 사용하여 엔진을 지정할 수 있습니다. (아래 참조)
+- 이름은 아마도 require()의 인수로 전달될 것이므로, 짧지만 합리적으로 설명적이어야 합니다.
+- 이름을 결정하기 전에 npm 레지스트리에서 그 이름의 것이 이미 있는지 확인하고 싶을 수 있습니다. [https://www.npmjs.com/](https://www.npmjs.com/)
 
-A name can be optionally prefixed by a scope, e.g. `@myorg/mypackage`. See [`scope`](/cli/v10/using-npm/scope) for more detail.
+이름은 선택적으로 스코프로 접두사를 붙일 수 있습니다. 예: `@myorg/mypackage`. 자세한 내용은 [`scope`](/cli/v10/using-npm/scope)를 참조하세요.
 
 ### version
 
-If you plan to publish your package, the _most_ important things in your package.json are the name and version fields as they will be required. The name and version together form an identifier that is assumed to be completely unique. Changes to the package should come along with changes to the version. If you don't plan to publish your package, the name and version fields are optional.
+패키지를 배포할 계획이라면, package.json에서 _가장_ 중요한 것은 name과 version 필드입니다. 이들은 필수입니다. name과 version은 함께 완전히 고유한 식별자를 형성한다고 가정됩니다. 패키지의 변경 사항은 버전의 변경과 함께 이루어져야 합니다. 패키지를 배포할 계획이 없다면 name과 version 필드는 선택 사항입니다.
 
-Version must be parseable by [node-semver](https://github.com/npm/node-semver), which is bundled with npm as a dependency. (`npm install semver` to use it yourself.)
+버전은 [node-semver](https://github.com/npm/node-semver)로 파싱할 수 있어야 합니다. npm과 함께 의존성으로 번들되어 있습니다. (`npm install semver`로 직접 사용할 수 있습니다.)
 
 ### description
 
-Put a description in it. It's a string. This helps people discover your package, as it's listed in `npm search`.
+설명을 넣으세요. 이것은 문자열입니다. 이는 `npm search`에 나열되므로 사람들이 당신의 패키지를 발견하는 데 도움이 됩니다.
 
 ### keywords
 
-Put keywords in it. It's an array of strings. This helps people discover your package as it's listed in `npm search`.
+키워드를 넣으세요. 문자열 배열입니다. 이는 `npm search`에 나열되므로 사람들이 당신의 패키지를 발견하는 데 도움이 됩니다.
 
 ### homepage
 
-The URL to the project homepage.
+프로젝트 홈페이지의 URL입니다.
 
-Example:
+예시:
 
 ```json
 "homepage": "https://github.com/owner/project#readme"
@@ -81,9 +81,9 @@ Example:
 
 ### bugs
 
-The URL to your project's issue tracker and / or the email address to which issues should be reported. These are helpful for people who encounter issues with your package.
+프로젝트의 이슈 트래커의 URL 및/또는 이슈를 보고해야 하는 이메일 주소입니다. 이는 패키지에 문제가 있는 사람들에게 도움이 됩니다.
 
-It should look like this:
+다음과 같이 보여야 합니다:
 
 ```json
 {
@@ -94,15 +94,15 @@ It should look like this:
 }
 ```
 
-You can specify either one or both values. If you want to provide only a URL, you can specify the value for "bugs" as a simple string instead of an object.
+하나 또는 둘 다의 값을 지정할 수 있습니다. URL만 제공하려면 "bugs"의 값을 객체 대신 간단한 문자열로 지정할 수 있습니다.
 
-If a URL is provided, it will be used by the `npm bugs` command.
+URL이 제공되면 `npm bugs` 명령에 의해 사용됩니다.
 
 ### license
 
-You should specify a license for your package so that people know how they are permitted to use it, and any restrictions you're placing on it.
+패키지에 대한 라이선스를 지정하여 사람들이 어떻게 사용할 수 있는지, 그리고 당신이 부과하는 제한 사항을 알 수 있게 해야 합니다.
 
-If you're using a common license such as BSD-2-Clause or MIT, add a current SPDX license identifier for the license you're using, like this:
+BSD-2-Clause나 MIT와 같은 일반적인 라이선스를 사용하고 있다면, 사용 중인 라이선스에 대한 현재 SPDX 라이선스 식별자를 다음과 같이 추가하세요:
 
 ```json
 {
@@ -110,9 +110,9 @@ If you're using a common license such as BSD-2-Clause or MIT, add a current SPDX
 }
 ```
 
-You can check [the full list of SPDX license IDs](https://spdx.org/licenses/). Ideally you should pick one that is [OSI](https://opensource.org/licenses/) approved.
+[SPDX 라이선스 ID의 전체 목록](https://spdx.org/licenses/)을 확인할 수 있습니다. 이상적으로는 [OSI](https://opensource.org/licenses/)에서 승인한 것 중 하나를 선택해야 합니다.
 
-If your package is licensed under multiple common licenses, use an [SPDX license expression syntax version 2.0 string](https://spdx.dev/specifications/), like this:
+패키지가 여러 일반 라이선스 하에 라이선스가 부여된 경우 [SPDX 라이선스 표현 구문 버전 2.0 문자열](https://spdx.dev/specifications/)을 사용하세요. 예시:
 
 ```json
 {
@@ -120,7 +120,7 @@ If your package is licensed under multiple common licenses, use an [SPDX license
 }
 ```
 
-If you are using a license that hasn't been assigned an SPDX identifier, or if you are using a custom license, use a string value like this one:
+SPDX 식별자가 할당되지 않은 라이선스를 사용하고 있거나 사용자 정의 라이선스를 사용하고 있다면 다음과 같은 문자열 값을 사용하세요:
 
 ```json
 {
@@ -128,12 +128,12 @@ If you are using a license that hasn't been assigned an SPDX identifier, or if y
 }
 ```
 
-Then include a file named `<filename>` at the top level of the package.
+그런 다음 패키지의 최상위 레벨에 `<filename>`이라는 이름의 파일을 포함시키세요.
 
-Some old packages used license objects or a "licenses" property containing an array of license objects:
+일부 오래된 패키지는 라이선스 객체나 라이선스 객체 배열을 포함하는 "licenses" 속성을 사용했습니다:
 
 ```json
-// Not valid metadata
+// 유효하지 않은 메타데이터
 {
   "license" : {
     "type" : "ISC",
@@ -141,7 +141,7 @@ Some old packages used license objects or a "licenses" property containing an ar
   }
 }
 
-// Not valid metadata
+// 유효하지 않은 메타데이터
 {
   "licenses" : [
     {
@@ -156,7 +156,7 @@ Some old packages used license objects or a "licenses" property containing an ar
 }
 ```
 
-Those styles are now deprecated. Instead, use SPDX expressions, like this:
+이러한 스타일은 이제 폐기되었습니다. 대신 SPDX 표현식을 사용하세요. 예시:
 
 ```json
 {
@@ -170,7 +170,7 @@ Those styles are now deprecated. Instead, use SPDX expressions, like this:
 }
 ```
 
-Finally, if you do not wish to grant others the right to use a private or unpublished package under any terms:
+마지막으로, 다른 사람들에게 어떤 조건으로든 비공개 또는 미배포 패키지를 사용할 권리를 부여하고 싶지 않다면:
 
 ```json
 {
@@ -178,11 +178,11 @@ Finally, if you do not wish to grant others the right to use a private or unpubl
 }
 ```
 
-Consider also setting `"private": true` to prevent accidental publication.
+우연한 배포를 방지하기 위해 `"private": true`를 설정하는 것도 고려하세요.
 
 ### people fields: author, contributors
 
-The "author" is one person. "contributors" is an array of people. A "person" is an object with a "name" field and optionally "url" and "email", like this:
+"author"는 한 사람입니다. "contributors"는 사람들의 배열입니다. "person"은 "name" 필드와 선택적으로 "url"과 "email"을 가진 객체입니다. 다음과 같습니다:
 
 ```json
 {
@@ -192,7 +192,7 @@ The "author" is one person. "contributors" is an array of people. A "person" is 
 }
 ```
 
-Or you can shorten that all into a single string, and npm will parse it for you:
+또는 이 모든 것을 하나의 문자열로 축약할 수 있으며, npm이 당신을 위해 파싱할 것입니다:
 
 ```json
 {
@@ -200,13 +200,13 @@ Or you can shorten that all into a single string, and npm will parse it for you:
 }
 ```
 
-Both email and url are optional either way.
+email과 url은 둘 다 선택사항입니다.
 
-npm also sets a top-level "maintainers" field with your npm user info.
+npm은 또한 당신의 npm 사용자 정보로 최상위 "maintainers" 필드를 설정합니다.
 
 ### funding
 
-You can specify an object containing a URL that provides up-to-date information about ways to help fund development of your package, a string URL, or an array of objects and string URLs:
+패키지 개발을 위한 자금 지원 방법에 대한 최신 정보를 제공하는 URL을 포함하는 객체, 문자열 URL, 또는 객체와 문자열 URL의 배열을 지정할 수 있습니다:
 
 ```json
 {
@@ -248,47 +248,46 @@ You can specify an object containing a URL that provides up-to-date information 
 }
 ```
 
-Users can use the `npm fund` subcommand to list the `funding` URLs of all dependencies of their project, direct and indirect. A shortcut to visit each funding URL is also available when providing the project name such as: `npm fund <projectname>` (when there are multiple URLs, the first one will be visited)
+사용자는 `npm fund` 하위 명령을 사용하여 프로젝트의 모든 의존성(직접 및 간접)의 `funding` URL을 나열할 수 있습니다. 각 funding URL을 방문하는 단축키도 프로젝트 이름을 제공할 때 사용할 수 있습니다: `npm fund <projectname>` (여러 URL이 있을 경우 첫 번째 URL이 방문됩니다)
 
 ### files
 
-The optional `files` field is an array of file patterns that describes the entries to be included when your package is installed as a dependency. File patterns follow a similar syntax to `.gitignore`, but reversed: including a file, directory, or glob pattern (`*`, `**/*`, and such) will make it so that file is included in the tarball when it's packed. Omitting the field will make it default to `["*"]`, which means it will include all files.
+선택적인 `files` 필드는 패키지가 의존성으로 설치될 때 포함될 항목을 설명하는 파일 패턴의 배열입니다. 파일 패턴은 `.gitignore`와 유사하지만 반대의 매칭을 따릅니다. 파일, 디렉토리 또는 glob 패턴(`*`, `**/*` 등)을 포함하면 패킹될 때 tarball에 해당 파일이 포함됩니다. 이 필드를 생략하면 `["*"]`로 기본 설정되어 모든 파일을 포함합니다.
 
-Some special files and directories are also included or excluded regardless of whether they exist in the `files` array (see below).
+일부 특수 파일과 디렉토리는 `files` 배열에 존재 여부와 관계없이 포함되거나 제외됩니다(아래 참조).
 
-You can also provide a `.npmignore` file in the root of your package or in subdirectories, which will keep files from being included. At the root of your package it will not override the "files" field, but in subdirectories it will. The `.npmignore` file works just like a `.gitignore`. If there is a `.gitignore` file, and `.npmignore` is missing, `.gitignore`'s contents will be used instead.
+`.npmignore` 파일을 패키지의 루트나 하위 디렉토리에 제공하여 파일이 포함되지 않도록 할 수도 있습니다. 패키지의 루트에서는 "files" 필드를 재정의하지 않지만 하위 디렉토리에서는 재정의합니다. `.npmignore` 파일은 `.gitignore`와 같은 방식으로 작동합니다. `.gitignore` 파일이 있고 `.npmignore`이 없는 경우, `.gitignore`의 내용이 대신 사용됩니다.
 
-Certain files are always included, regardless of settings:
+특정 파일은 설정과 관계없이 항상 포함됩니다:
 
 - `package.json`
 - `README`
 - `LICENSE` / `LICENCE`
-- The file in the "main" field
-- The file(s) in the "bin" field
+- "main" 필드에 있는 파일
+- "bin" 필드에 있는 파일(들)
 
-`README` & `LICENSE` can have any case and extension.
+`README` & `LICENSE`는 대소문자와 확장자를 구분하지 않습니다.
 
-Some files are always ignored by default:
+일부 파일은 기본적으로 항상 무시됩니다:
 
-- `*.orig`
 - `.*.swp`
 - `.DS_Store`
 - `._*`
 - `.git`
 - `.hg`
-- `.lock-wscript`
 - `.npmrc`
+- `.lock-wscript`
 - `.svn`
 - `.wafpickle-N`
-- `CVS`
 - `config.gypi`
-- `node_modules`
+- `CVS`
 - `npm-debug.log`
-- `package-lock.json` (use [`npm-shrinkwrap.json`](/cli/v10/configuring-npm/npm-shrinkwrap-json) if you wish it to be published)
+- `node_modules`
+- `package-lock.json` (배포하려면 [`npm-shrinkwrap.json`](/cli/v10/configuring-npm/npm-shrinkwrap-json)을 사용하세요)
 - `pnpm-lock.yaml`
 - `yarn.lock`
 
-Most of these ignored files can be included specifically if included in the `files` globs. Exceptions to this are:
+이러한 무시된 파일들 대부분은 `files` glob에 명시적으로 포함시키면 포함될 수 있습니다. 예외는 다음과 같습니다:
 
 - `.git`
 - `.npmrc`
@@ -297,29 +296,29 @@ Most of these ignored files can be included specifically if included in the `fil
 - `pnpm-lock.yaml`
 - `yarn.lock`
 
-These can not be included.
+이들은 포함될 수 없습니다.
 
 ### main
 
-The main field is a module ID that is the primary entry point to your program. That is, if your package is named `foo`, and a user installs it, and then does `require("foo")`, then your main module's exports object will be returned.
+main 필드는 프로그램의 주요 진입점을 나타내는 모듈 ID입니다. 즉, 패키지의 이름이 `foo`이고 사용자가 이를 설치한 후 `require("foo")`를 하면, main 모듈의 exports 객체가 반환됩니다.
 
-This should be a module relative to the root of your package folder.
+이는 패키지 폴더의 루트를 기준으로 한 모듈이어야 합니다.
 
-For most modules, it makes the most sense to have a main script and often not much else.
+대부분의 모듈에서는 메인 스크립트를 갖고 그 외에는 많지 않은 것이 가장 합리적입니다.
 
-If `main` is not set, it defaults to `index.js` in the package's root folder.
+`main`이 설정되지 않은 경우, 기본값은 패키지의 루트 폴더에 있는 `index.js`입니다.
 
 ### browser
 
-If your module is meant to be used client-side the browser field should be used instead of the main field. This is helpful to hint users that it might rely on primitives that aren't available in Node.js modules. (e.g. `window`)
+모듈이 클라이언트 측에서 사용되도록 의도된 경우 main 필드 대신 browser 필드를 사용해야 합니다. 이는 Node.js 모듈에서 사용할 수 없는 기본 객체(`window` 등)에 의존할 수 있음을 사용자에게 알리는 데 도움이 됩니다.
 
 ### bin
 
-A lot of packages have one or more executable files that they'd like to install into the PATH. npm makes this pretty easy (in fact, it uses this feature to install the "npm" executable.)
+많은 패키지에는 PATH에 설치하고 싶은 하나 이상의 실행 파일이 있습니다. npm은 이를 매우 쉽게 만듭니다(실제로 이 기능을 사용하여 "npm" 실행 파일을 설치합니다).
 
-To use this, supply a `bin` field in your package.json which is a map of command name to local file name. When this package is installed globally, that file will be either linked inside the global bins directory or a cmd (Windows Command File) will be created which executes the specified file in the `bin` field, so it is available to run by `name` or `name.cmd` (on Windows PowerShell). When this package is installed as a dependency in another package, the file will be linked where it will be available to that package either directly by `npm exec` or by name in other scripts when invoking them via `npm run-script`.
+이를 사용하려면 package.json에 `bin` 필드를 제공하세요. 이는 명령 이름과 로컬 파일 이름을 매핑한 객체입니다. 이 패키지가 전역적으로 설치되면, 해당 파일이 전역 bin 디렉토리 내부에 연결되거나 `bin` 필드에 지정된 파일을 실행하는 cmd(Windows 명령 파일)가 생성되어 `name` 또는 `name.cmd`(Windows PowerShell에서)로 실행할 수 있게 됩니다. 이 패키지가 다른 패키지의 의존성으로 설치되면, 파일이 연결되어 `npm exec`를 통해 직접 사용하거나 `npm run-script`를 통해 다른 스크립트를 호출할 때 이름으로 사용할 수 있습니다.
 
-For example, myapp could have this:
+예를 들어, myapp은 다음과 같을 수 있습니다:
 
 ```json
 {
@@ -329,9 +328,9 @@ For example, myapp could have this:
 }
 ```
 
-So, when you install myapp, in case of unix-like OS it'll create a symlink from the `cli.js` script to `/usr/local/bin/myapp` and in case of windows it will create a cmd file usually at `C:\Users\{Username}\AppData\Roaming\npm\myapp.cmd` which runs the `cli.js` script.
+따라서 myapp을 설치하면, Unix와 유사한 OS의 경우 `cli.js` 스크립트에서 `/usr/local/bin/myapp`로 심볼릭 링크를 생성하고, Windows의 경우 일반적으로 `C:\Users\{Username}\AppData\Roaming\npm\myapp.cmd`에 `cli.js` 스크립트를 실행하는 cmd 파일을 생성합니다.
 
-If you have a single executable, and its name should be the name of the package, then you can just supply it as a string. For example:
+단일 실행 파일이 있고 그 이름이 패키지의 이름이어야 한다면 문자열로 제공할 수 있습니다. 예를 들어:
 
 ```json
 {
@@ -341,7 +340,7 @@ If you have a single executable, and its name should be the name of the package,
 }
 ```
 
-would be the same as this:
+이는 다음과 같습니다:
 
 ```json
 {
@@ -353,17 +352,17 @@ would be the same as this:
 }
 ```
 
-Please make sure that your file(s) referenced in `bin` starts with `#!/usr/bin/env node`, otherwise the scripts are started without the node executable!
+`bin`에 참조된 파일이 `#!/usr/bin/env node`로 시작하는지 확인하세요. 그렇지 않으면 스크립트가 node 실행 파일 없이 시작됩니다!
 
-Note that you can also set the executable files using [directories.bin](#directoriesbin).
+또한 [directories.bin](#directoriesbin)을 사용하여 실행 파일을 설정할 수도 있습니다.
 
-See [folders](/cli/v10/configuring-npm/folders#executables) for more info on executables.
+실행 파일에 대한 자세한 정보는 [folders](/cli/v10/configuring-npm/folders#executables)를 참조하세요.
 
 ### man
 
-Specify either a single file or an array of filenames to put in place for the `man` program to find.
+`man` 프로그램이 찾을 수 있도록 배치할 단일 파일 또는 파일 이름 배열을 지정합니다.
 
-If only a single file is provided, then it's installed such that it is the result from `man <pkgname>`, regardless of its actual filename. For example:
+단일 파일만 제공되는 경우, 실제 파일 이름에 관계없이 `man <pkgname>`의 결과가 되도록 설치됩니다. 예를 들어:
 
 ```json
 {
@@ -375,9 +374,9 @@ If only a single file is provided, then it's installed such that it is the resul
 }
 ```
 
-would link the `./man/doc.1` file in such that it is the target for `man foo`
+이는 `./man/doc.1` 파일을 `man foo`의 대상이 되도록 연결합니다.
 
-If the filename doesn't start with the package name, then it's prefixed. So, this:
+파일 이름이 패키지 이름으로 시작하지 않으면 접두사가 붙습니다. 따라서 다음과 같습니다:
 
 ```json
 {
@@ -389,9 +388,9 @@ If the filename doesn't start with the package name, then it's prefixed. So, thi
 }
 ```
 
-will create files to do `man foo` and `man foo-bar`.
+`man foo`와 `man foo-bar`를 할 수 있는 파일을 생성합니다.
 
-Man files must end with a number, and optionally a `.gz` suffix if they are compressed. The number dictates which man section the file is installed into.
+man 파일은 숫자로 끝나야 하며, 선택적으로 압축된 경우 `.gz` 접미사가 붙을 수 있습니다. 숫자는 파일이 설치되는 man 섹션을 지정합니다.
 
 ```json
 {
@@ -403,29 +402,29 @@ Man files must end with a number, and optionally a `.gz` suffix if they are comp
 }
 ```
 
-will create entries for `man foo` and `man 2 foo`
+이는 `man foo`와 `man 2 foo` 항목을 생성합니다.
 
 ### directories
 
-The CommonJS [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec details a few ways that you can indicate the structure of your package using a `directories` object. If you look at [npm's package.json](https://registry.npmjs.org/npm/latest), you'll see that it has directories for doc, lib, and man.
+CommonJS [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) 사양은 `directories` 객체를 사용하여 패키지의 구조를 나타내는 몇 가지 방법을 자세히 설명합니다. [npm의 package.json](https://registry.npmjs.org/npm/latest)을 보면 doc, lib, man을 위한 디렉토리가 있는 것을 볼 수 있습니다.
 
-In the future, this information may be used in other creative ways.
+향후에는 이 정보가 다른 창의적인 방식으로 사용될 수 있습니다.
 
 #### directories.bin
 
-If you specify a `bin` directory in `directories.bin`, all the files in that folder will be added.
+`bin` 디렉토리를 `directories.bin`에 지정하면 해당 폴더의 모든 파일이 추가됩니다.
 
-Because of the way the `bin` directive works, specifying both a `bin` path and setting `directories.bin` is an error. If you want to specify individual files, use `bin`, and for all the files in an existing `bin` directory, use `directories.bin`.
+`bin` 지시문이 작동하는 방식 때문에, `bin` 경로를 지정하고 `directories.bin`을 설정하는 것은 오류입니다. 개별 파일을 지정하려면 `bin`을 사용하고, 기존 `bin` 디렉토리의 모든 파일을 사용하려면 `directories.bin`을 사용하세요.
 
 #### directories.man
 
-A folder that is full of man pages. Sugar to generate a "man" array by walking the folder.
+man 페이지로 가득 찬 폴더입니다. 폴더를 순회하여 "man" 배열을 생성하는 단축 표현입니다.
 
 ### repository
 
-Specify the place where your code lives. This is helpful for people who want to contribute. If the git repo is on GitHub, then the `npm repo` command will be able to find you.
+코드가 있는 곳을 지정합니다. 이는 기여하고 싶어하는 사람들에게 도움이 됩니다. git 저장소가 GitHub에 있다면, `npm repo` 명령이 당신을 찾을 수 있을 것입니다.
 
-Do it like this:
+다음과 같이 하세요:
 
 ```json
 {
@@ -436,9 +435,9 @@ Do it like this:
 }
 ```
 
-The URL should be a publicly available (perhaps read-only) URL that can be handed directly to a VCS program without any modification. It should not be a URL to an html project page that you put in your browser. It's for computers.
+URL은 버전 관리 시스템(VCS) 프로그램에 직접 전달될 수 있는 공개적으로 사용 가능한 URL이어야 하며, 이는 읽기 전용일 수 있습니다. 이 URL은 브라우저에서 보는 HTML 프로젝트 페이지의 URL이 아니라, 컴퓨터가 읽을 수 있는 URL이어야 합니다.
 
-For GitHub, GitHub gist, Bitbucket, or GitLab repositories you can use the same shortcut syntax you use for `npm install`:
+GitHub, GitHub gist, Bitbucket, 또는 GitLab 저장소의 경우 `npm install`에 사용하는 것과 동일한 단축 구문을 사용할 수 있습니다:
 
 ```json
 {
@@ -454,7 +453,7 @@ For GitHub, GitHub gist, Bitbucket, or GitLab repositories you can use the same 
 }
 ```
 
-If the `package.json` for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives:
+패키지의 `package.json`이 루트 디렉토리에 없는 경우(예시: 모노레포의 일부인 경우), 다음과 같이 해당 파일이 있는 디렉토리를 지정할 수 있습니다:
 
 ```json
 {
@@ -468,13 +467,13 @@ If the `package.json` for your package is not in the root directory (for example
 
 ### scripts
 
-The "scripts" property is a dictionary containing script commands that are run at various times in the lifecycle of your package. The key is the lifecycle event, and the value is the command to run at that point.
+"scripts" 속성은 패키지의 라이프사이클의 다양한 시점에 실행되는 스크립트 명령어를 포함하는 사전입니다. 키는 라이프사이클 이벤트이고, 값은 해당 시점에 실행할 명령입니다.
 
-See [`scripts`](/cli/v10/using-npm/scripts) to find out more about writing package scripts.
+패키지 스크립트 작성에 대해 자세히 알아보려면 [`scripts`](/cli/v10/using-npm/scripts)를 참조하세요.
 
 ### config
 
-A "config" object can be used to set configuration parameters used in package scripts that persist across upgrades. For instance, if a package had the following:
+"config" 객체를 사용하여 업그레이드 간에 지속되는 패키지 스크립트에서 사용되는 구성 매개변수를 설정할 수 있습니다. 예를 들어, 패키지에 다음과 같은 내용이 있다면:
 
 ```json
 {
@@ -485,36 +484,36 @@ A "config" object can be used to set configuration parameters used in package sc
 }
 ```
 
-It could also have a "start" command that referenced the `npm_package_config_port` environment variable.
+또한 `npm_package_config_port` 환경 변수를 참조하는 "start" 명령이 있을 수 있습니다.
 
 ### dependencies
 
-Dependencies are specified in a simple object that maps a package name to a version range. The version range is a string which has one or more space-separated descriptors. Dependencies can also be identified with a tarball or git URL.
+의존성은 패키지 이름을 버전 범위에 매핑하는 간단한 객체로 지정됩니다. 버전 범위는 하나 이상의 공백으로 구분된 설명자를 가진 문자열입니다. 의존성은 또한 tarball이나 git URL로 식별될 수 있습니다.
 
-**Please do not put test harnesses or transpilers or other "development" time tools in your `dependencies` object.** See `devDependencies`, below.
+**테스트 하네스나 트랜스파일러 또는 기타 "개발" 시간 도구를 `dependencies` 객체에 넣지 마세요.** 아래의 `devDependencies`를 참조하세요.
 
-See [semver](https://github.com/npm/node-semver#versions) for more details about specifying version ranges.
+버전 범위 지정에 대한 자세한 내용은 [semver](https://github.com/npm/node-semver#versions)를 참조하세요.
 
-- `version` Must match `version` exactly
-- `>version` Must be greater than `version`
-- `>=version` etc
+- `version` `version`과 정확히 일치해야 함
+- `>version` `version`보다 커야 함
+- `>=version` 등
 - `<version`
 - `<=version`
-- `~version` "Approximately equivalent to version" See [semver](https://github.com/npm/node-semver#versions)
-- `^version` "Compatible with version" See [semver](https://github.com/npm/node-semver#versions)
-- `1.2.x` 1.2.0, 1.2.1, etc., but not 1.3.0
-- `http://...` See 'URLs as Dependencies' below
-- `*` Matches any version
-- `""` (just an empty string) Same as `*`
-- `version1 - version2` Same as `>=version1 <=version2`.
-- `range1 || range2` Passes if either range1 or range2 are satisfied.
-- `git...` See 'Git URLs as Dependencies' below
-- `user/repo` See 'GitHub URLs' below
-- `tag` A specific version tagged and published as `tag` See [`npm dist-tag`](/cli/v10/commands/npm-dist-tag)
-- `path/path/path` See [Local Paths](#local-paths) below
-- `npm:@scope/pkg@version` Custom alias for a pacakge See [`package-spec`](/cli/v10/using-npm/package-spec#aliases)
+- `~version` "버전과 대략적으로 동등함" [semver](https://github.com/npm/node-semver#versions) 참조
+- `^version` "버전과 호환됨" [semver](https://github.com/npm/node-semver#versions) 참조
+- `1.2.x` 1.2.0, 1.2.1 등, 하지만 1.3.0은 아님
+- `http://...` 아래의 '의존성으로서의 URL' 참조
+- `*` 모든 버전과 일치
+- `""` (빈 문자열) `*`와 동일
+- `version1 - version2` `>=version1 <=version2`와 동일
+- `range1 || range2` range1이나 range2가 만족되면 통과
+- `git...` 아래의 '의존성으로서의 Git URL' 참조
+- `user/repo` 아래의 'GitHub URL' 참조
+- `tag` `tag`로 태그되고 배포된 특정 버전 [`npm dist-tag`](/cli/v10/commands/npm-dist-tag) 참조
+- `path/path/path` 아래의 [로컬 경로](#local-paths) 참조
+- `npm:@scope/pkg@version` 패키지에 대한 사용자 정의 별칭 [`package-spec`](/cli/v10/using-npm/package-spec#aliases) 참조
 
-For example, these are all valid:
+예를 들어, 다음은 모두 유효합니다:
 
 ```json
 {
@@ -536,25 +535,25 @@ For example, these are all valid:
 }
 ```
 
-#### URLs as Dependencies
+#### 의존성으로서의 URL
 
-You may specify a tarball URL in place of a version range.
+버전 범위 대신 tarball URL을 지정할 수 있습니다.
 
-This tarball will be downloaded and installed locally to your package at install time.
+이 tarball은 설치 시 로컬에서 패키지로 다운로드 및 설치됩니다.
 
-#### Git URLs as Dependencies
+#### 의존성으로서의 Git URL
 
-Git URLs are of the form:
+Git URL은 다음 형식입니다:
 
 ```bash
 <protocol>://[<user>[:<password>]@]<hostname>[:<port>][:][/]<path>[#<commit-ish> | #semver:<semver>]
 ```
 
-`<protocol>` is one of `git`, `git+ssh`, `git+http`, `git+https`, or `git+file`.
+`<protocol>`은 `git`, `git+ssh`, `git+http`, `git+https`, 또는 `git+file` 중 하나입니다.
 
-If `#<commit-ish>` is provided, it will be used to clone exactly that commit. If the commit-ish has the format `#semver:<semver>`, `<semver>` can be any valid semver range or exact version, and npm will look for any tags or refs matching that range in the remote repository, much as it would for a registry dependency. If neither `#<commit-ish>` or `#semver:<semver>` is specified, then the default branch is used.
+`#<commit-ish>`가 제공되면 정확히 해당 커밋을 복제하는 데 사용됩니다. commit-ish가 `#semver:<semver>` 형식이면, `<semver>`는 유효한 semver 범위나 정확한 버전일 수 있으며, npm은 레지스트리 의존성에 대해 하는 것과 마찬가지로 원격 저장소에서 해당 범위와 일치하는 태그나 참조를 찾습니다. `#<commit-ish>` 또는 `#semver:<semver>`가 지정되지 않으면 기본 브랜치가 사용됩니다.
 
-Examples:
+예시:
 
 ```bash
 git+ssh://git@github.com:npm/cli.git#v1.0.27
@@ -563,9 +562,9 @@ git+https://isaacs@github.com/npm/cli.git
 git://github.com/npm/cli.git#v1.0.27
 ```
 
-When installing from a `git` repository, the presence of certain fields in the `package.json` will cause npm to believe it needs to perform a build. To do so your repository will be cloned into a temporary directory, all of its deps installed, relevant scripts run, and the resulting directory packed and installed.
+`git` 저장소에서 설치할 때 `package.json`에 특정 필드가 있으면 npm은 빌드를 수행해야 한다고 판단합니다. 이를 위해 저장소가 임시 디렉토리에 복제되고, 모든 의존성이 설치되며, 관련 스크립트가 실행되고, 결과 디렉토리가 패킹되어 설치됩니다.
 
-This flow will occur if your git dependency uses `workspaces`, or if any of the following scripts are present:
+이 흐름은 git 의존성이 `workspaces`를 사용하거나 다음 스크립트 중 하나가 있는 경우 발생합니다:
 
 - `build`
 - `prepare`
@@ -574,11 +573,11 @@ This flow will occur if your git dependency uses `workspaces`, or if any of the 
 - `install`
 - `postinstall`
 
-If your git repository includes pre-built artifacts, you will likely want to make sure that none of the above scripts are defined, or your dependency will be rebuilt for every installation.
+git 저장소에 미리 빌드된 아티팩트가 포함되어 있다면 위의 스크립트 중 어느 것도 정의되지 않도록 해야 합니다. 그렇지 않으면 의존성이 모든 설치에 대해 재빌드됩니다.
 
 #### GitHub URLs
 
-As of version 1.1.65, you can refer to GitHub URLs as just "foo": "user/foo-project". Just as with git URLs, a `commit-ish` suffix can be included. For example:
+버전 1.1.65부터 GitHub URL을 "foo": "user/foo-project"와 같이 참조할 수 있습니다. git URL과 마찬가지로 `commit-ish` 접미사를 포함할 수 있습니다. 예를 들어:
 
 ```json
 {
@@ -592,9 +591,9 @@ As of version 1.1.65, you can refer to GitHub URLs as just "foo": "user/foo-proj
 }
 ```
 
-#### Local Paths
+#### 로컬 경로
 
-As of version 2.0.0 you can provide a path to a local directory that contains a package. Local paths can be saved using `npm install -S` or `npm install --save`, using any of these forms:
+버전 2.0.0부터 패키지를 포함하는 로컬 디렉토리의 경로를 제공할 수 있습니다. 로컬 경로는 `npm install -S` 또는 `npm install --save`를 사용하여 다음 형식 중 하나로 저장할 수 있습니다:
 
 ```bash
 ../foo/bar
@@ -603,7 +602,7 @@ As of version 2.0.0 you can provide a path to a local directory that contains a 
 /foo/bar
 ```
 
-in which case they will be normalized to a relative path and added to your `package.json`. For example:
+이 경우 상대 경로로 정규화되어 `package.json`에 추가됩니다. 예를 들어:
 
 ```json
 {
@@ -614,21 +613,21 @@ in which case they will be normalized to a relative path and added to your `pack
 }
 ```
 
-This feature is helpful for local offline development and creating tests that require npm installing where you don't want to hit an external server, but should not be used when publishing your package to the public registry.
+이 기능은 로컬 오프라인 개발과 외부 서버에 접근하지 않고 npm 설치가 필요한 테스트 생성에 유용하지만, 공개 레지스트리에 패키지를 배포할 때는 사용하지 않아야 합니다.
 
-_note_: Packages linked by local path will not have their own dependencies installed when `npm install` is ran in this case. You must run `npm install` from inside the local path itself.
+_참고_: 로컬 경로로 연결된 패키지는 이 경우 `npm install`이 실행될 때 자체 의존성이 설치되지 않습니다. 로컬 경로 자체에서 `npm install`을 실행해야 합니다.
 
 ### devDependencies
 
-If someone is planning on downloading and using your module in their program, then they probably don't want or need to download and build the external test or documentation framework that you use.
+누군가가 당신의 모듈을 프로그램에서 다운로드하고 사용할 계획이라면, 아마도 당신이 사용하는 외부 테스트나 문서 프레임워크를 다운로드하고 빌드하길 원하지 않을 것입니다.
 
-In this case, it's best to map these additional items in a `devDependencies` object.
+이 경우, 이러한 추가 항목을 `devDependencies` 객체에 매핑하는 것이 가장 좋습니다.
 
-These things will be installed when doing `npm link` or `npm install` from the root of a package, and can be managed like any other npm configuration param. See [`config`](/cli/v10/using-npm/config) for more on the topic.
+이러한 것들은 패키지의 루트에서 `npm link` 또는 `npm install`을 할 때 설치되며, 다른 npm 설정 매개변수처럼 관리할 수 있습니다. [`config`](/cli/v10/using-npm/config)에서 이 주제에 대해 자세히 알아보세요.
 
-For build steps that are not platform-specific, such as compiling CoffeeScript or other languages to JavaScript, use the `prepare` script to do this, and make the required package a devDependency.
+CoffeeScript나 다른 언어를 JavaScript로 컴파일하는 것과 같이 플랫폼에 특정하지 않은 빌드 단계의 경우, `prepare` 스크립트를 사용하여 이를 수행하고 필요한 패키지를 devDependency로 만드세요.
 
-For example:
+예를 들어:
 
 ```json
 {
@@ -645,13 +644,13 @@ For example:
 }
 ```
 
-The `prepare` script will be run before publishing, so that users can consume the functionality without requiring them to compile it themselves. In dev mode (ie, locally running `npm install`), it'll run this script as well, so that you can test it easily.
+`prepare` 스크립트는 배포하기 전에 실행되므로 사용자가 직접 컴파일할 필요 없이 기능을 사용할 수 있습니다. 개발 모드(즉, 로컬에서 `npm install` 실행)에서도 이 스크립트를 실행하므로 쉽게 테스트할 수 있습니다.
 
 ### peerDependencies
 
-In some cases, you want to express the compatibility of your package with a host tool or library, while not necessarily doing a `require` of this host. This is usually referred to as a _plugin_. Notably, your module may be exposing a specific interface, expected and specified by the host documentation.
+일부 경우에는 호스트 도구나 라이브러리와의 호환성을 표현하고 싶지만 반드시 해당 호스트의 `require`를 수행하지는 않을 수 있습니다. 이는 일반적으로 *플러그인*이라고 합니다. 특히, 모듈이 호스트 문서에서 예상하고 지정한 특정 인터페이스를 노출할 수 있습니다.
 
-For example:
+예를 들어:
 
 ```json
 {
@@ -663,24 +662,24 @@ For example:
 }
 ```
 
-This ensures your package `tea-latte` can be installed _along_ with the second major version of the host package `tea` only. `npm install tea-latte` could possibly yield the following dependency graph:
+이는 `tea-latte` 패키지가 호스트 패키지 `tea`의 두 번째 주요 버전과 _함께_ 설치될 수 있음을 보장합니다. `npm install tea-latte`는 다음과 같은 의존성 그래프를 생성할 수 있습니다:
 
 ```bash
 ├── tea-latte@1.3.5
 └── tea@2.2.0
 ```
 
-In npm versions 3 through 6, `peerDependencies` were not automatically installed, and would raise a warning if an invalid version of the peer dependency was found in the tree. As of npm v7, peerDependencies _are_ installed by default.
+npm 버전 3부터 6까지는 `peerDependencies`가 자동으로 설치되지 않았으며, 트리에서 유효하지 않은 버전의 피어 의존성이 발견되면 경고를 발생시켰습니다. npm v7부터는 peerDependencies가 기본적으로 설치됩니다.
 
-Trying to install another plugin with a conflicting requirement may cause an error if the tree cannot be resolved correctly. For this reason, make sure your plugin requirement is as broad as possible, and not to lock it down to specific patch versions.
+트리를 올바르게 해결할 수 없는 경우 충돌하는 요구 사항을 가진 다른 플러그인을 설치하려고 하면 오류가 발생할 수 있습니다. 이러한 이유로 플러그인 요구 사항을 가능한 한 넓게 만들고 특정 패치 버전으로 잠그지 않도록 하세요.
 
-Assuming the host complies with [semver](https://semver.org/), only changes in the host package's major version will break your plugin. Thus, if you've worked with every 1.x version of the host package, use `"^1.0"` or `"1.x"` to express this. If you depend on features introduced in 1.5.2, use `"^1.5.2"`.
+호스트가 [semver](https://semver.org/)를 준수한다고 가정하면, 호스트 패키지의 주요 버전 변경만이 플러그인을 깨뜨릴 것입니다. 따라서 호스트 패키지의 모든 1.x 버전과 작동했다면 `"^1.0"` 또는 `"1.x"`를 사용하여 이를 표현하세요. 1.5.2에서 도입된 기능에 의존한다면 `"^1.5.2"`를 사용하세요.
 
 ### peerDependenciesMeta
 
-The `peerDependenciesMeta` field serves to provide npm more information on how your peer dependencies are to be used. Specifically, it allows peer dependencies to be marked as optional. Npm will not automatically install optional peer dependencies. This allows you to integrate and interact with a variety of host packages without requiring all of them to be installed.
+`peerDependenciesMeta` 필드는 npm에 피어 의존성 사용 방법에 대한 추가 정보를 제공합니다. 특히 피어 의존성을 선택적으로 표시할 수 있습니다. npm은 선택적 피어 의존성을 자동으로 설치하지 않습니다. 이를 통해 다양한 호스트 패키지와 통합하고 상호 작용할 수 있지만 모두 설치할 필요는 없습니다.
 
-For example:
+예를 들어:
 
 ```json
 {
@@ -700,13 +699,13 @@ For example:
 
 ### bundleDependencies
 
-This defines an array of package names that will be bundled when publishing the package.
+이는 패키지를 배포할 때 번들로 제공될 패키지 이름의 배열을 정의합니다.
 
-In cases where you need to preserve npm packages locally or have them available through a single file download, you can bundle the packages in a tarball file by specifying the package names in the `bundleDependencies` array and executing `npm pack`.
+npm 패키지를 로컬에 보존하거나 단일 파일 다운로드를 통해 사용할 수 있어야 하는 경우, `bundleDependencies` 배열에 패키지 이름을 지정하고 `npm pack`을 실행하여 패키지를 tarball 파일로 번들할 수 있습니다.
 
-For example:
+예를 들어:
 
-If we define a package.json like this:
+다음과 같이 package.json을 정의하면:
 
 ```json
 {
@@ -716,17 +715,17 @@ If we define a package.json like this:
 }
 ```
 
-we can obtain `awesome-web-framework-1.0.0.tgz` file by running `npm pack`. This file contains the dependencies `renderized` and `super-streams` which can be installed in a new project by executing `npm install awesome-web-framework-1.0.0.tgz`. Note that the package names do not include any versions, as that information is specified in `dependencies`.
+`npm pack`을 실행하여 `awesome-web-framework-1.0.0.tgz` 파일을 얻을 수 있습니다. 이 파일에는 `renderized`와 `super-streams` 의존성이 포함되어 있으며, `npm install awesome-web-framework-1.0.0.tgz`를 실행하여 새 프로젝트에 설치할 수 있습니다. 패키지 이름에는 버전이 포함되지 않습니다. 해당 정보는 `dependencies`에 지정되어 있기 때문입니다.
 
-If this is spelled `"bundledDependencies"`, then that is also honored.
+이것을 `"bundledDependencies"`로 철자를 쓰면 그것도 인정됩니다.
 
-Alternatively, `"bundleDependencies"` can be defined as a boolean value. A value of `true` will bundle all dependencies, a value of `false` will bundle none.
+또는 `"bundleDependencies"`를 불리언 값으로 정의할 수 있습니다. `true` 값은 모든 의존성을 번들로 제공하고, `false` 값은 아무것도 번들로 제공하지 않습니다.
 
 ### optionalDependencies
 
-If a dependency can be used, but you would like npm to proceed if it cannot be found or fails to install, then you may put it in the `optionalDependencies` object. This is a map of package name to version or URL, just like the `dependencies` object. The difference is that build failures do not cause installation to fail. Running `npm install --omit=optional` will prevent these dependencies from being installed.
+의존성을 사용할 수 있지만 찾을 수 없거나 설치에 실패해도 npm이 계속 진행하기를 원한다면 `optionalDependencies` 객체에 넣을 수 있습니다. 이는 `dependencies` 객체와 마찬가지로 패키지 이름을 버전 또는 URL에 매핑한 것입니다. 차이점은 빌드 실패가 설치 실패를 초래하지 않는다는 것입니다. `npm install --omit=optional`을 실행하면 이러한 의존성이 설치되는 것을 방지할 수 있습니다.
 
-It is still your program's responsibility to handle the lack of the dependency. For example, something like this:
+의존성의 부재를 처리하는 것은 여전히 프로그램의 책임입니다. 예를 들어, 다음과 같은 방식입니다:
 
 ```js
 try {
@@ -739,24 +738,24 @@ if (notGoodFooVersion(fooVersion)) {
   foo = null;
 }
 
-// .. then later in your program ..
+// .. 그리고 나중에 프로그램에서 ..
 
 if (foo) {
   foo.doFooThings();
 }
 ```
 
-Entries in `optionalDependencies` will override entries of the same name in `dependencies`, so it's usually best to only put in one place.
+`optionalDependencies`의 항목은 `dependencies`의 동일한 이름의 항목을 재정의하므로 한 곳에만 넣는 것이 일반적으로 가장 좋습니다.
 
 ### overrides
 
-If you need to make specific changes to dependencies of your dependencies, for example replacing the version of a dependency with a known security issue, replacing an existing dependency with a fork, or making sure that the same version of a package is used everywhere, then you may add an override.
+의존성의 의존성에 대해 특정 변경을 해야 하는 경우, 예를 들어 알려진 보안 문제가 있는 의존성의 버전을 교체하거나, 기존 의존성을 포크로 교체하거나, 모든 곳에서 동일한 버전의 패키지가 사용되도록 하려면 override를 추가할 수 있습니다.
 
-Overrides provide a way to replace a package in your dependency tree with another version, or another package entirely. These changes can be scoped as specific or as vague as desired.
+Overrides는 의존성 트리에서 패키지를 다른 버전이나 완전히 다른 패키지로 교체하는 방법을 제공합니다. 이러한 변경은 원하는 만큼 구체적이거나 모호하게 범위를 지정할 수 있습니다.
 
-Overrides are only considered in the root `package.json` file for a project. Overrides in installed dependencies (including [workspaces](/cli/v10/using-npm/workspaces)) are not considered in dependency tree resolution. Published packages may dictate their resolutions by pinning dependencies or using an [`npm-shrinkwrap.json`](/cli/v10/configuring-npm/npm-shrinkwrap-json) file.
+Overrides는 프로젝트의 루트 `package.json` 파일에서만 고려됩니다. 설치된 의존성(워크스페이스 포함)의 Overrides는 의존성 트리 해결에서 고려되지 않습니다. 배포된 패키지는 의존성을 고정하거나 [`npm-shrinkwrap.json`](/cli/v10/configuring-npm/npm-shrinkwrap-json) 파일을 사용하여 해결을 지시할 수 있습니다.
 
-To make sure the package `foo` is always installed as version `1.0.0` no matter what version your dependencies rely on:
+의존성이 어떤 버전에 의존하든 상관없이 패키지 `foo`가 항상 버전 `1.0.0`으로 설치되도록 하려면:
 
 ```json
 {
@@ -766,7 +765,7 @@ To make sure the package `foo` is always installed as version `1.0.0` no matter 
 }
 ```
 
-The above is a short hand notation, the full object form can be used to allow overriding a package itself as well as a child of the package. This will cause `foo` to always be `1.0.0` while also making `bar` at any depth beyond `foo` also `1.0.0`:
+위의 것은 축약 표기법이며, 전체 객체 형식을 사용하여 패키지 자체와 패키지의 자식을 재정의할 수 있습니다. 이는 `foo`를 항상 `1.0.0`으로 만들면서 `foo` 이하의 모든 깊이에서 `bar`도 `1.0.0`으로 만듭니다:
 
 ```json
 {
@@ -779,7 +778,7 @@ The above is a short hand notation, the full object form can be used to allow ov
 }
 ```
 
-To only override `foo` to be `1.0.0` when it's a child (or grandchild, or great grandchild, etc) of the package `bar`:
+`foo`를 `1.0.0`으로 재정의하되 패키지 `bar`의 자식(또는 손자, 또는 증손자 등)인 경우에만 재정의하려면:
 
 ```json
 {
@@ -791,7 +790,7 @@ To only override `foo` to be `1.0.0` when it's a child (or grandchild, or great 
 }
 ```
 
-Keys can be nested to any arbitrary length. To override `foo` only when it's a child of `bar` and only when `bar` is a child of `baz`:
+키는 임의의 길이로 중첩될 수 있습니다. `foo`를 `bar`의 자식이고 `bar`가 `baz`의 자식인 경우에만 재정의하려면:
 
 ```json
 {
@@ -805,7 +804,7 @@ Keys can be nested to any arbitrary length. To override `foo` only when it's a c
 }
 ```
 
-The key of an override can also include a version, or range of versions. To override `foo` to `1.0.0`, but only when it's a child of `bar@2.0.0`:
+override의 키에는 버전이나 버전 범위도 포함될 수 있습니다. `foo`를 `1.0.0`으로 재정의하되 `bar@2.0.0`의 자식인 경우에만:
 
 ```json
 {
@@ -817,7 +816,7 @@ The key of an override can also include a version, or range of versions. To over
 }
 ```
 
-You may not set an override for a package that you directly depend on unless both the dependency and the override itself share the exact same spec. To make this limitation easier to deal with, overrides may also be defined as a reference to a spec for a direct dependency by prefixing the name of the package you wish the version to match with a `$`.
+직접 의존하는 패키지에 대해서는 의존성과 override 자체가 정확히 동일한 사양을 공유하지 않는 한 override를 설정할 수 없습니다. 이 제한을 더 쉽게 다루기 위해, override는 직접 의존성에 대한 사양에 대한 참조로 정의될 수도 있습니다. 버전을 일치시키려는 패키지의 이름 앞에 `$`를 붙여 사용합니다.
 
 ```json
 {
@@ -825,13 +824,13 @@ You may not set an override for a package that you directly depend on unless bot
     "foo": "^1.0.0"
   },
   "overrides": {
-    // BAD, will throw an EOVERRIDE error
+    // 잘못됨, EOVERRIDE 오류를 발생시킴
     // "foo": "^2.0.0"
-    // GOOD, specs match so override is allowed
+    // 좋음, 사양이 일치하므로 override가 허용됨
     // "foo": "^1.0.0"
-    // BEST, the override is defined as a reference to the dependency
+    // 가장 좋음, override가 의존성에 대한 참조로 정의됨
     "foo": "$foo",
-    // the referenced package does not need to match the overridden one
+    // 참조된 패키지가 재정의된 패키지와 일치할 필요는 없음
     "bar": "$foo"
   }
 }
@@ -839,7 +838,7 @@ You may not set an override for a package that you directly depend on unless bot
 
 ### engines
 
-You can specify the version of node that your stuff works on:
+당신의 코드가 작동하는 node 버전을 지정할 수 있습니다:
 
 ```json
 {
@@ -849,9 +848,9 @@ You can specify the version of node that your stuff works on:
 }
 ```
 
-And, like with dependencies, if you don't specify the version (or if you specify "\*" as the version), then any version of node will do.
+그리고 의존성과 마찬가지로, 버전을 지정하지 않거나 (또는 "\*"를 버전으로 지정하면) 모든 버전의 node가 괜찮습니다.
 
-You can also use the "engines" field to specify which versions of npm are capable of properly installing your program. For example:
+또한 "engines" 필드를 사용하여 어떤 버전의 npm이 프로그램을 제대로 설치할 수 있는지 지정할 수 있습니다. 예를 들어:
 
 ```json
 {
@@ -861,11 +860,11 @@ You can also use the "engines" field to specify which versions of npm are capabl
 }
 ```
 
-Unless the user has set the [`engine-strict` config](/cli/v10/using-npm/config#engine-strict) flag, this field is advisory only and will only produce warnings when your package is installed as a dependency.
+사용자가 [`engine-strict` 설정 플래그](/cli/v10/using-npm/config#engine-strict)를 설정하지 않은 한, 이 필드는 권고사항일 뿐이며 패키지가 의존성으로 설치될 때만 경고를 생성합니다.
 
 ### os
 
-You can specify which operating systems your module will run on:
+모듈이 실행될 수 있는 운영 체제를 지정할 수 있습니다:
 
 ```json
 {
@@ -873,7 +872,7 @@ You can specify which operating systems your module will run on:
 }
 ```
 
-You can also block instead of allowing operating systems, just prepend the blocked os with a '!':
+또한 운영 체제를 허용하는 대신 차단할 수도 있습니다. 차단하려는 운영 체제 앞에 '!'를 붙이면 됩니다:
 
 ```json
 {
@@ -881,13 +880,13 @@ You can also block instead of allowing operating systems, just prepend the block
 }
 ```
 
-The host operating system is determined by `process.platform`
+호스트 운영 체제는 `process.platform`에 의해 결정됩니다.
 
-It is allowed to both block and allow an item, although there isn't any good reason to do this.
+어떤 항목을 동시에 허용하고 차단하는 것도 가능하지만, 그렇게 할 필요는 거의 없습니다.
 
 ### cpu
 
-If your code only runs on certain cpu architectures, you can specify which ones.
+코드가 특정 CPU 아키텍처에서만 실행된다면 지정할 수 있습니다.
 
 ```json
 {
@@ -895,7 +894,7 @@ If your code only runs on certain cpu architectures, you can specify which ones.
 }
 ```
 
-Like the `os` option, you can also block architectures:
+`os` 옵션과 마찬가지로 아키텍처를 차단할 수도 있습니다:
 
 ```json
 {
@@ -903,27 +902,27 @@ Like the `os` option, you can also block architectures:
 }
 ```
 
-The host architecture is determined by `process.arch`
+호스트 아키텍처는 `process.arch`에 의해 결정됩니다.
 
 ### private
 
-If you set `"private": true` in your package.json, then npm will refuse to publish it.
+package.json에 `"private": true`를 설정하면 npm은 패키지를 배포하는 것을 거부합니다.
 
-This is a way to prevent accidental publication of private repositories. If you would like to ensure that a given package is only ever published to a specific registry (for example, an internal registry), then use the `publishConfig` dictionary described below to override the `registry` config param at publish-time.
+이는 비공개 저장소의 우발적인 배포를 방지하는 방법입니다. 특정 레지스트리에만 패키지가 배포되도록 하려면 (예: 내부 레지스트리) 아래에 설명된 `publishConfig` 사전을 사용하여 배포 시 `registry` 설정 매개변수를 재정의하세요.
 
 ### publishConfig
 
-This is a set of config values that will be used at publish-time. It's especially handy if you want to set the tag, registry or access, so that you can ensure that a given package is not tagged with "latest", published to the global public registry or that a scoped module is private by default.
+이는 배포 시 사용될 설정 값 집합입니다. 태그, 레지스트리 또는 접근 권한을 설정하여 주어진 패키지가 "latest"로 태그되지 않거나, 전역 공개 레지스트리에 배포되지 않거나, 스코프가 지정된 모듈이 기본적으로 비공개가 되도록 할 수 있어 특히 유용합니다.
 
-See [`config`](/cli/v10/using-npm/config) to see the list of config options that can be overridden.
+재정의할 수 있는 설정 옵션 목록은 [`config`](/cli/v10/using-npm/config)를 참조하세요.
 
 ### workspaces
 
-The optional `workspaces` field is an array of file patterns that describes locations within the local file system that the install client should look up to find each [workspace](/cli/v10/using-npm/workspaces) that needs to be symlinked to the top level `node_modules` folder.
+선택적 `workspaces` 필드는 설치 클라이언트가 최상위 `node_modules` 폴더에 심볼릭 링크해야 하는 각 [워크스페이스](/cli/v10/using-npm/workspaces)를 찾기 위해 로컬 파일 시스템 내에서 찾아야 하는 위치를 설명하는 파일 패턴 배열입니다.
 
-It can describe either the direct paths of the folders to be used as workspaces or it can define globs that will resolve to these same folders.
+워크스페이스로 사용될 폴더의 직접 경로를 설명하거나 동일한 폴더로 해석될 glob을 정의할 수 있습니다.
 
-In the following example, all folders located inside the folder `./packages` will be treated as workspaces as long as they have valid `package.json` files inside them:
+다음 예에서는 `./packages` 폴더 내부에 있는 모든 폴더가 내부에 유효한 `package.json` 파일이 있는 한 워크스페이스로 취급됩니다:
 
 ```json
 {
@@ -932,25 +931,25 @@ In the following example, all folders located inside the folder `./packages` wil
 }
 ```
 
-See [`workspaces`](/cli/v10/using-npm/workspaces) for more examples.
+더 많은 예시는 [`workspaces`](/cli/v10/using-npm/workspaces)를 참조하세요.
 
-### DEFAULT VALUES
+### 기본값
 
-npm will default some values based on package contents.
+npm은 패키지 내용을 기반으로 일부 값을 기본값으로 설정합니다.
 
 - `"scripts": {"start": "node server.js"}`
 
-  If there is a `server.js` file in the root of your package, then npm will default the `start` command to `node server.js`.
+  패키지의 루트에 `server.js` 파일이 있으면 npm은 기본적으로 `start` 명령을 `node server.js`로 설정합니다.
 
 - `"scripts":{"install": "node-gyp rebuild"}`
 
-  If there is a `binding.gyp` file in the root of your package and you have not defined an `install` or `preinstall` script, npm will default the `install` command to compile using node-gyp.
+  패키지의 루트에 `binding.gyp` 파일이 있고 `install` 또는 `preinstall` 스크립트를 정의하지 않았다면, npm은 기본적으로 `install` 명령을 node-gyp를 사용하여 컴파일하도록 설정합니다.
 
 - `"contributors": [...]`
 
-  If there is an `AUTHORS` file in the root of your package, npm will treat each line as a `Name <email> (url)` format, where email and url are optional. Lines which start with a `#` or are blank, will be ignored.
+  패키지의 루트에 `AUTHORS` 파일이 있으면 npm은 각 줄을 `Name <email> (url)` 형식으로 취급합니다. 여기서 email과 url은 선택사항입니다. `#`로 시작하거나 빈 줄은 무시됩니다.
 
-### SEE ALSO
+### 참고
 
 - [semver](https://github.com/npm/node-semver#versions)
 - [workspaces](/cli/v10/using-npm/workspaces)

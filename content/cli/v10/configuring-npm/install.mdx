@@ -1,7 +1,7 @@
 ---
-title: install
+title: 설치
 section: 5
-description: Download and install node and npm
+description: node와 npm 다운로드 및 설치
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/configuring-npm/install.md
@@ -17,51 +17,51 @@ redirect_from:
   - /files/install
 ---
 
-### Description
+### 설명
 
-To publish and install packages to and from the public npm registry, you must install Node.js and the npm command line interface using either a Node version manager or a Node installer. **We strongly recommend using a Node version manager to install Node.js and npm.** We do not recommend using a Node installer, since the Node installation process installs npm in a directory with local permissions and can cause permissions errors when you run npm packages globally.
+공개 npm 레지스트리에서 패키지를 게시하고 설치하려면 Node 버전 관리자나 Node 설치 프로그램을 사용하여 Node.js와 npm 명령줄 인터페이스를 설치해야 합니다. **Node.js와 npm을 설치하기 위해 Node 버전 관리자를 사용할 것을 강력히 권장합니다.** Node 설치 프로그램은 로컬 권한이 있는 디렉터리에 npm을 설치하므로 npm 패키지를 전역적으로 실행할 때 권한 오류가 발생할 수 있기 때문에 권장하지 않습니다.
 
-### Overview
+### 개요
 
-- [Checking your version of npm and Node.js](#checking-your-version-of-npm-and-nodejs)
-- [Using a Node version manager to install Node.js and npm](#using-a-node-version-manager-to-install-nodejs-and-npm)
-- [Using a Node installer to install Node.js and npm](#using-a-node-installer-to-install-nodejs-and-npm)
+- [npm과 Node.js 버전 확인하기](#npm과-nodejs-버전-확인하기)
+- [Node 버전 관리자를 사용하여 Node.js와 npm 설치하기](#node-버전-관리자를-사용하여-nodejs와-npm-설치하기)
+- [Node 설치 프로그램을 사용하여 Node.js와 npm 설치하기](#node-설치-프로그램을-사용하여-nodejs와-npm-설치하기)
 
-### Checking your version of npm and Node.js
+### npm과 Node.js 버전 확인하기
 
-To see if you already have Node.js and npm installed and check the installed version, run the following commands:
+Node.js와 npm이 이미 설치되어 있는지 확인하고 설치된 버전을 확인하려면 다음 명령어를 실행하세요:
 
 ```
 node -v
 npm -v
 ```
 
-### Using a Node version manager to install Node.js and npm
+### Node 버전 관리자를 사용하여 Node.js와 npm 설치하기
 
-Node version managers allow you to install and switch between multiple versions of Node.js and npm on your system so you can test your applications on multiple versions of npm to ensure they work for users on different versions. You can [search for them on GitHub](https://github.com/search?q=node+version+manager+archived%3Afalse&type=repositories&ref=advsearch).
+Node 버전 관리자를 사용하면 시스템에 여러 버전의 Node.js와 npm을 설치하고 전환할 수 있어, 다양한 npm 버전에서 애플리케이션을 테스트하여 다른 버전의 사용자들에게도 작동하는지 확인할 수 있습니다. [GitHub에서 Node 버전 관리자를 검색](https://github.com/search?q=node+version+manager+archived%3Afalse&type=repositories&ref=advsearch)할 수 있습니다.
 
-### Using a Node installer to install Node.js and npm
+### Node 설치 프로그램을 사용하여 Node.js와 npm 설치하기
 
-If you are unable to use a Node version manager, you can use a Node installer to install both Node.js and npm on your system.
+Node 버전 관리자를 사용할 수 없는 경우, Node 설치 프로그램을 사용하여 시스템에 Node.js와 npm을 모두 설치할 수 있습니다.
 
-- [Node.js installer](https://nodejs.org/en/download/)
-- [NodeSource installer](https://github.com/nodesource/distributions). If you use Linux, we recommend that you use a NodeSource installer.
+- [Node.js 설치 프로그램](https://nodejs.org/en/download/)
+- [NodeSource 설치 프로그램](https://github.com/nodesource/distributions). Linux를 사용하는 경우 NodeSource 설치 프로그램을 사용하는 것이 좋습니다.
 
-#### OS X or Windows Node installers
+#### OS X 또는 Windows Node 설치 프로그램
 
-If you're using OS X or Windows, use one of the installers from the [Node.js download page](https://nodejs.org/en/download/). Be sure to install the version labeled **LTS**. Other versions have not yet been tested with npm.
+OS X 또는 Windows를 사용하는 경우 [Node.js 다운로드 페이지](https://nodejs.org/en/download/)에서 설치 프로그램 중 하나를 사용하세요. **LTS**라고 표시된 버전을 설치해야 합니다. 다른 버전은 아직 npm과 함께 테스트되지 않았습니다.
 
-#### Linux or other operating systems Node installers
+#### Linux 또는 기타 운영 체제 Node 설치 프로그램
 
-If you're using Linux or another operating system, use one of the following installers:
+Linux 또는 다른 운영 체제를 사용하는 경우 다음 설치 프로그램 중 하나를 사용하세요:
 
-- [NodeSource installer](https://github.com/nodesource/distributions) (recommended)
-- One of the installers on the [Node.js download page](https://nodejs.org/en/download/)
+- [NodeSource 설치 프로그램](https://github.com/nodesource/distributions) (권장)
+- [Node.js 다운로드 페이지](https://nodejs.org/en/download/)의 설치 프로그램 중 하나
 
-Or see [this page](https://nodejs.org/en/download/package-manager/) to install npm for Linux in the way many Linux developers prefer.
+또는 많은 Linux 개발자가 선호하는 방식으로 Linux용 npm을 설치하려면 [이 페이지](https://nodejs.org/en/download/package-manager/)를 참조하세요.
 
-#### Less-common operating systems
+#### 비주류 운영 체제
 
-For more information on installing Node.js on a variety of operating systems, see [this page][pkg-mgr].
+다양한 운영 체제에 Node.js를 설치하는 방법에 대한 자세한 내용은 [이 페이지][pkg-mgr]를 참조하세요.
 
 [pkg-mgr]: https://nodejs.org/en/download/package-manager/

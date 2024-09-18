@@ -1,7 +1,7 @@
 ---
 title: npm-login
 section: 1
-description: Login to a registry user account
+description: 레지스트리 사용자 계정에 로그인
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/commands/npm-login.md
@@ -35,70 +35,69 @@ redirect_from:
   - /commands/npm-login
 ---
 
-### Synopsis
+### 개요
 
 ```bash
 npm login
 ```
 
-Note: This command is unaware of workspaces.
+참고: 이 명령은 작업 공간을 인식하지 않습니다.
 
-### Description
+### 설명
 
-Verify a user in the specified registry, and save the credentials to the `.npmrc` file. If no registry is specified, the default registry will be used (see [`config`](/cli/v10/using-npm/config)).
+지정된 레지스트리에서 사용자를 확인하고 자격 증명을 `.npmrc` 파일에 저장합니다. 레지스트리가 지정되지 않은 경우 기본 레지스트리가 사용됩니다 ([`config`](/cli/v10/using-npm/config) 참조).
 
-When using `legacy` for your `auth-type`, the username and password, are read in from prompts.
+`auth-type`에 `legacy`를 사용할 때는 사용자 이름과 비밀번호를 프롬프트에서 읽습니다.
 
-To reset your password, go to [https://www.npmjs.com/forgot](https://www.npmjs.com/forgot)
+비밀번호를 재설정하려면 [https://www.npmjs.com/forgot](https://www.npmjs.com/forgot)로 이동하세요.
 
-To change your email address, go to [https://www.npmjs.com/email-edit](https://www.npmjs.com/email-edit)
+이메일 주소를 변경하려면 [https://www.npmjs.com/email-edit](https://www.npmjs.com/email-edit)로 이동하세요.
 
-You may use this command multiple times with the same user account to authorize on a new machine. When authenticating on a new machine, the username, password and email address must all match with your existing record.
+새 기기에서 인증하기 위해 동일한 사용자 계정으로 이 명령을 여러 번 사용할 수 있습니다. 새 기기에서 인증할 때는 사용자 이름, 비밀번호 및 이메일 주소가 모두 기존 기록과 일치해야 합니다.
 
-### Configuration
+### 구성
 
 #### `registry`
 
-- Default: "https://registry.npmjs.org/"
-- Type: URL
+- 기본값: "https://registry.npmjs.org/"
+- 유형: URL
 
-The base URL of the npm registry.
+npm 레지스트리의 기본 URL입니다.
 
 #### `scope`
 
-- Default: the scope of the current project, if any, or ""
-- Type: String
+- 기본값: 현재 프로젝트의 스코프(있다면) 또는 ""
+- 유형: String
 
-Associate an operation with a scope for a scoped registry.
+스코프가 지정된 레지스트리에 대한 작업을 스코프와 연결합니다.
 
-Useful when logging in to or out of a private registry:
+프라이빗 레지스트리에 로그인하거나 로그아웃할 때 유용합니다:
 
 ```
-# log in, linking the scope to the custom registry
+# 로그인하고 스코프를 사용자 정의 레지스트리에 연결
 npm login --scope=@mycorp --registry=https://registry.mycorp.com
 
-# log out, removing the link and the auth token
+# 로그아웃하고 링크와 인증 토큰 제거
 npm logout --scope=@mycorp
 ```
 
-This will cause `@mycorp` to be mapped to the registry for future installation of packages specified according to the pattern `@mycorp/package`.
+이렇게 하면 향후 `@mycorp/package` 패턴에 따라 지정된 패키지를 설치할 때 `@mycorp`가 레지스트리에 매핑됩니다.
 
-This will also cause `npm init` to create a scoped package.
+또한 `npm init`이 스코프가 지정된 패키지를 생성하게 됩니다.
 
 ```
-# accept all defaults, and create a package named "@foo/whatever",
-# instead of just named "whatever"
+# 모든 기본값을 수락하고 "whatever" 대신 "@foo/whatever"라는 이름의 패키지 생성
 npm init --scope=@foo --yes
 ```
 
 #### `auth-type`
 
-- Default: "web"
-- Type: "legacy" or "web"
+- 기본값: "web"
+- 유형: "legacy" 또는 "web"
 
-What authentication strategy to use with `login`. Note that if an `otp` config is given, this value will always be set to `legacy`.
+`login`에 사용할 인증 전략입니다. `otp` 구성이 지정된 경우 이 값은 항상 `legacy`로 설정됩니다.
 
-### See Also
+### 참조
 
 - [npm registry](/cli/v10/using-npm/registry)
 - [npm config](/cli/v10/commands/npm-config)

@@ -1,61 +1,61 @@
 ---
-title: About two-factor authentication
+title: 2단계 인증에 대하여
 redirect_from:
   - /getting-started/using-two-factor-authentication
 ---
 
-[Two-factor authentication (2FA)][2fa] protects against unauthorized access to your account by confirming your identity using:
+[2단계 인증(2FA)][2fa]은 다음을 사용하여 귀하의 신원을 확인함으로써 계정에 대한 무단 접근을 방지합니다:
 
-- Something you know (e.g., a password).
-- Something you have (e.g., an ID badge or a cryptographic key).
-- Something you are (e.g., a fingerprint or other biometric data).
+- 귀하가 알고 있는 것 (예: 비밀번호)
+- 귀하가 가지고 있는 것 (예: ID 배지 또는 암호화 키)
+- 귀하의 신체적 특징 (예: 지문 또는 기타 생체 데이터)
 
-When you enable 2FA, you will be prompted for a second form of authentication before performing certain actions on your account or packages to which you have write access. Depending on your 2FA configuration you will be either prompted to authenticate with a [security-key][webauthn] or a [time-based one-time password (TOTP)][totp].
+2FA를 활성화하면, 계정에서 특정 작업을 수행하거나 쓰기 권한이 있는 패키지에 접근하기 전에 두 번째 형태의 인증을 요구받게 됩니다. 2FA 구성에 따라 [보안 키][webauthn] 또는 [시간 기반 일회용 비밀번호(TOTP)][totp]로 인증하라는 메시지가 표시됩니다.
 
-- The security-key flow allows you to use biometric devices such as Apple [Touch ID][touch-id], [Face ID][face-id] or [Windows Hello][windows-hello] as well as physical keys such as [Yubikey][yubikey], [Thetis][thetis] or [Feitian][feitian] as your 2FA.
-- To configure TOTP you will need to install an authenticator application that can generate OTPs such as [Authy][authy], [Google Authenticator][google-authenticator], or [Microsoft Authenticator][microsoft-authenticator] on your mobile device.
+- 보안 키 흐름을 사용하면 Apple [Touch ID][touch-id], [Face ID][face-id] 또는 [Windows Hello][windows-hello]와 같은 생체 인식 장치와 [Yubikey][yubikey], [Thetis][thetis] 또는 [Feitian][feitian]과 같은 물리적 키를 2FA로 사용할 수 있습니다.
+- TOTP를 구성하려면 모바일 기기에 [Authy][authy], [Google Authenticator][google-authenticator] 또는 [Microsoft Authenticator][microsoft-authenticator]와 같은 OTP를 생성할 수 있는 인증 애플리케이션을 설치해야 합니다.
 
 <Note>
 
-**Note:** Two-factor authentication provides the best possible security for your account against attackers. We strongly recommend enabling 2FA on your account as soon as possible after you sign up.
+**참고:** 2단계 인증은 공격자로부터 계정을 보호하는 최상의 보안을 제공합니다. 가입 후 가능한 한 빨리 계정에서 2FA를 활성화할 것을 강력히 권장합니다.
 
 </Note>
 
-## Two-factor authentication on npm
+## npm의 2단계 인증
 
-Two-factor authentication on npm can be enabled for authorization and writes, or authorization only.
+npm의 2단계 인증은 인증 및 쓰기 작업에 대해, 또는 인증만을 위해 활성화할 수 있습니다.
 
-### Authorization and writes
+### 인증 및 쓰기
 
-By default, 2FA is enabled for authorization and writes. We will request a second form of authentication for certain authorized actions, as well as write actions.
+기본적으로 2FA는 인증 및 쓰기 작업에 대해 활성화됩니다. 특정 인증 작업과 쓰기 작업에 대해 두 번째 형태의 인증을 요청합니다.
 
-| Action                                            | CLI command                                            |
-| :------------------------------------------------ | :----------------------------------------------------- |
-| Log in to npm                                     | [`npm login`][login]                                   |
-| Change profile settings (including your password) | [`npm profile set`][profile-set]                       |
-| Change 2FA modes for your user account            | [`npm profile enable-2fa auth-and-writes`][2fa-enable] |
-| Disable 2FA for your user account                 | [`npm profile disable-2fa`][2fa-disable]               |
-| Create tokens                                     | [`npm token create`][token-create]                     |
-| Revoke tokens                                     | [`npm token revoke`][token-revoke]                     |
-| Publish packages                                  | [`npm publish`][publish]                               |
-| Unpublish packages                                | [`npm unpublish`][unpublish]                           |
-| Deprecate packages                                | [`npm deprecate`][deprecate]                           |
-| Change package visibility                         | [`npm access public/restricted`][access]               |
-| Change user and team package access               | [`npm access grant/revoke`][access]                    |
-| [Change package 2FA requirements][pkg-2fa]        | [`npm access 2fa-required/2fa-not-required`][access]   |
+| 작업                                | CLI 명령어                                             |
+| :---------------------------------- | :----------------------------------------------------- |
+| npm에 로그인                        | [`npm login`][login]                                   |
+| 프로필 설정 변경 (비밀번호 포함)    | [`npm profile set`][profile-set]                       |
+| 사용자 계정의 2FA 모드 변경         | [`npm profile enable-2fa auth-and-writes`][2fa-enable] |
+| 사용자 계정의 2FA 비활성화          | [`npm profile disable-2fa`][2fa-disable]               |
+| 토큰 생성                           | [`npm token create`][token-create]                     |
+| 토큰 폐기                           | [`npm token revoke`][token-revoke]                     |
+| 패키지 게시                         | [`npm publish`][publish]                               |
+| 패키지 게시 취소                    | [`npm unpublish`][unpublish]                           |
+| 패키지 폐기                         | [`npm deprecate`][deprecate]                           |
+| 패키지 가시성 변경                  | [`npm access public/restricted`][access]               |
+| 사용자 및 팀 패키지 접근 권한 변경  | [`npm access grant/revoke`][access]                    |
+| [패키지 2FA 요구사항 변경][pkg-2fa] | [`npm access 2fa-required/2fa-not-required`][access]   |
 
-### Authorization only
+### 인증만
 
-If you enable 2FA for authorization only. We will request a second form of authentication only for certain authorized actions.
+2FA를 인증만을 위해 활성화하면, 특정 인증 작업에 대해서만 두 번째 형태의 인증을 요청합니다.
 
-| Action                                            | CLI command                                      |
-| :------------------------------------------------ | :----------------------------------------------- |
-| Log in to npm                                     | [`npm login`][login]                             |
-| Change profile settings (including your password) | [`npm profile set`][profile-set]                 |
-| Change 2FA modes for your user account            | [`npm profile enable-2fa auth-only`][2fa-enable] |
-| Disable 2FA for your user account                 | [`npm profile disable-2fa`][2fa-disable]         |
-| Create tokens                                     | [`npm token create`][token-create]               |
-| Revoke tokens                                     | [`npm token revoke`][token-revoke]               |
+| 작업                             | CLI 명령어                                       |
+| :------------------------------- | :----------------------------------------------- |
+| npm에 로그인                     | [`npm login`][login]                             |
+| 프로필 설정 변경 (비밀번호 포함) | [`npm profile set`][profile-set]                 |
+| 사용자 계정의 2FA 모드 변경      | [`npm profile enable-2fa auth-only`][2fa-enable] |
+| 사용자 계정의 2FA 비활성화       | [`npm profile disable-2fa`][2fa-disable]         |
+| 토큰 생성                        | [`npm token create`][token-create]               |
+| 토큰 폐기                        | [`npm token revoke`][token-revoke]               |
 
 [login]: https://docs.npmjs.com/cli/adduser
 [profile-set]: https://docs.npmjs.com/cli/profile

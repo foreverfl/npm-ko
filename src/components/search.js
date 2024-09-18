@@ -1,21 +1,21 @@
 import React from 'react'
-import {Button, ActionList, Box, Text} from '@primer/react'
-import {XIcon, SearchIcon} from '@primer/octicons-react'
-import {AnimatePresence, motion} from 'framer-motion'
-import {FocusOn} from 'react-focus-on'
+import { Button, ActionList, Box, Text } from '@primer/react'
+import { XIcon, SearchIcon } from '@primer/octicons-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { FocusOn } from 'react-focus-on'
 import TextInput from './text-input'
 import useSiteMetadata from '../hooks/use-site-metadata'
-import {HEADER_BAR, HEADER_HEIGHT} from '../constants'
-import {LightTheme} from '../theme'
-import {LinkNoUnderline} from './link'
+import { HEADER_BAR, HEADER_HEIGHT } from '../constants'
+import { LightTheme } from '../theme'
+import { LinkNoUnderline } from './link'
 import * as getNav from '../util/get-nav'
 import omit from '../util/omit'
 
-const SearchResults = ({results, getItemProps, highlightedIndex}) => {
+const SearchResults = ({ results, getItemProps, highlightedIndex }) => {
   const siteMetadata = useSiteMetadata()
 
   if (!results || results.length === 0) {
-    return <Box sx={{fontSize: 2, px: 3, py: 3}}>No results</Box>
+    return <Box sx={{ fontSize: 2, px: 3, py: 3 }}>No results</Box>
   }
 
   return (
@@ -35,13 +35,13 @@ const SearchResults = ({results, getItemProps, highlightedIndex}) => {
             key={item.path}
             // fixes a bug between downshift and react/primer where the search result item is always disabled
             // this is safe to remove because we know we never have any disabled search results
-            {...omit(getItemProps({item, index}), 'aria-disabled')}
+            {...omit(getItemProps({ item, index }), 'aria-disabled')}
             as={LinkNoUnderline}
             to={item.path}
             active={highlightedIndex === index}
           >
-            <Box sx={{display: 'flex', flexDirection: 'column', flex: '0 0 auto'}}>
-              <Text sx={{fontSize: 0}}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', flex: '0 0 auto' }}>
+              <Text sx={{ fontSize: 0 }}>
                 {hierarchy.length ? hierarchy.map(s => s.shortName || s.title).join(' / ') : siteMetadata.shortName}
               </Text>
               <Text>{item.title}</Text>
@@ -55,17 +55,17 @@ const SearchResults = ({results, getItemProps, highlightedIndex}) => {
 
 export const Desktop = props => {
   const siteMetadata = useSiteMetadata()
-  const {getInputProps, getMenuProps, resultsOpen, ...rest} = props
+  const { getInputProps, getMenuProps, resultsOpen, ...rest } = props
 
   return (
-    <Box sx={{position: 'relative'}}>
+    <Box sx={{ position: 'relative' }}>
       <TextInput
-        sx={{width: '240px'}}
+        sx={{ width: '240px' }}
         placeholder={`Search ${siteMetadata.title}`}
         aria-label={`Search ${siteMetadata.title}`}
         {...getInputProps()}
       />
-      <Box sx={{position: 'absolute', left: 0, right: 0, pt: 1}} {...getMenuProps()}>
+      <Box sx={{ position: 'absolute', left: 0, right: 0, pt: 1 }} {...getMenuProps()}>
         {resultsOpen ? (
           <LightTheme
             sx={{
@@ -99,7 +99,7 @@ export const Mobile = ({
   ...rest
 }) => {
   const siteMetadata = useSiteMetadata()
-  const getCloseAnimation = exit => (isForceClose ? undefined : {exit})
+  const getCloseAnimation = exit => (isForceClose ? undefined : { exit })
 
   return (
     <>
@@ -131,13 +131,13 @@ export const Mobile = ({
                 }}
                 key="search-backdrop"
                 as={motion.div}
-                initial={{opacity: 0}}
-                animate={{opacity: 1}}
-                transition={{type: 'tween'}}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ type: 'tween' }}
                 onClick={() => resetAndClose(true)}
-                {...getCloseAnimation({opacity: 0})}
+                {...getCloseAnimation({ opacity: 0 })}
               />
-              <Box sx={{display: 'flex', flexDirection: 'column', height: resultsOpen ? '100%' : 'auto'}}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', height: resultsOpen ? '100%' : 'auto' }}>
                 <Box
                   sx={{
                     display: 'flex',
@@ -156,11 +156,11 @@ export const Mobile = ({
                 >
                   <motion.div
                     key="search-box"
-                    initial={{scaleX: 0}}
-                    animate={{scaleX: 1}}
-                    {...getCloseAnimation({scaleX: 0})}
-                    transition={{type: 'tween', ease: 'easeOut', duration: 0.2}}
-                    style={{width: '100%', originX: '100%'}}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    {...getCloseAnimation({ scaleX: 0 })}
+                    transition={{ type: 'tween', ease: 'easeOut', duration: 0.2 }}
+                    style={{ width: '100%', originX: '100%' }}
                   >
                     <Box
                       sx={{
@@ -175,19 +175,19 @@ export const Mobile = ({
                     />
                     <TextInput
                       leadingVisual={SearchIcon}
-                      placeholder={`Search ${siteMetadata.title}`}
-                      aria-label={`Search ${siteMetadata.title}`}
-                      sx={{width: '100%'}}
+                      placeholder={`${siteMetadata.title} 검색하기`}
+                      aria-label={`${siteMetadata.title} 검색하기`}
+                      sx={{ width: '100%' }}
                       {...getInputProps()}
                     />
                   </motion.div>
                   <Box
                     key="button-blocker"
                     as={motion.div}
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1}}
-                    {...getCloseAnimation({scaleX: 0})}
-                    transition={{type: 'tween', ease: 'easeOut', duration: 0.2}}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    {...getCloseAnimation({ scaleX: 0 })}
+                    transition={{ type: 'tween', ease: 'easeOut', duration: 0.2 }}
                     sx={{
                       position: 'absolute',
                       top: 0,
@@ -201,12 +201,12 @@ export const Mobile = ({
                   <Box
                     key="button"
                     as={motion.div}
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1}}
-                    {...getCloseAnimation({opacity: 0})}
-                    transition={{type: 'tween', ease: 'easeOut', duration: 0.2}}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    {...getCloseAnimation({ opacity: 0 })}
+                    transition={{ type: 'tween', ease: 'easeOut', duration: 0.2 }}
                   >
-                    <Button sx={{ml: 3}} aria-label="Cancel" onClick={() => resetAndClose(false)}>
+                    <Button sx={{ ml: 3 }} aria-label="Cancel" onClick={() => resetAndClose(false)}>
                       <XIcon />
                     </Button>
                   </Box>

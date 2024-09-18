@@ -1,7 +1,7 @@
 ---
 title: npm-whoami
 section: 1
-description: Display npm username
+description: npm 사용자 이름 표시
 github_repo: npm/cli
 github_branch: latest
 github_path: docs/lib/content/commands/npm-whoami.md
@@ -35,32 +35,32 @@ redirect_from:
   - /commands/whoami
 ---
 
-### Synopsis
+### 개요
 
 ```bash
 npm whoami
 ```
 
-Note: This command is unaware of workspaces.
+참고: 이 명령은 작업 공간을 인식하지 않습니다.
 
-### Description
+### 설명
 
-Display the npm username of the currently logged-in user.
+현재 로그인한 사용자의 npm 사용자 이름을 표시합니다.
 
-If logged into a registry that provides token-based authentication, then connect to the `/-/whoami` registry endpoint to find the username associated with the token, and print to standard output.
+토큰 기반 인증을 제공하는 레지스트리에 로그인한 경우, `/-/whoami` 레지스트리 엔드포인트에 연결하여 토큰과 연관된 사용자 이름을 찾아 표준 출력에 출력합니다.
 
-If logged into a registry that uses Basic Auth, then simply print the `username` portion of the authentication string.
+기본 인증을 사용하는 레지스트리에 로그인한 경우, 인증 문자열의 `username` 부분만 단순히 출력합니다.
 
-### Configuration
+### 설정
 
 #### `registry`
 
-- Default: "https://registry.npmjs.org/"
-- Type: URL
+- 기본값: "https://registry.npmjs.org/"
+- 유형: URL
 
-The base URL of the npm registry.
+npm 레지스트리의 기본 URL입니다.
 
-### See Also
+### 참조
 
 - [npm config](/cli/v10/commands/npm-config)
 - [npmrc](/cli/v10/configuring-npm/npmrc)

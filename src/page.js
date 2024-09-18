@@ -1,13 +1,13 @@
 import React from 'react'
-import {BaseStyles, themeGet, Box} from '@primer/react'
-import {createGlobalStyle} from 'styled-components'
+import { BaseStyles, themeGet, Box } from '@primer/react'
+import { createGlobalStyle } from 'styled-components'
 import Slugger from 'github-slugger'
 import Header from './components/header'
 import Sidebar from './components/sidebar'
-import {SkipBox, SkipLink} from './components/skip-nav'
-import {SKIP_TO_CONTENT_ID, SKIP_TO_SEARCH_ID} from './constants'
+import { SkipBox, SkipLink } from './components/skip-nav'
+import { SKIP_TO_CONTENT_ID, SKIP_TO_SEARCH_ID } from './constants'
 
-import {PageProvider} from './hooks/use-page'
+import { PageProvider } from './hooks/use-page'
 import Layout from './layout'
 
 const GlobalStyles = createGlobalStyle`
@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
   }
 `
 
-const PageElement = ({element, props}) => {
+const PageElement = ({ element, props }) => {
   const page = {
     pageContext: props.pageContext,
     frontmatter: props.pageContext?.frontmatter || {},
@@ -33,10 +33,10 @@ const PageElement = ({element, props}) => {
         <SkipLink href={`#${SKIP_TO_CONTENT_ID}`}>Skip to content</SkipLink>
       </SkipBox>
       <PageProvider value={page}>
-        <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Header />
-          <Box sx={{zIndex: 0, display: 'flex', flex: '1 1 auto', flexDirection: 'row'}} role="main">
-            <Box sx={{display: ['none', null, null, 'block']}}>
+          <Box sx={{ zIndex: 0, display: 'flex', flex: '1 1 auto', flexDirection: 'row' }} role="main">
+            <Box sx={{ display: ['none', null, null, 'block'] }}>
               <Sidebar />
             </Box>
             <Layout>{element}</Layout>

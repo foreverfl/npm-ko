@@ -1,16 +1,16 @@
 ---
-title: Accessing npm using two-factor authentication
+title: 2단계 인증을 사용하여 npm 접근하기
 redirect_from:
    - /getting-started/using-two-factor-authentication
 ---
 
 import shared from '~/shared.js'
 
-## Sign in from the command line using security-key flow
+## 보안 키 흐름을 사용하여 명령줄에서 로그인하기
 
-1. On the command line, type the [`npm login`][login] command.
+1. 명령줄에서 [`npm login`][login] 명령을 입력합니다.
 
-2. When prompted, provide your username, password, and email address.
+2. 메시지가 표시되면 사용자 이름, 비밀번호 및 이메일 주소를 제공합니다.
 
    ```
    user@host:~$ npm login
@@ -21,29 +21,29 @@ import shared from '~/shared.js'
    npm notice Open https://www.npmjs.com/login/913c3ab1-89a0-44bd-be8d-d946e2e906f0 to use your security key for authentication or enter OTP from your authenticator app
    ```
 
-3. If you have configured a security-key, open the provided URL shown in the command line. Alternatively, if you have configured a mobile authenticator skip to step 6.
+3. 보안 키를 구성한 경우 명령줄에 표시된 URL을 엽니다. 또는 모바일 인증기를 구성한 경우 6단계로 건너뜁니다.
 
-4. Click on _Use security key_ and follow the browser specific steps to authenticate.
+4. *보안 키 사용*을 클릭하고 브라우저별 단계에 따라 인증합니다.
 
-   <Screenshot src="/getting-started/setting-up-your-npm-user-account/2fa-use-security-key.png" alt="Screenshot showing security key prompt" />
+   <Screenshot src="/getting-started/setting-up-your-npm-user-account/2fa-use-security-key.png" alt="보안 키 프롬프트를 보여주는 스크린샷" />
 
-5. Copy the generated token
+5. 생성된 토큰을 복사합니다.
 
-   <Screenshot src="/getting-started/setting-up-your-npm-user-account/webauthn-cli-login-token.png" alt="Screenshot showing a sample token generated while using WebAuthn for cli login" />
+   <Screenshot src="/getting-started/setting-up-your-npm-user-account/webauthn-cli-login-token.png" alt="WebAuthn을 사용한 CLI 로그인 시 생성된 샘플 토큰을 보여주는 스크린샷" />
 
-6. Enter the one-time password into the CLI prompt.
+6. CLI 프롬프트에 일회용 비밀번호를 입력합니다.
 
    <Prompt>Enter one-time password:</Prompt>
 
-## Sign in from the command line using `--auth-type=web`
+## `--auth-type=web`을 사용하여 명령줄에서 로그인하기
 
-npm 8.14.0 and higher support login flow through the browsers. This will become the default behavior for the npm public registry in npm 9.
+npm 8.14.0 이상은 브라우저를 통한 로그인 흐름을 지원합니다. 이는 npm 9에서 npm 공개 레지스트리의 기본 동작이 될 것입니다.
 
-### With an existing browser session
+### 기존 브라우저 세션이 있는 경우
 
-1. On the command line, type the [`npm login --auth-type=web`][login] command.
+1. 명령줄에서 [`npm login --auth-type=web`][login] 명령을 입력합니다.
 
-2. When prompted hit "ENTER" to open your browser to start the login flow or click the provided URL show in the command line.
+2. 메시지가 표시되면 "ENTER"를 눌러 브라우저를 열고 로그인 흐름을 시작하거나 명령줄에 표시된 URL을 클릭합니다.
 
    ```
    user@host:~$ npm login
@@ -53,17 +53,17 @@ npm 8.14.0 and higher support login flow through the browsers. This will become 
    Press ENTER to open in the browser...
    ```
 
-3. Click on _Use security key_ and follow the browser specific steps to authenticate.
+3. *보안 키 사용*을 클릭하고 브라우저별 단계에 따라 인증합니다.
 
-   <Screenshot src="/getting-started/setting-up-your-npm-user-account/2fa-use-security-key.png" alt="Screenshot showing security key prompt" />
+   <Screenshot src="/getting-started/setting-up-your-npm-user-account/2fa-use-security-key.png" alt="보안 키 프롬프트를 보여주는 스크린샷" />
 
-   _Note: If you have configured to use TOTP, you will see an TOTP prompt instead_
+   _참고: TOTP 사용을 구성한 경우 대신 TOTP 프롬프트가 표시됩니다_
 
-### Without an existing browser session
+### 기존 브라우저 세션이 없는 경우
 
-1. On the command line, type the [`npm login --auth-type=web`][login] command.
+1. 명령줄에서 [`npm login --auth-type=web`][login] 명령을 입력합니다.
 
-2. When prompted hit "ENTER" to open your browser to start the login flow or click the provided URL show in the command line.
+2. 메시지가 표시되면 "ENTER"를 눌러 브라우저를 열고 로그인 흐름을 시작하거나 명령줄에 표시된 URL을 클릭합니다.
 
    ```
    user@host:~$ npm login
@@ -77,10 +77,10 @@ npm 8.14.0 and higher support login flow through the browsers. This will become 
 
    <>{shared['user-login'].image}</>
 
-4. Click on _Use security key_ and follow the browser specific steps to authenticate.
+4. *보안 키 사용*을 클릭하고 브라우저별 단계에 따라 인증합니다.
 
-   <Screenshot src="/getting-started/setting-up-your-npm-user-account/2fa-use-security-key.png" alt="Screenshot showing security key prompt" />
+   <Screenshot src="/getting-started/setting-up-your-npm-user-account/2fa-use-security-key.png" alt="보안 키 프롬프트를 보여주는 스크린샷" />
 
-   _Note: If you have configured to use TOTP, you will see an TOTP prompt instead_
+   _참고: TOTP 사용을 구성한 경우 대신 TOTP 프롬프트가 표시됩니다_
 
 [login]: https://docs.npmjs.com/cli/adduser
