@@ -11,7 +11,7 @@
     "gatsby": "PARCEL_WORKERS=0 gatsby develop",
     "develop": "npm run gatsby -- develop",
     "develop:ssr": "GATSBY_DEV_SSR=true npm run develop",
-    "build": "npm run gatsby -- build --verbose --log-pages",
+    "build": "npm run gatsby -- build",
     "clean": "npm run gatsby -- clean",
     "serve": "npm run gatsby -- serve",
     "lint": "eslint \"**/*.{js,mjs,mdx}\"",
